@@ -65,21 +65,18 @@ dependencies {
     //realm lib
     implementation("io.realm:realm-android:10.9.0")
 
-    // Networking/Retrofit/RxJava libs:
+    //Retrofit/OkHttp/Coroutines libs:
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
-
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
-
-//    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
-//    implementation("io.reactivex.rxjava2:rxjava:2.2.9")
-//    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
-
     implementation("org.greenrobot:eventbus:3.0.0")
+
+    //swipe refresh libs
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.24.11-rc")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
     //test libs
     testImplementation("junit:junit:4.13.2")
