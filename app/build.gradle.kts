@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.nikoarap.gametime"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.nikoarap.gametime"
@@ -32,11 +32,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -63,7 +63,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
 
     //realm lib
-    implementation("io.realm:realm-android:10.9.0")
+    implementation("io.realm:realm-android-library:10.17.0")
 
     //Retrofit/OkHttp/Coroutines libs:
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
