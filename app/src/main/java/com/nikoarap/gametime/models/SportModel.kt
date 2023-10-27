@@ -1,13 +1,13 @@
 package com.nikoarap.gametime.models
 
-import com.nikoarap.gametime.utils.Constants.Companion.EMPTY
+import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
 import io.realm.RealmModel
 import io.realm.annotations.PrimaryKey
 
 open class SportModel: RealmModel {
     @PrimaryKey
-    var id: String = EMPTY
-    var name: String = EMPTY
+    var id: String = EMPTY_STRING
+    var name: String = EMPTY_STRING
     var activeEvents: ArrayList<EventModel> = arrayListOf()
 }
 
