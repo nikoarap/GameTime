@@ -29,62 +29,13 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
         val jsonArrayObject = json?.asJsonArray
         if (jsonArrayObject != null) {
             for (jsonArrayElement in jsonArrayObject.asJsonArray) {
+
                 if (jsonArrayElement.asJsonObject.has("d")) {
                     if (jsonArrayElement.asJsonObject.get("d").isJsonPrimitive && jsonArrayElement.asJsonObject.get("d").asString != null) {
-                        d = jsonArrayElement.asJsonObject.get("d")?.asString ?: ""
+                        d = jsonArrayElement.asJsonObject.get("d")?.asString ?: EMPTY_STRING
                     }
                     else if (jsonArrayElement.asJsonObject.get("d") is JsonArray) {
-                        val jsonObject = jsonArrayElement.asJsonObject
-
-                        for ((key, value) in jsonObject.entrySet()) {
-                            if (key == "d") {
-                                if (value is JsonArray) {
-                                    val jsonSubArray = value.asJsonArray
-                                    for (subElement in jsonSubArray) {
-                                        d = JsonUtils.getAsStringFromJsonObject("d", subElement.asJsonObject)
-                                        i = JsonUtils.getAsStringFromJsonObject("i", subElement.asJsonObject)
-                                        e = context?.deserialize<List<EventModelDTO>>(subElement.asJsonObject.get("e"), object : TypeToken<List<EventModelDTO>>() {}.type) ?: emptyList()
-                                        sportModelDTOsList.add(SportModelDTO(i,d,e))
-                                    }
-                                } else {
-                                    d = value.asString
-                                }
-                            }
-
-                            if (key == "i") {
-                                if (value is JsonArray) {
-                                    val jsonSubArray = value.asJsonArray
-                                    for (subElement in jsonSubArray) {
-                                        d = JsonUtils.getAsStringFromJsonObject("d", subElement.asJsonObject)
-                                        i = JsonUtils.getAsStringFromJsonObject("i", subElement.asJsonObject)
-                                        e = context?.deserialize<List<EventModelDTO>>(subElement.asJsonObject.get("e"), object : TypeToken<List<EventModelDTO>>() {}.type) ?: emptyList()
-                                        sportModelDTOsList.add(SportModelDTO(i,d,e))
-                                    }
-                                }
-                                else {
-                                    i = value.asString
-                                }
-                            }
-
-                            if (key == "e") {
-                                if (value is JsonArray) {
-                                    val jsonSubArray = value.asJsonArray
-                                    for (subElement in jsonSubArray) {
-                                        d = JsonUtils.getAsStringFromJsonObject("d", subElement.asJsonObject)
-                                        i = JsonUtils.getAsStringFromJsonObject("i", subElement.asJsonObject)
-                                        e = context?.deserialize<List<EventModelDTO>>(subElement.asJsonObject.get("e"), object : TypeToken<List<EventModelDTO>>() {}.type) ?: emptyList()
-                                        sportModelDTOsList.add(SportModelDTO(i,d,e))
-                                    }
-                                } else {
-                                    e = context?.deserialize<List<EventModelDTO>>(
-                                        value,
-                                        object : TypeToken<List<EventModelDTO>>() {}.type
-                                    ) ?: emptyList()
-                                }
-                            }
-
-                            sportModelDTOsList.add(SportModelDTO(i,d,e))
-                        }
+                       addFromJsonObject(jsonArrayElement.asJsonObject, context, sportModelDTOsList)
                     }
                 }
 
@@ -92,31 +43,17 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
                     if (jsonArrayElement.asJsonObject.get("i").isJsonPrimitive && jsonArrayElement.asJsonObject.get("i").asString != null) {
                         i = jsonArrayElement.asJsonObject.get("i")?.asString ?: ""
                     }
-                    else {
-                        val jsonSubArray = jsonArrayElement.asJsonObject.asJsonArray
-                        for (subElement in jsonSubArray) {
-                            if (subElement.asJsonObject.has("d") && subElement.asJsonObject.get("d").isJsonPrimitive && subElement.asJsonObject.get("d").asString != null) {
-                                d = subElement.asJsonObject.get("d")?.asString ?: ""
-                            }
-                            if (subElement.asJsonObject.has("i") && subElement.asJsonObject.get("i").isJsonPrimitive && subElement.asJsonObject.get("i").asString != null) {
-                                i = subElement.asJsonObject.get("i")?.asString ?: ""
-                            }
-
-                            e = context?.deserialize<List<EventModelDTO>>(
-                                subElement.asJsonObject?.get("e"),
-                                object : TypeToken<List<EventModelDTO>>() {}.type
-                            ) ?: emptyList()
-
-                            sportModelDTOsList.add(SportModelDTO(i,d,e))
-                        }
+                    else if (jsonArrayElement.asJsonObject.get("i") is JsonArray) {
+                        addFromJsonObject(jsonArrayElement.asJsonObject, context, sportModelDTOsList)
                     }
                 }
 
-                e = context?.deserialize<List<EventModelDTO>>(
-                    jsonArrayElement.asJsonObject?.get("e"),
-                    object : TypeToken<List<EventModelDTO>>() {}.type
-                ) ?: emptyList()
-
+                if (jsonArrayElement.asJsonObject.has("e")) {
+                    e = context?.deserialize<List<EventModelDTO>>(
+                        jsonArrayElement.asJsonObject?.get("e"),
+                        object : TypeToken<List<EventModelDTO>>() {}.type
+                    ) ?: emptyList()
+                }
 
                 sportModelDTOsList.add(SportModelDTO(i,d,e))
             }
@@ -124,6 +61,60 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
 
         sportModelListDTO.sportModelDTOs = sportModelDTOsList
         return sportModelListDTO
+    }
+
+    private fun addFromJsonObject(
+        jsonObject: JsonObject,
+        context: JsonDeserializationContext?,
+        sportModelDTOsList: ArrayList<SportModelDTO>
+    ) {
+        var i = EMPTY_STRING
+        var d = EMPTY_STRING
+        var e: List<EventModelDTO> = arrayListOf()
+        for ((key, value) in jsonObject.entrySet()) {
+            if (key == "d") {
+                if (value is JsonArray) {
+                    addFromJsonArray(value, context, sportModelDTOsList)
+                } else {
+                    d = value.asString
+                }
+            }
+            if (key == "i") {
+                if (value is JsonArray) {
+                    addFromJsonArray(value, context, sportModelDTOsList)
+                }
+                else {
+                    i = value.asString
+                }
+            }
+            if (key == "e") {
+                if (value is JsonArray) {
+                    addFromJsonArray(value, context, sportModelDTOsList)
+                } else {
+                    e = context?.deserialize<List<EventModelDTO>>(
+                        value,
+                        object : TypeToken<List<EventModelDTO>>() {}.type
+                    ) ?: emptyList()
+                }
+            }
+            sportModelDTOsList.add(SportModelDTO(i,d,e))
+        }
+    }
+
+    private fun addFromJsonArray(
+        jsonArray: JsonArray,
+        context: JsonDeserializationContext?,
+        sportModelDTOsList: ArrayList<SportModelDTO>
+    ) {
+        for (subElement in jsonArray) {
+            sportModelDTOsList.add(
+                SportModelDTO(
+                    JsonUtils.getAsStringFromJsonObject("i", subElement.asJsonObject),
+                    JsonUtils.getAsStringFromJsonObject("d", subElement.asJsonObject),
+                    context?.deserialize<List<EventModelDTO>>(subElement.asJsonObject.get("e"), object : TypeToken<List<EventModelDTO>>() {}.type) ?: emptyList()
+                )
+            )
+        }
     }
 }
 
