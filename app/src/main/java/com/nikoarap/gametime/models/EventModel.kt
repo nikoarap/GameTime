@@ -11,5 +11,6 @@ open class EventModel: RealmModel {
     var sportId: String = EMPTY_STRING
     var name: String = EMPTY_STRING
     var startTime: Int = VALUE_ZERO
+    var isFavourite: Boolean = false
 }
 
