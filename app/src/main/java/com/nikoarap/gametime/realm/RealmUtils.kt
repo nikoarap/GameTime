@@ -6,7 +6,7 @@ import io.realm.Realm
 open class RealmUtils {
 
     companion object {
-        private fun getRealm(): Realm? {
+        fun getRealm(): Realm? {
             val realmConfiguration = Realm.getDefaultConfiguration()
             val globalInstanceCount = realmConfiguration?.let { Realm.getGlobalInstanceCount(it) }
             val localInstanceCount = realmConfiguration?.let { Realm.getLocalInstanceCount(it) }

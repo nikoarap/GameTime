@@ -4,10 +4,8 @@ import android.util.Log
 import com.nikoarap.gametime.networking.apiServices.RetrofitClient
 import com.nikoarap.gametime.networking.transforming.DTOs.SportModelDTO
 import com.nikoarap.gametime.networking.transforming.transformers.SportModelTransformer
-import com.nikoarap.gametime.storage.SportsStorage
+import com.nikoarap.gametime.realm.DataStorage
 import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.HttpException
@@ -39,6 +37,12 @@ class SportsRepository {
         }
     }
 
+    private fun persistData(sportModelDTOList: List<SportModelDTO>) {
+        for (sportModelDTO in sportModelDTOList) {
+            DataStorage.insert(sportModelTransformer.fromDTO(sportModelDTO))
+        }
+    }
+
 
 //    private suspend fun getSportsData(): Response<List<SportModelDTO>> {
 //        return withContext(Dispatchers.IO) {
@@ -54,11 +58,7 @@ class SportsRepository {
 //        }
 //    }
 
-    private fun persistData(sportModelDTOList: List<SportModelDTO>) {
-        for (sportModelDTO in sportModelDTOList) {
-            SportsStorage.insert(sportModelTransformer.fromDTO(sportModelDTO))
-        }
-    }
+
 
     private fun onFetchError(throwable: ResponseBody?) {
      //todo handle the error by sending an event to the main activity
