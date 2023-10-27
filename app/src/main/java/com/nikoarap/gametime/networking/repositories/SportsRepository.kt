@@ -18,7 +18,7 @@ class SportsRepository {
     private val sportModelTransformer = SportModelTransformer()
     private val CLASS_TAG: String = SportsRepository::class.java.simpleName
 
-    suspend fun getIfSuccessful() {
+    suspend fun fetchDataFromRepo() {
         val response = getSportsData()
         if (response.isSuccessful) {
             response.body()?.let { persistData(it) }
@@ -28,18 +28,31 @@ class SportsRepository {
     }
 
     private suspend fun getSportsData(): Response<List<SportModelDTO>> {
-        return withContext(Dispatchers.IO) {
-            try {
-                val apiService = RetrofitClient.retrofitInstance
-                apiService.getSportModels()
-            } catch (e: Exception) {
-                val errorCode = if (e is HttpException) e.code() else VALUE_ZERO
-                Log.e(CLASS_TAG, "getSportsData failed with error code: $errorCode and message: ${e.message}")
-                val throwableMessage: String = e.cause?.message.toString()
-                Response.error(errorCode, throwableMessage.toResponseBody(null))
-            }
+        return try {
+            val apiService = RetrofitClient.retrofitInstance
+            apiService.getSportModels()
+        } catch (e: Exception) {
+            val errorCode = if (e is HttpException) e.code() else VALUE_ZERO
+            Log.e(CLASS_TAG, "getSportsData failed with error code: $errorCode and message: ${e.message}")
+            val throwableMessage: String = e.cause?.message.toString()
+            Response.error(errorCode, throwableMessage.toResponseBody(null))
         }
     }
+
+
+//    private suspend fun getSportsData(): Response<List<SportModelDTO>> {
+//        return withContext(Dispatchers.IO) {
+//            try {
+//                val apiService = RetrofitClient.retrofitInstance
+//                apiService.getSportModels()
+//            } catch (e: Exception) {
+//                val errorCode = if (e is HttpException) e.code() else VALUE_ZERO
+//                Log.e(CLASS_TAG, "getSportsData failed with error code: $errorCode and message: ${e.message}")
+//                val throwableMessage: String = e.cause?.message.toString()
+//                Response.error(errorCode, throwableMessage.toResponseBody(null))
+//            }
+//        }
+//    }
 
     private fun persistData(sportModelDTOList: List<SportModelDTO>) {
         for (sportModelDTO in sportModelDTOList) {
