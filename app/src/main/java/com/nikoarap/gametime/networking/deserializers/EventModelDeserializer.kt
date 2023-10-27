@@ -1,9 +1,9 @@
-package com.nikoarap.gametime.networking.transforming.deserializers
+package com.nikoarap.gametime.networking.deserializers
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
-import com.nikoarap.gametime.networking.transforming.DTOs.EventModelDTO
+import com.nikoarap.gametime.networking.DTOs.EventModelDTO
 import java.lang.reflect.Type
 
 class EventModelDeserializer: JsonDeserializer<EventModelDTO> {

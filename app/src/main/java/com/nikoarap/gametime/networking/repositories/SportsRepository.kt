@@ -2,8 +2,8 @@ package com.nikoarap.gametime.networking.repositories
 
 import android.util.Log
 import com.nikoarap.gametime.networking.apiServices.RetrofitClient
-import com.nikoarap.gametime.networking.transforming.DTOs.SportModelListDTO
-import com.nikoarap.gametime.networking.transforming.transformers.SportModelTransformer
+import com.nikoarap.gametime.networking.DTOs.SportModelListDTO
+import com.nikoarap.gametime.networking.transformers.SportModelTransformer
 import com.nikoarap.gametime.realm.DataStorage
 import com.nikoarap.gametime.utils.Constants.Companion.BAD_REQUEST
 import okhttp3.ResponseBody

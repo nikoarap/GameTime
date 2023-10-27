@@ -1,11 +1,10 @@
 package com.nikoarap.gametime.networking.apiServices
 
 import com.google.gson.GsonBuilder
-import com.nikoarap.gametime.networking.transforming.DTOs.EventModelDTO
-import com.nikoarap.gametime.networking.transforming.DTOs.SportModelDTO
-import com.nikoarap.gametime.networking.transforming.DTOs.SportModelListDTO
-import com.nikoarap.gametime.networking.transforming.deserializers.EventModelDeserializer
-import com.nikoarap.gametime.networking.transforming.deserializers.SportModelDeserializer
+import com.nikoarap.gametime.networking.DTOs.EventModelDTO
+import com.nikoarap.gametime.networking.DTOs.SportModelListDTO
+import com.nikoarap.gametime.networking.deserializers.EventModelDeserializer
+import com.nikoarap.gametime.networking.deserializers.SportModelDeserializer
 import com.nikoarap.gametime.utils.Constants.Companion.API_ENDPOINT
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

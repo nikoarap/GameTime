@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.networking.transforming.DTOs
+package com.nikoarap.gametime.networking.DTOs
 
 data class SportModelListDTO(
     var sportModelDTOs: List<SportModelDTO> = arrayListOf()

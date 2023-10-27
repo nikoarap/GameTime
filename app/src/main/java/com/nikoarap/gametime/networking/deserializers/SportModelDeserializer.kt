@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.networking.transforming.deserializers
+package com.nikoarap.gametime.networking.deserializers
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonDeserializationContext
@@ -6,9 +6,9 @@ import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import com.nikoarap.gametime.networking.transforming.DTOs.EventModelDTO
-import com.nikoarap.gametime.networking.transforming.DTOs.SportModelDTO
-import com.nikoarap.gametime.networking.transforming.DTOs.SportModelListDTO
+import com.nikoarap.gametime.networking.DTOs.EventModelDTO
+import com.nikoarap.gametime.networking.DTOs.SportModelDTO
+import com.nikoarap.gametime.networking.DTOs.SportModelListDTO
 import java.lang.reflect.Type
 
 class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
