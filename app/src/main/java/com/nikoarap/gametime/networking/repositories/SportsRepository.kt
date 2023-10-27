@@ -5,7 +5,7 @@ import com.nikoarap.gametime.networking.apiServices.RetrofitClient
 import com.nikoarap.gametime.networking.transforming.DTOs.SportModelDTO
 import com.nikoarap.gametime.networking.transforming.transformers.SportModelTransformer
 import com.nikoarap.gametime.realm.DataStorage
-import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
+import com.nikoarap.gametime.utils.Constants.Companion.BAD_REQUEST
 import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.HttpException
@@ -16,7 +16,7 @@ class SportsRepository {
     private val sportModelTransformer = SportModelTransformer()
     private val CLASS_TAG: String = SportsRepository::class.java.simpleName
 
-    suspend fun fetchDataFromRepo() {
+    suspend fun fetchData() {
         val response = getSportsData()
         if (response.isSuccessful) {
             response.body()?.let { persistData(it) }
@@ -30,7 +30,7 @@ class SportsRepository {
             val apiService = RetrofitClient.retrofitInstance
             apiService.getSportModels()
         } catch (e: Exception) {
-            val errorCode = if (e is HttpException) e.code() else VALUE_ZERO
+            val errorCode = if (e is HttpException) e.code() else BAD_REQUEST
             Log.e(CLASS_TAG, "getSportsData failed with error code: $errorCode and message: ${e.message}")
             val throwableMessage: String = e.cause?.message.toString()
             Response.error(errorCode, throwableMessage.toResponseBody(null))
