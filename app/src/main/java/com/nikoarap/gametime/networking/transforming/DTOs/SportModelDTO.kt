@@ -1,6 +1,7 @@
-package com.nikoarap.gametime.networking.deserializing
+package com.nikoarap.gametime.networking.transforming.DTOs
 
 import com.google.gson.annotations.SerializedName
+import com.nikoarap.gametime.networking.transforming.DTOs.EventModelDTO
 import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
 
 data class SportModelDTO (
