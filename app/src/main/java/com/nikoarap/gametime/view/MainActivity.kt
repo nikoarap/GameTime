@@ -13,12 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.nikoarap.gametime.ui.theme.GameTimeTheme
 import com.nikoarap.gametime.viewmodels.MainViewModel
+import io.realm.Realm
 
 class MainActivity : ComponentActivity() {
 
 
+    private var realm = Realm.getDefaultInstance()
     private val viewModel: MainViewModel by viewModels()
-   
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

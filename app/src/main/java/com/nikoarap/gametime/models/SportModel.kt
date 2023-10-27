@@ -1,9 +1,16 @@
 package com.nikoarap.gametime.models
 
-import com.nikoarap.gametime.utils.Constants.Companion.EMPTY
+import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
+import io.realm.RealmList
+import io.realm.RealmModel
+import io.realm.annotations.PrimaryKey
 
-data class SportModel(
-    var id: String = EMPTY,
-    var name: String = EMPTY,
-    var activeEvents: ArrayList<EventModel> = arrayListOf()
-)
+open class SportModel: RealmModel {
+    @PrimaryKey
+    var id: String = EMPTY_STRING
+    var name: String = EMPTY_STRING
+    var activeEvents: RealmList<EventModel> = RealmList()
+}
+
+
+
