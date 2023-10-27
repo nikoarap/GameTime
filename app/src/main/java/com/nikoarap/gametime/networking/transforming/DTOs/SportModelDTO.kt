@@ -10,5 +10,5 @@ data class SportModelDTO (
     @SerializedName("d")
     var name: String = EMPTY_STRING,
     @SerializedName("e")
-    var activeEvents: ArrayList<EventModelDTO> = arrayListOf(),
+    var activeEvents: List<EventModelDTO> = arrayListOf(),
 )

@@ -2,7 +2,7 @@ package com.nikoarap.gametime.networking.repositories
 
 import android.util.Log
 import com.nikoarap.gametime.networking.apiServices.RetrofitClient
-import com.nikoarap.gametime.networking.transforming.DTOs.SportModelDTO
+import com.nikoarap.gametime.networking.transforming.DTOs.SportModelListDTO
 import com.nikoarap.gametime.networking.transforming.transformers.SportModelTransformer
 import com.nikoarap.gametime.realm.DataStorage
 import com.nikoarap.gametime.utils.Constants.Companion.BAD_REQUEST
@@ -25,40 +25,24 @@ class SportsRepository {
         }
     }
 
-    private suspend fun getSportsData(): Response<List<SportModelDTO>> {
+    private suspend fun getSportsData(): Response<SportModelListDTO> {
         return try {
             val apiService = RetrofitClient.retrofitInstance
             apiService.getSportModels()
         } catch (e: Exception) {
             val errorCode = if (e is HttpException) e.code() else BAD_REQUEST
+            Log.e(CLASS_TAG, "getSportsData failed with exception: " + e.cause)
             Log.e(CLASS_TAG, "getSportsData failed with error code: $errorCode and message: ${e.message}")
             val throwableMessage: String = e.cause?.message.toString()
             Response.error(errorCode, throwableMessage.toResponseBody(null))
         }
     }
 
-    private fun persistData(sportModelDTOList: List<SportModelDTO>) {
-        for (sportModelDTO in sportModelDTOList) {
+    private fun persistData(sportModelDTOList: SportModelListDTO) {
+        for (sportModelDTO in sportModelDTOList.sportModelDTOs) {
             DataStorage.insert(sportModelTransformer.fromDTO(sportModelDTO))
         }
     }
-
-
-//    private suspend fun getSportsData(): Response<List<SportModelDTO>> {
-//        return withContext(Dispatchers.IO) {
-//            try {
-//                val apiService = RetrofitClient.retrofitInstance
-//                apiService.getSportModels()
-//            } catch (e: Exception) {
-//                val errorCode = if (e is HttpException) e.code() else VALUE_ZERO
-//                Log.e(CLASS_TAG, "getSportsData failed with error code: $errorCode and message: ${e.message}")
-//                val throwableMessage: String = e.cause?.message.toString()
-//                Response.error(errorCode, throwableMessage.toResponseBody(null))
-//            }
-//        }
-//    }
-
-
 
     private fun onFetchError(throwable: ResponseBody?) {
      //todo handle the error by sending an event to the main activity
