@@ -15,7 +15,7 @@ import io.realm.RealmResults
  * @param results The initial RealmResults to observe.
  */
 class RealmLiveData<T : RealmModel?>(
-    private var results: RealmResults<T>
+    private var results: RealmResults<T>?
 ): LiveData<RealmResults<T>?>() {
 
     private val listener = RealmChangeListener { value: RealmResults<T>? -> this.setValue(value) }
@@ -35,10 +35,10 @@ class RealmLiveData<T : RealmModel?>(
      * @param results The new RealmResults to observe.
      */
     fun setResults(results: RealmResults<T>) {
-        this.results.removeChangeListener(listener)
+        this.results?.removeChangeListener(listener)
         this.results = results
         value = results
-        this.results.addChangeListener(listener)
+        this.results?.addChangeListener(listener)
     }
 
     /**
@@ -46,7 +46,7 @@ class RealmLiveData<T : RealmModel?>(
      * This method registers the RealmChangeListener to start listening for changes in theRealmResults.
      */
     override fun onActive() {
-        results.addChangeListener(listener)
+        results?.addChangeListener(listener)
     }
 
     /**
@@ -55,6 +55,6 @@ class RealmLiveData<T : RealmModel?>(
      * RealmResults. This helps optimize resource usage.
      */
     override fun onInactive() {
-        results.removeChangeListener(listener)
+        results?.removeChangeListener(listener)
     }
 }
