@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.utils
+package com.nikoarap.gametime.realm
 
 import android.util.Log
 import io.realm.Realm
@@ -6,7 +6,7 @@ import io.realm.Realm
 open class RealmUtils {
 
     companion object {
-        fun getRealm(): Realm? {
+        private fun getRealm(): Realm? {
             val realmConfiguration = Realm.getDefaultConfiguration()
             val globalInstanceCount = realmConfiguration?.let { Realm.getGlobalInstanceCount(it) }
             val localInstanceCount = realmConfiguration?.let { Realm.getLocalInstanceCount(it) }
