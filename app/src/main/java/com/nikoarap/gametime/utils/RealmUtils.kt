@@ -3,7 +3,7 @@ package com.nikoarap.gametime.utils
 import android.util.Log
 import io.realm.Realm
 
-class RealmUtils {
+open class RealmUtils {
 
     companion object {
         fun getRealm(): Realm? {
@@ -21,6 +21,14 @@ class RealmUtils {
                         + " -> " + localInstanceCountNew
             )
             return realm
+        }
+
+        fun executeTransaction(transaction: Realm.Transaction) {
+            try {
+                getRealm().use { realm -> realm?.executeTransaction(transaction) }
+            } catch (e: Throwable) {
+                Log.e("Executing transaction", Log.getStackTraceString(e))
+            }
         }
     }
 
