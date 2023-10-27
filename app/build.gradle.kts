@@ -66,7 +66,6 @@ dependencies {
     implementation("io.realm:realm-android:10.9.0")
 
     // Networking/Retrofit/RxJava libs:
-    implementation("io.realm:realm-android:10.9.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
