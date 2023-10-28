@@ -3,7 +3,6 @@ package com.nikoarap.gametime.view.composables
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,12 +12,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
+import androidx.compose.material.Surface
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,7 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
+import com.google.accompanist.flowlayout.FlowRow
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.models.SportModel
@@ -42,6 +39,7 @@ import com.nikoarap.gametime.utils.Constants.Companion.SECTION_COLUMN_WEIGHT
 import com.nikoarap.gametime.view.themes.dp_16
 import com.nikoarap.gametime.view.themes.dp_18
 import com.nikoarap.gametime.view.themes.dp_24
+import com.nikoarap.gametime.view.themes.dp_4
 import com.nikoarap.gametime.view.themes.dp_8
 import com.nikoarap.gametime.view.themes.onSecondary
 import com.nikoarap.gametime.view.themes.surface
@@ -108,7 +106,7 @@ fun LoadSportSection(
         Divider(
             modifier = Modifier.fillMaxWidth(),
             color = surface,
-            thickness = 24.dp
+            thickness = dp_16
         )
     }
 }
@@ -117,18 +115,17 @@ fun LoadSportSection(
 fun LoadEventsInSportSection(
     sportEvents: List<EventModel>
 ) {
-    Card(
+    Surface(
         modifier = Modifier
             .wrapContentHeight()
             .background(color = surface)
     ) {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(4), // 4 columns
-            verticalArrangement = Arrangement.spacedBy(8.dp), // Adjust vertical spacing as needed
-            modifier = Modifier.padding(8.dp) // Adjust padding as needed
+        FlowRow(
+            modifier = Modifier.background(color = surface)
+                .padding(horizontal = dp_4),
         ) {
-            items(sportEvents) { item ->
-                LoadEventGridItem(item)
+            for (sportEvent in sportEvents) {
+                LoadSportEvent(sportEvent)
             }
         }
     }

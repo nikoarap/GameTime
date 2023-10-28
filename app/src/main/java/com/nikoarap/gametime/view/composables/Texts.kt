@@ -1,32 +1,34 @@
 package com.nikoarap.gametime.view.composables
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.nikoarap.gametime.view.themes.dp_4
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.unit.dp
 import com.nikoarap.gametime.view.themes.primary
 import com.nikoarap.gametime.view.themes.secondary
+import com.nikoarap.gametime.view.themes.surface
 
 @Composable
 fun TextWithBorder(text: String) {
     Box(
         modifier = Modifier
-            .background(color = primary) // Border color
-            .padding(dp_4) // Adjust the border padding as needed
-            .then(Modifier.fillMaxSize()), // Expand to fill available space
+            .border(border = BorderStroke(1.dp, primary), shape = RectangleShape)
+            .background(color = surface),
         contentAlignment = Alignment.Center
     ) {
         Text(
+            modifier = Modifier.padding(4.dp),
             text = text,
             style = MaterialTheme.typography.caption,
             color = secondary,
-            modifier = Modifier
         )
     }
 }

@@ -1,25 +1,18 @@
 package com.nikoarap.gametime.view.composables
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.SportModel
@@ -78,18 +71,8 @@ fun LoadSportSections(
             .verticalScroll(rememberScrollState())
             .background(color = surface)
     ) {
-
         for (sport in sports) {
             LoadSportSection(sport)
         }
-
-
-//        LazyColumn(
-//            state = rememberLazyListState(),
-//        ) {
-//            items(sports) { sport ->
-//                LoadSportSection(sport)
-//            }
-//        }
     }
 }

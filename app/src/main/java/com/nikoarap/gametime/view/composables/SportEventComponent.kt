@@ -9,6 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -24,14 +25,15 @@ import com.nikoarap.gametime.view.themes.surface
 import com.nikoarap.gametime.view.themes.tertiary
 
 @Composable
-fun LoadEventGridItem(
+fun LoadSportEvent(
     event: EventModel
 ) {
     Column(
         modifier = Modifier
             .background(color = surface)
             .wrapContentSize()
-            .padding(dp_8)
+            .padding(dp_8),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         TextWithBorder(text = event.startTime.toString())
         Icon(
