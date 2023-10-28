@@ -8,5 +8,9 @@ class Constants {
         const val REALM_SCHEMA_VER = 0L
         const val BAD_REQUEST = 400
         const val VALUE_ZERO = 0
+        const val FLOAT_DEGREES_0 = 0f
+        const val FLOAT_DEGREES_180 = 180f
+        const val ICON = "icon"
+        const val SECTION_COLUMN_WEIGHT = .8f
     }
 }
