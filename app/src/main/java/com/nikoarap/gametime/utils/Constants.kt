@@ -8,5 +8,8 @@ class Constants {
         const val REALM_SCHEMA_VER = 0L
         const val BAD_REQUEST = 400
         const val VALUE_ZERO = 0
+
+        //dp + sp constants
+        const val DP_16 = 16
     }
 }
