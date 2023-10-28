@@ -42,10 +42,6 @@ fun SwitchButton(
         },
         colors = getSwitchColors()
     )
-
-
-
-
 }
 
 @Composable

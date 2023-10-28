@@ -11,5 +11,6 @@ class Constants {
         const val FLOAT_DEGREES_0 = 0f
         const val FLOAT_DEGREES_180 = 180f
         const val ICON = "icon"
+        const val SECTION_COLUMN_WEIGHT = .8f
     }
 }
