@@ -11,6 +11,8 @@ open class SportModel: RealmObject() {
     var id: String = EMPTY_STRING
     var name: String = EMPTY_STRING
     var activeEvents: RealmList<EventModel> = RealmList()
+    var isFavourite: Boolean = false
+    var isExpanded: Boolean = false
 }
 
 

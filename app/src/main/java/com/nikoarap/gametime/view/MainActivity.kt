@@ -4,30 +4,40 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.tooling.preview.Preview
 import com.nikoarap.gametime.view.composables.LoadTopBarWithContent
 import com.nikoarap.gametime.viewmodels.MainViewModel
 import io.realm.Realm
 
 class MainActivity : ComponentActivity() {
 
-    private var realm = Realm.getDefaultInstance()
+
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.initViewModel(realm)
+        viewModel.initViewModel(Realm.getDefaultInstance())
         initObservables()
         setContent {
-            val sportsList by viewModel.sportModelsStateFlow.collectAsState()
-            val isRefreshing by viewModel.isRefreshing.collectAsState()
-            LoadTopBarWithContent(
-                sports = sportsList,
-                refreshing = isRefreshing,
-                onRefresh = { viewModel.onRefresh() }
-            )
+            TestContent()
         }
+    }
+
+
+
+    @Preview(showSystemUi = true, showBackground = true)
+    @Composable
+    fun TestContent() {
+        val sportsList by viewModel.sportModelsStateFlow.collectAsState()
+        val isRefreshing by viewModel.isRefreshing.collectAsState()
+        LoadTopBarWithContent(
+            sports = sportsList,
+            refreshing = isRefreshing,
+            onRefresh = { viewModel.onRefresh() }
+        )
     }
 
 
@@ -43,3 +53,5 @@ class MainActivity : ComponentActivity() {
 
     }
 }
+
+
