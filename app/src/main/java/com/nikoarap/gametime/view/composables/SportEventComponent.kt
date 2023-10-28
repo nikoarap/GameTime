@@ -66,7 +66,7 @@ fun LoadSportEvent(
             tint = onSurface
         )
         Text(
-            text = event.name,
+            text = event.competitorLeft,
             style = MaterialTheme.typography.labelMedium,
             color = secondary,
             overflow = TextOverflow.Ellipsis,
@@ -79,7 +79,7 @@ fun LoadSportEvent(
             modifier = Modifier
         )
         Text(
-            text = event.name,
+            text = event.competitorRight,
             style = MaterialTheme.typography.labelMedium,
             color = secondary,
             overflow = TextOverflow.Ellipsis,

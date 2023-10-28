@@ -14,9 +14,9 @@ class EventModelDeserializer: JsonDeserializer<EventModelDTO> {
         context: JsonDeserializationContext?
     ): EventModelDTO {
         return EventModelDTO(
-            JsonUtils.getAsStringFromJsonObject("d", json?.asJsonObject),
             JsonUtils.getAsStringFromJsonObject("i", json?.asJsonObject),
             JsonUtils.getAsStringFromJsonObject("si", json?.asJsonObject),
+            JsonUtils.getAsStringFromJsonObject("d", json?.asJsonObject),
             JsonUtils.getAsIntFromJsonObject("tt", json?.asJsonObject)
         )
     }
