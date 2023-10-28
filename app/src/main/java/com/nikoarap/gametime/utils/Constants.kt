@@ -15,5 +15,10 @@ class Constants {
         const val VS_VALUE = "VS"
         const val SCORE_REGEX = "-"
         const val SPACER_SCORE_SPACER_REGEX = " - "
+        const val TIMER_SDF_FORMAT = "HH:mm:ss"
+        const val SECONDS_IN_HOUR = 3600
+        const val MINUTES_IN_HOUR = 60
+        const val MILLIS_IN_SECOND = 1000
+        const val EVENT_STARTED = "EVENT STARTED"
     }
 }

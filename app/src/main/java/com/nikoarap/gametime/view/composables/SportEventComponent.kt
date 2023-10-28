@@ -10,8 +10,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.Star
-import androidx.compose.material.icons.sharp.Star
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,17 +18,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.utils.Constants
+import com.nikoarap.gametime.utils.Constants.Companion.MILLIS_IN_SECOND
 import com.nikoarap.gametime.utils.Constants.Companion.VS_VALUE
-import com.nikoarap.gametime.view.themes.dp_16
 import com.nikoarap.gametime.view.themes.dp_24
 import com.nikoarap.gametime.view.themes.dp_4
 import com.nikoarap.gametime.view.themes.dp_8
@@ -53,7 +48,7 @@ fun LoadSportEvent(
             .padding(dp_8),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TextWithBorder(text = event.startTime.toString())
+        CountdownTimer((System.currentTimeMillis() / MILLIS_IN_SECOND) - event.startTime)
         Icon(
             painter = if (isEventFavourite) rememberVectorPainter(Icons.Filled.Star) else painterResource(id = R.drawable.ic_star_hollow),
             modifier = Modifier
