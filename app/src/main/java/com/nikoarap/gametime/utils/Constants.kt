@@ -13,5 +13,7 @@ class Constants {
         const val ICON = "icon"
         const val SECTION_COLUMN_WEIGHT = .8f
         const val VS_VALUE = "VS"
+        const val SCORE_REGEX = "-"
+        const val SPACER_SCORE_SPACER_REGEX = " - "
     }
 }

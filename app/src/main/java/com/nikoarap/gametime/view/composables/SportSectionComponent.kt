@@ -39,7 +39,6 @@ import com.nikoarap.gametime.utils.Constants.Companion.SECTION_COLUMN_WEIGHT
 import com.nikoarap.gametime.view.themes.dp_16
 import com.nikoarap.gametime.view.themes.dp_18
 import com.nikoarap.gametime.view.themes.dp_24
-import com.nikoarap.gametime.view.themes.dp_4
 import com.nikoarap.gametime.view.themes.dp_8
 import com.nikoarap.gametime.view.themes.onSecondary
 import com.nikoarap.gametime.view.themes.surface
@@ -119,10 +118,10 @@ fun LoadEventsInSportSection(
         modifier = Modifier
             .wrapContentHeight()
             .background(color = surface)
+            .padding(dp_16)
     ) {
         FlowRow(
             modifier = Modifier.background(color = surface)
-                .padding(horizontal = dp_4),
         ) {
             for (sportEvent in sportEvents) {
                 LoadSportEvent(sportEvent)
