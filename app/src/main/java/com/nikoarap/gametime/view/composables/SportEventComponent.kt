@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.utils.Constants
@@ -35,6 +36,7 @@ import com.nikoarap.gametime.view.themes.dp_4
 import com.nikoarap.gametime.view.themes.dp_8
 import com.nikoarap.gametime.view.themes.onSurface
 import com.nikoarap.gametime.view.themes.secondary
+import com.nikoarap.gametime.view.themes.sp_10
 import com.nikoarap.gametime.view.themes.surface
 import com.nikoarap.gametime.view.themes.tertiary
 
@@ -74,7 +76,7 @@ fun LoadSportEvent(
         )
         Text(
             text = VS_VALUE,
-            style = MaterialTheme.typography.labelSmall,
+            fontSize = sp_10,
             color = tertiary,
             modifier = Modifier
         )
