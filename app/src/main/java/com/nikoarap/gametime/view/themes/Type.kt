@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.ui.theme
+package com.nikoarap.gametime.view.themes
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

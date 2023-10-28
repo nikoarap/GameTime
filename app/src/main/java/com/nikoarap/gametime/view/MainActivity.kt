@@ -4,52 +4,63 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.nikoarap.gametime.ui.theme.GameTimeTheme
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import com.nikoarap.gametime.view.composables.LoadSportList
 import com.nikoarap.gametime.viewmodels.MainViewModel
 import io.realm.Realm
 
 class MainActivity : ComponentActivity() {
 
-
     private var realm = Realm.getDefaultInstance()
     private val viewModel: MainViewModel by viewModels()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.initViewModel(realm)
+        initObservables()
         setContent {
-            GameTimeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
+            val sportsList by viewModel.sportModelsStateFlow.collectAsState()
+            val isRefreshing by viewModel.isRefreshing.collectAsState()
+            LoadSportList(
+                sports = sportsList,
+                refreshing = isRefreshing,
+                onRefresh = { viewModel.onRefresh() }
+            )
+        }
+    }
+
+//    override fun onCreateView(
+//        parent: View?,
+//        name: String,
+//        context: Context,
+//        attrs: AttributeSet
+//    ): View? {
+//        initObservers()
+//        return super.onCreateView(parent, name, context, attrs)
+//    }
+//
+//    /**
+//     * onViewCreated lifecycle method.
+//     */
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        navController = NavHostFragment.findNavController(this)
+//        analyticsViewListLogEvent(taskTable)
+//        initObservers()
+//    }
+
+
+
+    private fun initObservables() {
+        viewModel.getSportModels()?.observe(this) {
+            run {
+                //check if the realm results set we are observing for nullability and validity (realm object validity)
+                if (it != null && it.isValid) {
+                    viewModel.emitSportModels(it)
                 }
             }
         }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    GameTimeTheme {
-        Greeting("Android")
     }
 }

@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.networking.transforming.DTOs
+package com.nikoarap.gametime.networking.DTOs
 
 import com.google.gson.annotations.SerializedName
 import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING

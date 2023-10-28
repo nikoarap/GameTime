@@ -1,7 +1,7 @@
-package com.nikoarap.gametime.networking.transforming.transformers
+package com.nikoarap.gametime.networking.transformers
 
 import com.nikoarap.gametime.models.EventModel
-import com.nikoarap.gametime.networking.transforming.DTOs.EventModelDTO
+import com.nikoarap.gametime.networking.DTOs.EventModelDTO
 
 class EventModelTransformer: BaseTransformer<EventModelDTO, EventModel> {
 

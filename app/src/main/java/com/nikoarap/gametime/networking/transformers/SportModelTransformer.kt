@@ -1,7 +1,7 @@
-package com.nikoarap.gametime.networking.transforming.transformers
+package com.nikoarap.gametime.networking.transformers
 
 import com.nikoarap.gametime.models.SportModel
-import com.nikoarap.gametime.networking.transforming.DTOs.SportModelDTO
+import com.nikoarap.gametime.networking.DTOs.SportModelDTO
 
 class SportModelTransformer: BaseTransformer<SportModelDTO, SportModel> {
 

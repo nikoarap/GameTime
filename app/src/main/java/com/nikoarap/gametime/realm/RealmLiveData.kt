@@ -14,7 +14,7 @@ import io.realm.RealmResults
  * @param T The type of data in the RealmResults, usually a Realm model class.
  * @param results The initial RealmResults to observe.
  */
-class RealmLiveData<T : RealmModel?>(
+class RealmLiveData<T: RealmModel?>(
     private var results: RealmResults<T>?
 ): LiveData<RealmResults<T>?>() {
 
