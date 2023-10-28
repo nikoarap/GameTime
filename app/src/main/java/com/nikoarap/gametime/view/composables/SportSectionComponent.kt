@@ -119,10 +119,10 @@ fun LoadEventsInSportSection(
         modifier = Modifier
             .wrapContentHeight()
             .background(color = surface)
+            .padding(dp_16)
     ) {
         FlowRow(
             modifier = Modifier.background(color = surface)
-                .padding(horizontal = dp_4),
         ) {
             for (sportEvent in sportEvents) {
                 LoadSportEvent(sportEvent)
