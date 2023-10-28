@@ -3,20 +3,21 @@ package com.nikoarap.gametime.view.composables
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.Card
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,7 +30,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.nikoarap.gametime.R
+import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.models.SportModel
 import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
 import com.nikoarap.gametime.utils.Constants.Companion.FLOAT_DEGREES_0
@@ -45,31 +48,7 @@ import com.nikoarap.gametime.view.themes.surface
 import com.nikoarap.gametime.view.themes.tertiary
 
 @Composable
-fun LoadSportSections(
-    sports: List<SportModel>,
-    refreshing: Boolean,
-    onRefresh: () -> Unit,
-    paddingValues: PaddingValues
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = surface)
-            .verticalScroll(rememberScrollState())
-            .padding(paddingValues)
-    ) {
-
-        for (sport in sports) {
-            LoadSportSection(sport)
-        }
-
-    }
-
-
-}
-
-@Composable
-private fun LoadSportSection(
+fun LoadSportSection(
     sport: SportModel,
 ) {
     var expandedState by remember { mutableStateOf(false) }
@@ -123,9 +102,34 @@ private fun LoadSportSection(
             }
         }
     }
-    when {
-        expandedState -> {
-            LoadSportEventsInSection(sport.activeEvents)
+    if (expandedState) {
+        LoadEventsInSportSection(sport.activeEvents)
+    } else {
+        Divider(
+            modifier = Modifier.fillMaxWidth(),
+            color = surface,
+            thickness = 24.dp
+        )
+    }
+}
+
+@Composable
+fun LoadEventsInSportSection(
+    sportEvents: List<EventModel>
+) {
+    Card(
+        modifier = Modifier
+            .wrapContentHeight()
+            .background(color = surface)
+    ) {
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(4), // 4 columns
+            verticalArrangement = Arrangement.spacedBy(8.dp), // Adjust vertical spacing as needed
+            modifier = Modifier.padding(8.dp) // Adjust padding as needed
+        ) {
+            items(sportEvents) { item ->
+                LoadEventGridItem(item)
+            }
         }
     }
 }
