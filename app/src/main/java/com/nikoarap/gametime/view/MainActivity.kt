@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
-import com.nikoarap.gametime.view.composables.LoadTopBarWithContent
+import com.nikoarap.gametime.view.composables.LoadMainComponent
 import com.nikoarap.gametime.viewmodels.MainViewModel
 import io.realm.Realm
 
@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
     fun TestContent() {
         val sportsList by viewModel.sportModelsStateFlow.collectAsState()
         val isRefreshing by viewModel.isRefreshing.collectAsState()
-        LoadTopBarWithContent(
+        LoadMainComponent(
             sports = sportsList,
             refreshing = isRefreshing,
             onRefresh = { viewModel.onRefresh() }

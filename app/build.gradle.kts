@@ -80,6 +80,9 @@ dependencies {
     implementation("com.google.accompanist:accompanist-swiperefresh:0.24.11-rc")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
+    //flow layout lib
+    implementation("com.google.accompanist:accompanist-flowlayout:0.20.0")
+
     //test libs
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
