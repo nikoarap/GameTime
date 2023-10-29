@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.view
+package com.nikoarap.gametime.view.activities
 
 import android.app.AlertDialog
 import android.content.IntentFilter
