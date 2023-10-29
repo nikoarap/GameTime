@@ -1,11 +1,12 @@
 package com.nikoarap.gametime.networking.repositories
 
 import android.util.Log
-import com.nikoarap.gametime.networking.apiServices.RetrofitClient
 import com.nikoarap.gametime.networking.DTOs.SportModelListDTO
+import com.nikoarap.gametime.networking.apiServices.RetrofitClient
 import com.nikoarap.gametime.networking.transformers.SportModelTransformer
 import com.nikoarap.gametime.realm.DataStorage
 import com.nikoarap.gametime.utils.Constants.Companion.BAD_REQUEST
+import com.nikoarap.gametime.utils.ListUtils
 import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.HttpException
@@ -39,15 +40,13 @@ class SportsRepository {
     }
 
     private fun persistData(sportModelDTOList: SportModelListDTO) {
-        for (sportModelDTO in sportModelDTOList.sportModelDTOs) {
+        val mergedDTOList = ListUtils.mergeSportModels(sportModelDTOList)
+        for (sportModelDTO in mergedDTOList.sportModelDTOs) {
             DataStorage.insert(sportModelTransformer.fromDTO(sportModelDTO))
         }
     }
 
     private fun onFetchError(throwable: ResponseBody?) {
      //todo handle the error by sending an event to the main activity
-
     }
-
-
 }
