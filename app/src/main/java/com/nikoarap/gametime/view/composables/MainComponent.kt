@@ -33,11 +33,12 @@ fun LoadMainComponent(
         LoadHeader()
         LoadSportSections(sports)
     }
+    LoadBottomNavBar()
 }
 
 
 @Composable
-fun LoadHeader() {
+private fun LoadHeader() {
     TopAppBar(
         title = {
             Text(
@@ -57,7 +58,12 @@ fun LoadHeader() {
 }
 
 @Composable
-fun LoadSportSections(
+private fun LoadBottomNavBar() {
+
+}
+
+@Composable
+private fun LoadSportSections(
     sports: List<SportModel>
 ) {
     Column(

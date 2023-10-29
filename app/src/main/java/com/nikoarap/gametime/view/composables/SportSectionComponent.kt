@@ -116,7 +116,7 @@ fun LoadSportSection(
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun LoadEventsInSportSection(
+private fun LoadEventsInSportSection(
     sportEvents: List<EventModel>
 ) {
     var eventCounter = sportEvents.size
