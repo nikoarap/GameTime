@@ -17,7 +17,7 @@ open class DataStorage {
         }
 
         fun getAll(realm: Realm?): RealmResults<SportModel>? {
-            return realm?.where(SportModel::class.java)?.findAll()
+            return realm?.where(SportModel::class.java)?.notEqualTo("id", EMPTY_STRING)?.findAll()
         }
 
         fun getFavoriteSports(realm: Realm?): RealmResults<SportModel>? {
@@ -29,17 +29,15 @@ open class DataStorage {
         }
 
         fun updateSportModelWithFavourite(sportModel: SportModel, isFavourite: Boolean) {
-            RealmUtils.executeTransaction(fun(realm: Realm) {
+            RealmUtils.executeTransaction {
                 sportModel.isFavourite = isFavourite
-                realm.insertOrUpdate(sportModel)
-            })
+            }
         }
 
         fun updateEventModelWithFavourite(eventModel: EventModel, isFavourite: Boolean) {
-            RealmUtils.executeTransaction(fun(realm: Realm) {
+            RealmUtils.executeTransaction {
                 eventModel.isFavourite = isFavourite
-                realm.insertOrUpdate(eventModel)
-            })
+            }
         }
     }
 

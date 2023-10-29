@@ -1,6 +1,5 @@
 package com.nikoarap.gametime.view.composables
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
@@ -12,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,13 +28,21 @@ fun SwitchButton(
     viewModel: MainViewModel,
     sportModel: SportModel
 ) {
+    // Initialize isSwitchChecked based on the value from Realm
     var isSwitchChecked by remember { mutableStateOf(sportModel.isFavourite) }
+
+    // Create a snapshot of the Realm object
+    val sportModelSnapshot = rememberUpdatedState(sportModel)
+
+    // Update isSwitchChecked when the value in Realm changes to ensure that the isSwitchChecked stays up-to-date
+    if (isSwitchChecked != sportModelSnapshot.value.isFavourite) {
+        isSwitchChecked = sportModelSnapshot.value.isFavourite
+    }
     Switch(
-        modifier = Modifier.background(Color.White),
         checked = isSwitchChecked,
         onCheckedChange = {
             isSwitchChecked = it
-            viewModel.onSportFavouriteChecked(sportModel, isSwitchChecked)
+            viewModel.onSportFavouriteChecked(sportModel, it)
         },
         thumbContent = {
             Icon(

@@ -31,7 +31,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     private var realm: Realm? = null
     private var sportsRepository = SportsRepository()
     private var sportModels: RealmLiveData<SportModel>? = null
-    var favoriteSelected: MutableLiveData<Boolean> = MutableLiveData()
+    var favouriteSelected: MutableLiveData<Boolean> = MutableLiveData()
     var navBottomItems: List<NavBottomItem> = arrayListOf()
     var selectedItemIndex = 0
 
@@ -42,7 +42,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
 
     fun initViewModel(realm: Realm?) {
         this.realm = realm
-        favoriteSelected.value = false
+        favouriteSelected.value = false
         createNavBottomItems()
         sportModels = RealmLiveData(DataStorage.getEmpty(realm))
         val results = realm?.let { DataStorage.getAll(it) }
@@ -77,7 +77,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
         }
 
         if (realm?.isInTransaction == false) {
-            if (favoriteSelected.value == true) {
+            if (favouriteSelected.value == true) {
                 DataStorage.getFavoriteSports(realm)?.let { sportModels?.setResults(it) }
             } else {
                 DataStorage.getAll(realm)?.let { sportModels?.setResults(it) }
@@ -96,14 +96,14 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     }
 
     fun onHomeSelected() {
-        favoriteSelected.value = false
+        favouriteSelected.value = false
         selectedItemIndex = VALUE_ZERO
         loadSports()
 
     }
 
     fun onFavoritesSelected() {
-        favoriteSelected.value = true
+        favouriteSelected.value = true
         selectedItemIndex = VALUE_ONE
         loadSports()
     }
