@@ -9,11 +9,11 @@ class ListUtils {
 
         fun mergeSportModels(sportModelList: SportModelListDTO): SportModelListDTO {
             val mergedSportModelList = sportModelList.sportModelDTOs.groupBy { it.id }
-                .map { (id, models) ->
-                    SportModelDTO(
-                        id = id,
-                        activeEvents = models.flatMap { it.activeEvents }
-                    )
+                .map { (_, models) ->
+                    val id = models.first().id
+                    val name = models.first().name
+                    val activeEvents = models.flatMap { it.activeEvents }
+                    SportModelDTO(id, name, activeEvents)
                 }
             return SportModelListDTO(mergedSportModelList)
         }
