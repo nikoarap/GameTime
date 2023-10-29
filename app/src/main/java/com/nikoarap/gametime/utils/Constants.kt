@@ -29,6 +29,7 @@ class Constants {
         const val MAX_EVENTS_PER_ROW = 4
         const val EVENT_ITEM_LAYOUT_WEIGHT = 1f
         const val NO_FAVOURITES_YET = "You haven't added any favorite sports yet. Click on the star located in the sport header to add your favorite sports."
+        const val NO_EVENTS_PLANNED = "There are no sport events for this category yet"
 
         //sport types, used for enums
         const val SOCCER = "SOCCER"

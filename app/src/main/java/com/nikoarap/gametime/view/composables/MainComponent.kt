@@ -1,9 +1,6 @@
 package com.nikoarap.gametime.view.composables
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.TopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,18 +26,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.NavBottomItem
 import com.nikoarap.gametime.models.SportModel
 import com.nikoarap.gametime.utils.Constants
-import com.nikoarap.gametime.utils.Constants.Companion.IMAGE
 import com.nikoarap.gametime.utils.Constants.Companion.NO_FAVOURITES_YET
 import com.nikoarap.gametime.view.themes.dp_16
 import com.nikoarap.gametime.view.themes.dp_18
@@ -67,7 +58,12 @@ class MainComponent(private val viewModel: MainViewModel) {
                 if (sports.isNotEmpty()) {
                     LoadSportSections(sports, paddingValues)
                 } else {
-                    LoadNoResultsView(NO_FAVOURITES_YET)
+                    LoadNoResultsView(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(color = surface),
+                        noResultsText = NO_FAVOURITES_YET
+                    )
                 }
             }
         )
@@ -137,26 +133,6 @@ class MainComponent(private val viewModel: MainViewModel) {
         }
     }
 
-    /**
-     * A composable function that creates custom colors for a selected NavigationBarItem.
-     *
-     * @return A [NavigationBarItemDefaults] object with the specified custom color settings.
-     */
-    @Composable
-    private fun customNavigationBarItemColors(
-        containerColor: Color,
-        selectedColor: Color,
-        unselectedColor: Color
-    ): NavigationBarItemColors {
-        return NavigationBarItemDefaults.colors(
-            selectedIconColor = selectedColor,
-            selectedTextColor = selectedColor,
-            unselectedIconColor = unselectedColor,
-            unselectedTextColor = unselectedColor,
-            indicatorColor = containerColor
-        )
-    }
-
     @Composable
     private fun LoadSportSections(
         sports: List<SportModel>,
@@ -176,32 +152,23 @@ class MainComponent(private val viewModel: MainViewModel) {
         }
     }
 
+    /**
+     * A composable function that creates custom colors for a selected NavigationBarItem.
+     *
+     * @return A [NavigationBarItemDefaults] object with the specified custom color settings.
+     */
     @Composable
-    private fun LoadNoResultsView(
-        noResultsText: String
-    ) {
-        Column(
-            Modifier
-                .fillMaxSize()
-                .background(color = surface),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Image(
-                modifier = Modifier.background(color = surface),
-                contentDescription = IMAGE,
-                painter = painterResource(R.drawable.no_results_placeholder),
-            )
-            Text(
-                text = noResultsText,
-                color = secondary,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.labelMedium
-            )
-        }
+    private fun customNavigationBarItemColors(
+        containerColor: Color,
+        selectedColor: Color,
+        unselectedColor: Color
+    ): NavigationBarItemColors {
+        return NavigationBarItemDefaults.colors(
+            selectedIconColor = selectedColor,
+            selectedTextColor = selectedColor,
+            unselectedIconColor = unselectedColor,
+            unselectedTextColor = unselectedColor,
+            indicatorColor = containerColor
+        )
     }
-
-
-
-
 }
