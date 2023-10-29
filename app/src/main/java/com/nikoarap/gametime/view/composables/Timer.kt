@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.unit.dp
+import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
 import com.nikoarap.gametime.utils.Constants.Companion.EVENT_STARTED
 import com.nikoarap.gametime.utils.Constants.Companion.MILLIS_IN_SECOND
 import com.nikoarap.gametime.utils.Constants.Companion.MINUTES_IN_HOUR
@@ -51,6 +51,15 @@ fun CountdownTimer(timeUntilEventStartInMs: Long) {
     val minutesLeft = (seconds % SECONDS_IN_HOUR) / MINUTES_IN_HOUR
     val secondsLeft = seconds % SECONDS_IN_MINUTE
 
+    val countdownValue = if (timeLeft > VALUE_ZERO) {
+        val daysString = if (daysLeft > VALUE_ZERO) "${daysLeft}d, " else EMPTY_STRING
+        val hoursString = if (hoursLeft > VALUE_ZERO) "${hoursLeft}h, " else EMPTY_STRING
+        val minutesString = if (minutesLeft > VALUE_ZERO) "${minutesLeft}m, " else EMPTY_STRING
+        String.format("$daysString$hoursString$minutesString%02ds", secondsLeft)
+    } else {
+        EVENT_STARTED
+    }
+
     Box(
         modifier = Modifier
             .border(border = BorderStroke(dp_1, if (timeLeft > VALUE_ZERO) primary else Color.Transparent), shape = RectangleShape)
@@ -59,7 +68,7 @@ fun CountdownTimer(timeUntilEventStartInMs: Long) {
     ) {
         Text(
             modifier = Modifier.padding(dp_4),
-            text = if (timeLeft > VALUE_ZERO) "$daysLeft:$hoursLeft:$minutesLeft:$secondsLeft" else EVENT_STARTED,
+            text = countdownValue,
             style = MaterialTheme.typography.bodySmall,
             color = if (timeLeft > VALUE_ZERO) secondary else tertiary,
         )
