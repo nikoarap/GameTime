@@ -49,27 +49,22 @@ class MainComponent(private val viewModel: MainViewModel) {
     fun LoadMainComponent(
         sports: List<SportModel>,
         navBottomItems: List<NavBottomItem>,
-        selectedItemIndex: Int,
-        favouriteSelected: Boolean?
+        selectedItemIndex: Int
     ) {
         Scaffold(
             modifier = Modifier.background(color = surface),
             topBar = { LoadHeader()},
             bottomBar = { LoadBottomNavBar(navBottomItems, selectedItemIndex)},
             content = { paddingValues ->
-                if (favouriteSelected == true) {
-                    if (sports.isNotEmpty()) {
-                        LoadSportSections(sports, paddingValues)
-                    } else {
-                        LoadNoResultsView(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .background(color = surface),
-                            noResultsText = NO_FAVOURITES_YET
-                        )
-                    }
-                } else {
+                if (sports.isNotEmpty()) {
                     LoadSportSections(sports, paddingValues)
+                } else {
+                    LoadNoResultsView(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(color = surface),
+                        noResultsText = NO_FAVOURITES_YET
+                    )
                 }
             }
         )
