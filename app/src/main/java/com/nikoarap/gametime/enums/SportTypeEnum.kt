@@ -11,42 +11,42 @@ import com.nikoarap.gametime.utils.Constants.Companion.TABLE_TENNIS
 import com.nikoarap.gametime.utils.Constants.Companion.TENNIS
 
 enum class SportTypeEnum(
-    var sportType: String,var iconResName: String
+    var sportName: String, var iconResName: String
 ) {
     TYPE_SOCCER(
-        sportType = SOCCER,
+        sportName = SOCCER,
         iconResName = ""
     ),
     TYPE_BASKETBALL(
-    sportType = BASKETBALL,
-    iconResName = ""
+        sportName = BASKETBALL,
+        iconResName = ""
     ),
     TYPE_TENNIS(
-        sportType = TENNIS,
+        sportName = TENNIS,
         iconResName = ""
     ),
     TYPE_TABLE_TENNIS(
-        sportType = TABLE_TENNIS,
+        sportName = TABLE_TENNIS,
         iconResName = ""
     ),
     TYPE_ESPORTS(
-        sportType = ESPORTS,
+        sportName = ESPORTS,
         iconResName = ""
     ),
     TYPE_BASEBALL(
-        sportType = BASEBALL,
+        sportName = BASEBALL,
         iconResName = ""
     ),
     TYPE_HANDBALL(
-        sportType = HANDBALL,
+        sportName = HANDBALL,
         iconResName = ""
     ),
     TYPE_BEACH_VOLLEYBALL(
-        sportType = BEACH_VOLLEYBALL,
+        sportName = BEACH_VOLLEYBALL,
         iconResName = ""
     ),
     TYPE_DARTS(
-        sportType = DARTS,
+        sportName = DARTS,
         iconResName = ""
     ),
 }
