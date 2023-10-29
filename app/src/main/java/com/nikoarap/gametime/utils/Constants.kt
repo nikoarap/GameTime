@@ -24,6 +24,8 @@ class Constants {
         const val ONE_SECOND_DELAY = 1000L
         const val SECONDS_IN_DAY = 86400
         const val EVENT_STARTED = "EVENT STARTED"
+        const val MAX_EVENTS_PER_ROW = 4
+        const val EVENT_ITEM_LAYOUT_WEIGHT = 1f
 
         //sport types, used for enums
         const val SOCCER = "SOCCER"
