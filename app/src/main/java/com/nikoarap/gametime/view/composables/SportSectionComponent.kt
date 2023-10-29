@@ -53,7 +53,7 @@ import com.nikoarap.gametime.viewmodels.MainViewModel
 @Composable
 fun LoadSportSection(
     viewModel: MainViewModel,
-    sport: SportModel,
+    sport: SportModel
 ) {
     var expandedState by remember { mutableStateOf(false) }
     val rotationState by animateFloatAsState(targetValue = if (expandedState) FLOAT_DEGREES_180 else FLOAT_DEGREES_0, label = EMPTY_STRING)
