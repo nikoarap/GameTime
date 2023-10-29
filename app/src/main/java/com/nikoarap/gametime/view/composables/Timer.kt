@@ -22,8 +22,12 @@ import com.nikoarap.gametime.utils.Constants.Companion.EVENT_STARTED
 import com.nikoarap.gametime.utils.Constants.Companion.MILLIS_IN_SECOND
 import com.nikoarap.gametime.utils.Constants.Companion.MINUTES_IN_HOUR
 import com.nikoarap.gametime.utils.Constants.Companion.ONE_SECOND_DELAY
+import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_DAY
 import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_HOUR
 import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_MINUTE
+import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
+import com.nikoarap.gametime.view.themes.dp_1
+import com.nikoarap.gametime.view.themes.dp_4
 import com.nikoarap.gametime.view.themes.primary
 import com.nikoarap.gametime.view.themes.secondary
 import com.nikoarap.gametime.view.themes.surface
@@ -35,28 +39,29 @@ fun CountdownTimer(timeUntilEventStartInMs: Long) {
     var timeLeft by remember { mutableLongStateOf(timeUntilEventStartInMs) }
 
         LaunchedEffect(key1 = timeLeft) {
-            while (timeLeft > 0) {
+            while (timeLeft > VALUE_ZERO) {
                 delay(ONE_SECOND_DELAY)
-                timeLeft -= 1000
+                timeLeft -= MILLIS_IN_SECOND
             }
         }
 
     val seconds = (timeLeft / MILLIS_IN_SECOND).toInt()
-    val hoursLeft = seconds / SECONDS_IN_HOUR
-    val minutesLeft = (seconds % 3600) / MINUTES_IN_HOUR
+    val daysLeft = seconds / SECONDS_IN_DAY
+    val hoursLeft = (seconds % SECONDS_IN_DAY) / SECONDS_IN_HOUR
+    val minutesLeft = (seconds % SECONDS_IN_HOUR) / MINUTES_IN_HOUR
     val secondsLeft = seconds % SECONDS_IN_MINUTE
 
     Box(
         modifier = Modifier
-            .border(border = BorderStroke(1.dp, if (timeLeft > 0) primary else Color.Transparent), shape = RectangleShape)
+            .border(border = BorderStroke(dp_1, if (timeLeft > VALUE_ZERO) primary else Color.Transparent), shape = RectangleShape)
             .background(color = surface),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            modifier = Modifier.padding(4.dp),
-            text = if (timeLeft > 0) "$hoursLeft:$minutesLeft:$secondsLeft" else EVENT_STARTED,
+            modifier = Modifier.padding(dp_4),
+            text = if (timeLeft > VALUE_ZERO) "$daysLeft:$hoursLeft:$minutesLeft:$secondsLeft" else EVENT_STARTED,
             style = MaterialTheme.typography.bodySmall,
-            color = if (timeLeft > 0) secondary else tertiary,
+            color = if (timeLeft > VALUE_ZERO) secondary else tertiary,
         )
     }
 }
