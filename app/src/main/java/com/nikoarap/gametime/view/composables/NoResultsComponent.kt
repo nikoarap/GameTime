@@ -16,6 +16,12 @@ import com.nikoarap.gametime.utils.Constants.Companion.IMAGE
 import com.nikoarap.gametime.view.themes.secondary
 import com.nikoarap.gametime.view.themes.surface
 
+/**
+ * A composable function to display a "No Results" view.
+ *
+ * @param modifier          The modifier for this composable.
+ * @param noResultsText     The text to display as a message when there are no results.
+ */
 @Composable
 fun LoadNoResultsView(
     modifier: Modifier,

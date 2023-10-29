@@ -5,6 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 
+/**
+ * A BroadcastReceiver for monitoring network connectivity changes and notifying a callback
+ * when connectivity becomes available or is lost.
+ *
+ * @param connectivityCallback The callback to notify about network connectivity changes.
+ */
 class NetworkChangeReceiver(private val connectivityCallback: ConnectivityCallback) : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         if (intent?.action == ConnectivityManager.CONNECTIVITY_ACTION) {

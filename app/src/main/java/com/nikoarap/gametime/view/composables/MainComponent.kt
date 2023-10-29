@@ -42,8 +42,21 @@ import com.nikoarap.gametime.view.themes.secondary
 import com.nikoarap.gametime.view.themes.surface
 import com.nikoarap.gametime.viewmodels.MainViewModel
 
+/**
+ * A class representing the main UI component of the application.
+ *
+ * @param viewModel     The view model for managing the UI and data interaction.
+ */
 class MainComponent(private val viewModel: MainViewModel) {
 
+    /**
+     * Load the main component of the application.
+     *
+     * @param sports                The list of sports to display in the main component.
+     * @param navBottomItems        The list of navigation bar items.
+     * @param selectedItemIndex     The index of the selected item in the navigation bar.
+     * @param isFavouriteView       Indicates whether the view is in favorites mode.
+     */
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun LoadMainComponent(
@@ -71,6 +84,9 @@ class MainComponent(private val viewModel: MainViewModel) {
         )
     }
 
+    /**
+     * Loads the top app bar for the main component.
+     */
     @Composable
     private fun LoadHeader() {
         TopAppBar(
@@ -91,6 +107,12 @@ class MainComponent(private val viewModel: MainViewModel) {
         )
     }
 
+    /**
+     * Loads the bottom navigation bar for the main component.
+     *
+     * @param items                 The list of navigation bar items.
+     * @param selectedItemIndex     The index of the selected item.
+     */
     @Composable
     private fun LoadBottomNavBar(
         items: List<NavBottomItem>,
@@ -135,6 +157,12 @@ class MainComponent(private val viewModel: MainViewModel) {
         }
     }
 
+    /**
+     * Load the sport sections in the main component.
+     *
+     * @param sports            The list of sports to display.
+     * @param paddingValues     The padding values for the content.
+     */
     @Composable
     private fun LoadSportSections(
         sports: List<SportModel>,
@@ -154,7 +182,11 @@ class MainComponent(private val viewModel: MainViewModel) {
     }
 
     /**
-     * A composable function that creates custom colors for a selected NavigationBarItem.
+     * Create custom colors for a selected NavigationBarItem.
+     *
+     * @param containerColor        The color of the navigation bar container.
+     * @param selectedColor         The color for the selected item.
+     * @param unselectedColor       The color for unselected items.
      *
      * @return A [NavigationBarItemDefaults] object with the specified custom color settings.
      */

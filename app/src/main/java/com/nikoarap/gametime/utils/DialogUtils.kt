@@ -10,10 +10,19 @@ import com.nikoarap.gametime.utils.Constants.Companion.CONN_DIALOG_OPTION_DATA
 import com.nikoarap.gametime.utils.Constants.Companion.CONN_DIALOG_OPTION_WIFI
 import com.nikoarap.gametime.utils.Constants.Companion.CONN_DIALOG_TITLE
 
+/**
+ * A utility class for creating and displaying dialogs.
+ */
 class DialogUtils {
 
     companion object {
 
+        /**
+         * Shows a connectivity dialog with options to enable Wi-Fi, cellular data, or cancel.
+         *
+         * @param context       The context in which to display the dialog.
+         * @return              The created AlertDialog.
+         */
         fun showConnectivityDialog(context: Context): AlertDialog {
             val builder = AlertDialog.Builder(context)
             builder.setTitle(CONN_DIALOG_TITLE)

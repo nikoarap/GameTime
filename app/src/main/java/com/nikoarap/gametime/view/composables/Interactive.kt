@@ -23,6 +23,12 @@ import com.nikoarap.gametime.view.themes.secondary
 import com.nikoarap.gametime.view.themes.surface
 import com.nikoarap.gametime.viewmodels.MainViewModel
 
+/**
+ * A composable function that displays a switch button for making a sport favorite.
+ *
+ * @param viewModel         The view model for managing the UI and data interaction.
+ * @param sportModel        The sport model associated with the switch button.
+ */
 @Composable
 fun SwitchButton(
     viewModel: MainViewModel,
@@ -56,6 +62,11 @@ fun SwitchButton(
     )
 }
 
+/**
+ * A private composable function that returns the colors for the switch button.
+ *
+ * @return The colors for the switch button.
+ */
 @Composable
 private fun getSwitchColors(): SwitchColors {
     return SwitchDefaults.colors(

@@ -3,9 +3,18 @@ package com.nikoarap.gametime.realm
 import android.util.Log
 import io.realm.Realm
 
+/**
+ * A utility class for managing Realm instances and executing transactions.
+ */
 open class RealmUtils {
 
     companion object {
+
+        /**
+         * Gets a Realm instance.
+         *
+         * @return A Realm instance.
+         */
         fun getRealm(): Realm? {
             val realmConfiguration = Realm.getDefaultConfiguration()
             val globalInstanceCount = realmConfiguration?.let { Realm.getGlobalInstanceCount(it) }
@@ -23,6 +32,11 @@ open class RealmUtils {
             return realm
         }
 
+        /**
+         * Executes a transaction using a Realm instance.
+         *
+         * @param transaction The transaction to execute.
+         */
         fun executeTransaction(transaction: Realm.Transaction) {
             try {
                 getRealm().use { realm -> realm?.executeTransaction(transaction) }
