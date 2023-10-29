@@ -2,7 +2,7 @@ package com.nikoarap.gametime.networking.DTOs
 
 import com.google.gson.annotations.SerializedName
 import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
-import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
+import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO_LONG
 
 data class EventModelDTO (
     @SerializedName("i")
@@ -12,5 +12,5 @@ data class EventModelDTO (
     @SerializedName("d")
     var name: String = EMPTY_STRING,
     @SerializedName("tt")
-    var startTime: Int = VALUE_ZERO,
+    var startTime: Long = VALUE_ZERO_LONG,
 )

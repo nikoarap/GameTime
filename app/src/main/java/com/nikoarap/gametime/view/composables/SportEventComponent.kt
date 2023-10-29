@@ -6,11 +6,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,6 +26,7 @@ import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.utils.Constants
 import com.nikoarap.gametime.utils.Constants.Companion.MILLIS_IN_SECOND
 import com.nikoarap.gametime.utils.Constants.Companion.VS_VALUE
+import com.nikoarap.gametime.utils.DateUtils
 import com.nikoarap.gametime.view.themes.dp_24
 import com.nikoarap.gametime.view.themes.dp_4
 import com.nikoarap.gametime.view.themes.dp_8
@@ -48,7 +49,8 @@ fun LoadSportEvent(
             .padding(dp_8),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        CountdownTimer((System.currentTimeMillis() / MILLIS_IN_SECOND) - event.startTime)
+        //set the duration in ms
+        CountdownTimer((event.startTime * MILLIS_IN_SECOND) - System.currentTimeMillis())
         Icon(
             painter = if (isEventFavourite) rememberVectorPainter(Icons.Filled.Star) else painterResource(id = R.drawable.ic_star_hollow),
             modifier = Modifier

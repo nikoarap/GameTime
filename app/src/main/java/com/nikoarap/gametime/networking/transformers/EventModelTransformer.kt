@@ -22,7 +22,6 @@ class EventModelTransformer: BaseTransformer<EventModelDTO, EventModel> {
             eventModel.competitorLeft = competitorArray[0]
             eventModel.competitorRight = competitorArray[1]
         }
-
         eventModel.startTime = dto.startTime
         return eventModel
     }

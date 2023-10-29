@@ -8,6 +8,7 @@ class Constants {
         const val REALM_SCHEMA_VER = 0L
         const val BAD_REQUEST = 400
         const val VALUE_ZERO = 0
+        const val VALUE_ZERO_LONG = 0L
         const val FLOAT_DEGREES_0 = 0f
         const val FLOAT_DEGREES_180 = 180f
         const val ICON = "icon"
@@ -16,14 +17,12 @@ class Constants {
         const val SCORE_REGEX = "-"
         const val SPACER_SCORE_SPACER_REGEX = " - "
         const val TIMER_SDF_FORMAT = "HH:mm:ss"
-        const val HOURS_IN_DAY = 24
         const val MINUTES_IN_HOUR = 60
         const val SECONDS_IN_MINUTE = 60
         const val MILLIS_IN_SECOND = 1000
         const val SECONDS_IN_HOUR = 3600
-        const val COUNTDOWN_TIMER_DELAY = 1000L
-        const val MILLIS_IN_HOUR = 3600000
-        const val MILLIS_IN_MINUTE = 60000
+        const val ONE_SECOND_DELAY = 1000L
+        const val SECONDS_IN_DAY = 86400
         const val EVENT_STARTED = "EVENT STARTED"
 
         //sport types, used for enums

@@ -17,12 +17,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.unit.dp
 import com.nikoarap.gametime.utils.Constants.Companion.EVENT_STARTED
+import com.nikoarap.gametime.utils.Constants.Companion.MILLIS_IN_SECOND
 import com.nikoarap.gametime.utils.Constants.Companion.MINUTES_IN_HOUR
+import com.nikoarap.gametime.utils.Constants.Companion.ONE_SECOND_DELAY
 import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_HOUR
-import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
+import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_MINUTE
 import com.nikoarap.gametime.view.themes.primary
 import com.nikoarap.gametime.view.themes.secondary
 import com.nikoarap.gametime.view.themes.surface
@@ -30,19 +31,20 @@ import com.nikoarap.gametime.view.themes.tertiary
 import kotlinx.coroutines.delay
 
 @Composable
-fun CountdownTimer(timeUntilEventStart: Long) {
-    var timeLeft by remember { mutableLongStateOf(timeUntilEventStart) }
+fun CountdownTimer(timeUntilEventStartInMs: Long) {
+    var timeLeft by remember { mutableLongStateOf(timeUntilEventStartInMs) }
 
         LaunchedEffect(key1 = timeLeft) {
             while (timeLeft > 0) {
-                delay(1000L)
-                timeLeft--
+                delay(ONE_SECOND_DELAY)
+                timeLeft -= 1000
             }
         }
 
-    val hoursLeft = timeLeft / SECONDS_IN_HOUR
-    val minutesLeft = (timeLeft % SECONDS_IN_HOUR) / MINUTES_IN_HOUR
-    val secondsLeft = timeLeft % MINUTES_IN_HOUR
+    val seconds = (timeLeft / MILLIS_IN_SECOND).toInt()
+    val hoursLeft = seconds / SECONDS_IN_HOUR
+    val minutesLeft = (seconds % 3600) / MINUTES_IN_HOUR
+    val secondsLeft = seconds % SECONDS_IN_MINUTE
 
     Box(
         modifier = Modifier
@@ -52,7 +54,7 @@ fun CountdownTimer(timeUntilEventStart: Long) {
     ) {
         Text(
             modifier = Modifier.padding(4.dp),
-            text = if (timeLeft > 0) "$hoursLeft :$minutesLeft:$secondsLeft" else EVENT_STARTED,
+            text = if (timeLeft > 0) "$hoursLeft:$minutesLeft:$secondsLeft" else EVENT_STARTED,
             style = MaterialTheme.typography.bodySmall,
             color = if (timeLeft > 0) secondary else tertiary,
         )

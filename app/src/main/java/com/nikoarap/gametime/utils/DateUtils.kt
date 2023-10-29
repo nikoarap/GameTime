@@ -1,20 +1,15 @@
 package com.nikoarap.gametime.utils
 
-import android.annotation.SuppressLint
-import com.nikoarap.gametime.utils.Constants.Companion.TIMER_SDF_FORMAT
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.TimeZone
+import com.nikoarap.gametime.utils.Constants.Companion.MILLIS_IN_SECOND
+import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_DAY
 
 class DateUtils {
 
     companion object {
 
-        @SuppressLint("SimpleDateFormat")
-        fun convertTimestampToHHMMSS(timestamp: Long): String {
-            val dateFormat = SimpleDateFormat(TIMER_SDF_FORMAT)
-            dateFormat.timeZone = TimeZone.getDefault()
-            return dateFormat.format(Date(timestamp))
+        fun isDurationLessThanDay(timestampInSeconds: Long):Boolean {
+            val duration =  (System.currentTimeMillis() / MILLIS_IN_SECOND) - timestampInSeconds
+            return duration <= SECONDS_IN_DAY
         }
     }
 }
