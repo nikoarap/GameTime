@@ -1,6 +1,8 @@
 package com.nikoarap.gametime.viewmodels
 
 import android.app.Application
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
@@ -18,6 +20,7 @@ import com.nikoarap.gametime.utils.Constants.Companion.FAVORITES
 import com.nikoarap.gametime.utils.Constants.Companion.HOME
 import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ONE
 import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
+import com.nikoarap.gametime.utils.NetworkUtils
 import io.realm.Realm
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +35,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     private var sportsRepository = SportsRepository()
     private var sportModels: RealmLiveData<SportModel>? = null
     var favouriteSelected: MutableLiveData<Boolean> = MutableLiveData()
+    var showConnectivityDialog: MutableLiveData<Boolean> = MutableLiveData()
     var navBottomItems: List<NavBottomItem> = arrayListOf()
     var selectedItemIndex = 0
 
@@ -43,6 +47,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     fun initViewModel(realm: Realm?) {
         this.realm = realm
         favouriteSelected.value = false
+        showConnectivityDialog.value = false
         createNavBottomItems()
         sportModels = RealmLiveData(DataStorage.getEmpty(realm))
         val results = realm?.let { DataStorage.getAll(it) }
@@ -63,11 +68,12 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     }
 
     private fun fetchDataFromRepo() {
-
-        //todo check for internet connection here and act accordingly
-
-        CoroutineScope(Dispatchers.IO).launch {
-            sportsRepository.fetchData()
+        if (NetworkUtils.isNetworkConnected()) {
+            CoroutineScope(Dispatchers.IO).launch {
+                sportsRepository.fetchData()
+            }
+        } else {
+            showConnectivityDialog.value = true
         }
     }
 

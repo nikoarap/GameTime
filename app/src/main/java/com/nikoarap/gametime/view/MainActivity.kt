@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.nikoarap.gametime.utils.DialogUtils
 import com.nikoarap.gametime.view.composables.MainComponent
 import com.nikoarap.gametime.viewmodels.MainViewModel
 import io.realm.Realm
@@ -37,6 +38,14 @@ class MainActivity : ComponentActivity() {
                 //check if the realm results set we are observing for nullability and validity (realm object validity)
                 if (it != null && it.isValid) {
                     viewModel.emitSportModels(it)
+                }
+            }
+        }
+
+        viewModel.showConnectivityDialog.observe(this) {
+            run {
+                if (it == true) {
+                    DialogUtils.showConnectivityDialog(this)
                 }
             }
         }
