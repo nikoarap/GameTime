@@ -45,6 +45,7 @@ class Constants {
         const val ESPORTS = "ESPORTS"
         const val BASEBALL = "BASEBALL"
         const val HANDBALL = "HANDBALL"
+        const val VOLLEYBALL = "VOLLEYBALL"
         const val BEACH_VOLLEYBALL = "BEACH VOLLEYBALL"
         const val DARTS = "DARTS"
 
