@@ -1,8 +1,6 @@
 package com.nikoarap.gametime.viewmodels
 
 import android.app.Application
-import android.widget.Toast
-import android.widget.Toast.LENGTH_SHORT
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
@@ -20,7 +18,6 @@ import com.nikoarap.gametime.utils.Constants.Companion.FAVORITES
 import com.nikoarap.gametime.utils.Constants.Companion.HOME
 import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ONE
 import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
-import com.nikoarap.gametime.utils.NetworkUtils
 import io.realm.Realm
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -67,13 +64,9 @@ open class MainViewModel(application: Application): AndroidViewModel(application
         )
     }
 
-    private fun fetchDataFromRepo() {
-        if (NetworkUtils.isNetworkConnected()) {
-            CoroutineScope(Dispatchers.IO).launch {
-                sportsRepository.fetchData()
-            }
-        } else {
-            showConnectivityDialog.value = true
+    fun fetchDataFromRepo() {
+        CoroutineScope(Dispatchers.IO).launch {
+            sportsRepository.fetchData()
         }
     }
 

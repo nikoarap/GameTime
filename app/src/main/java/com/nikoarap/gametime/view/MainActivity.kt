@@ -1,19 +1,25 @@
 package com.nikoarap.gametime.view
 
+import android.app.AlertDialog
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.nikoarap.gametime.networking.broadcastReceiver.ConnectivityCallback
+import com.nikoarap.gametime.networking.broadcastReceiver.NetworkChangeReceiver
 import com.nikoarap.gametime.utils.DialogUtils
 import com.nikoarap.gametime.view.composables.MainComponent
 import com.nikoarap.gametime.viewmodels.MainViewModel
 import io.realm.Realm
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), ConnectivityCallback {
 
-
+    private val networkChangeReceiver = NetworkChangeReceiver(this)
+    private var connectivityDialog: AlertDialog? = null
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,15 +47,39 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-
         viewModel.showConnectivityDialog.observe(this) {
             run {
                 if (it == true) {
-                    DialogUtils.showConnectivityDialog(this)
+                    connectivityDialog = DialogUtils.showConnectivityDialog(this)
+                    connectivityDialog?.show()
                 }
             }
         }
+    }
 
+    override fun onStart() {
+        super.onStart()
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(networkChangeReceiver, filter)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(networkChangeReceiver)
+    }
+
+    override fun onConnectivityAvailable() {
+        viewModel.fetchDataFromRepo()
+        viewModel.showConnectivityDialog.value = false
+        if (connectivityDialog?.isShowing == true) {
+            connectivityDialog?.dismiss()
+        }
+    }
+
+    override fun onConnectivityLost() {
+        viewModel.showConnectivityDialog.value = true
+//        connectivityDialog = DialogUtils.showConnectivityDialog(this)
+//        connectivityDialog?.show()
     }
 }
 

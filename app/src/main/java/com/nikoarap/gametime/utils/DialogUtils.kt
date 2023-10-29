@@ -14,7 +14,7 @@ class DialogUtils {
 
     companion object {
 
-        fun showConnectivityDialog(context: Context) {
+        fun showConnectivityDialog(context: Context): AlertDialog {
             val builder = AlertDialog.Builder(context)
             builder.setTitle(CONN_DIALOG_TITLE)
             builder.setMessage(CONN_DIALOG_MESSAGE)
@@ -31,7 +31,11 @@ class DialogUtils {
             builder.setNeutralButton(CONN_DIALOG_OPTION_CANCEL) { dialog, _ ->
                 dialog.dismiss()
             }
-            builder.create().show()
+
+            val dialog = builder.create()
+            dialog.show()
+
+            return dialog
         }
     }
 
