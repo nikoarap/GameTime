@@ -41,7 +41,7 @@ import com.nikoarap.gametime.utils.Constants.Companion.ICON
 import com.nikoarap.gametime.utils.Constants.Companion.MAX_EVENTS_PER_ROW
 import com.nikoarap.gametime.utils.Constants.Companion.NO_EVENTS_PLANNED
 import com.nikoarap.gametime.utils.Constants.Companion.SECTION_COLUMN_WEIGHT
-import com.nikoarap.gametime.utils.IconUtils
+import com.nikoarap.gametime.utils.ImageUtils
 import com.nikoarap.gametime.view.themes.dp_16
 import com.nikoarap.gametime.view.themes.dp_18
 import com.nikoarap.gametime.view.themes.dp_24
@@ -74,7 +74,7 @@ fun LoadSportSection(
                 modifier = Modifier
                     .padding(start = dp_16)
                     .size(dp_18),
-                painter = painterResource(IconUtils.getPainterResForSport(sport.name)),
+                painter = painterResource(ImageUtils.getPainterResForSport(sport.name)),
                 contentDescription = ICON
             )
             Text(

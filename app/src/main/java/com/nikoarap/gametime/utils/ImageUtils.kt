@@ -2,7 +2,7 @@ package com.nikoarap.gametime.utils
 
 import com.nikoarap.gametime.enums.SportTypeEnum
 
-class IconUtils {
+class ImageUtils {
 
     companion object {
 
