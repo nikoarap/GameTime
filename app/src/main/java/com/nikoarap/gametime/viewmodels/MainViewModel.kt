@@ -1,13 +1,19 @@
 package com.nikoarap.gametime.viewmodels
 
 import android.app.Application
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Star
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.nikoarap.gametime.models.NavBottomItem
 import com.nikoarap.gametime.models.SportModel
 import com.nikoarap.gametime.networking.repositories.SportsRepository
 import com.nikoarap.gametime.realm.RealmLiveData
 import com.nikoarap.gametime.realm.DataStorage
 import com.nikoarap.gametime.realm.RealmUtils
+import com.nikoarap.gametime.utils.Constants.Companion.FAVORITES
+import com.nikoarap.gametime.utils.Constants.Companion.HOME
 import io.realm.Realm
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,8 +32,13 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     val sportModelsStateFlow: StateFlow<List<SportModel>>
         get() = _sportModels.asStateFlow()
 
+    var navBottomItems: List<NavBottomItem> = arrayListOf()
+
+    var selectedItemIndex = 0
+
     fun initViewModel(realm: Realm?) {
         this.realm = realm
+        createNavBottomItems()
         sportModels = RealmLiveData(DataStorage.getEmpty(realm))
         val results = realm?.let { DataStorage.getAll(it) }
 
@@ -37,6 +48,13 @@ open class MainViewModel(application: Application): AndroidViewModel(application
         }
 
         loadSports()
+    }
+
+    private fun createNavBottomItems() {
+        navBottomItems = listOf(
+            NavBottomItem(order = 0, label = HOME, imageVector = Icons.Filled.Home, onSelected = { onHomeSelected() }),
+            NavBottomItem(order = 1, label = FAVORITES, imageVector = Icons.Filled.Star, onSelected = { onFavoritesSelected() }),
+        )
     }
 
     private fun fetchDataFromRepo() {
@@ -65,5 +83,14 @@ open class MainViewModel(application: Application): AndroidViewModel(application
 
     fun getSportModels(): RealmLiveData<SportModel>? {
         return sportModels
+    }
+
+    fun onHomeSelected() {
+        selectedItemIndex = 0
+
+    }
+
+    fun onFavoritesSelected() {
+        selectedItemIndex = 1
     }
 }

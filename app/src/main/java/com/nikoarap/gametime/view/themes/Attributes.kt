@@ -12,6 +12,7 @@ val dp_18 = 18.dp
 val dp_24 = 24.dp
 val dp_32 = 32.dp
 val dp_48 = 48.dp
+val dp_68 = 68.dp
 
 //sp
 val sp_8 = 8.sp

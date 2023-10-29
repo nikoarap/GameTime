@@ -38,5 +38,9 @@ class Constants {
         const val BEACH_VOLLEYBALL = "BEACH VOLLEYBALL"
         const val DARTS = "DARTS"
 
+        //nav bar items, used for enums
+        const val HOME = "Home"
+        const val FAVORITES = "Favorites"
+
     }
 }
