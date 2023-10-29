@@ -20,6 +20,6 @@ class GameTimeApplication: Application() {
             .allowWritesOnUiThread(true)
             .build()
 
-        realmConfig.let { Realm.setDefaultConfiguration(it) }
+        realmConfig.let { it?.let { realmConfiguration -> Realm.setDefaultConfiguration(realmConfiguration) } }
     }
 }

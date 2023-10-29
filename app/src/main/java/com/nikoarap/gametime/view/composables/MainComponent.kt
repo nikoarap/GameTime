@@ -49,7 +49,8 @@ class MainComponent(private val viewModel: MainViewModel) {
     fun LoadMainComponent(
         sports: List<SportModel>,
         navBottomItems: List<NavBottomItem>,
-        selectedItemIndex: Int
+        selectedItemIndex: Int,
+        isFavouriteView: Boolean?
     ) {
         Scaffold(
             modifier = Modifier.background(color = surface),
@@ -63,7 +64,7 @@ class MainComponent(private val viewModel: MainViewModel) {
                         modifier = Modifier
                             .fillMaxSize()
                             .background(color = surface),
-                        noResultsText = NO_FAVOURITES_YET
+                        noResultsText = if (isFavouriteView == true) NO_FAVOURITES_YET else Constants.NO_RECORDS_SYNCED_YET
                     )
                 }
             }

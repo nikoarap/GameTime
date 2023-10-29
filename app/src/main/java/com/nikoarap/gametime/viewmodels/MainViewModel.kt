@@ -32,6 +32,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     private var sportsRepository = SportsRepository()
     private var sportModels: RealmLiveData<SportModel>? = null
     var favouriteSelected: MutableLiveData<Boolean> = MutableLiveData()
+    var showConnectivityDialog: MutableLiveData<Boolean> = MutableLiveData()
     var navBottomItems: List<NavBottomItem> = arrayListOf()
     var selectedItemIndex = 0
 
@@ -43,6 +44,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     fun initViewModel(realm: Realm?) {
         this.realm = realm
         favouriteSelected.value = false
+        showConnectivityDialog.value = false
         createNavBottomItems()
         sportModels = RealmLiveData(DataStorage.getEmpty(realm))
         val results = realm?.let { DataStorage.getAll(it) }
@@ -62,10 +64,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
         )
     }
 
-    private fun fetchDataFromRepo() {
-
-        //todo check for internet connection here and act accordingly
-
+    fun fetchDataFromRepo() {
         CoroutineScope(Dispatchers.IO).launch {
             sportsRepository.fetchData()
         }
