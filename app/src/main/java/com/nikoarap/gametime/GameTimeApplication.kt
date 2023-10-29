@@ -1,7 +1,6 @@
 package com.nikoarap.gametime
 
 import android.app.Application
-import android.content.Context
 import com.nikoarap.gametime.utils.Constants.Companion.REALM_ID
 import com.nikoarap.gametime.utils.Constants.Companion.REALM_SCHEMA_VER
 import io.realm.Realm
@@ -10,11 +9,9 @@ import io.realm.RealmConfiguration
 class GameTimeApplication: Application() {
 
     private var realmConfig: RealmConfiguration? = null
-    private var appContext: Context? = null
 
     override fun onCreate() {
         super.onCreate()
-        appContext = this
         Realm.init(this)
         realmConfig = RealmConfiguration.Builder()
             .name(REALM_ID)
@@ -23,11 +20,6 @@ class GameTimeApplication: Application() {
             .allowWritesOnUiThread(true)
             .build()
 
-        realmConfig.let { Realm.setDefaultConfiguration(it) }
+        realmConfig.let { it?.let { realmConfiguration -> Realm.setDefaultConfiguration(realmConfiguration) } }
     }
-
-    fun getContext(): Context? {
-        return appContext
-    }
-
 }
