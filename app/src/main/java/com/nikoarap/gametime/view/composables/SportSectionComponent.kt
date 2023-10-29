@@ -51,9 +51,11 @@ import com.nikoarap.gametime.view.themes.dp_8
 import com.nikoarap.gametime.view.themes.onSecondary
 import com.nikoarap.gametime.view.themes.surface
 import com.nikoarap.gametime.view.themes.tertiary
+import com.nikoarap.gametime.viewmodels.MainViewModel
 
 @Composable
 fun LoadSportSection(
+    viewModel: MainViewModel,
     sport: SportModel,
 ) {
     var expandedState by remember { mutableStateOf(false) }
@@ -92,7 +94,7 @@ fun LoadSportSection(
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    SwitchButton(isChecked = sport.isFavourite)
+                    SwitchButton(viewModel, sport)
                     Spacer(Modifier.width(dp_16))
                     Icon(
                         modifier = Modifier

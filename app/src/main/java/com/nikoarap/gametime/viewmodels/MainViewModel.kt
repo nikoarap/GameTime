@@ -106,4 +106,9 @@ open class MainViewModel(application: Application): AndroidViewModel(application
         selectedItemIndex = VALUE_ONE
         loadSports()
     }
+
+    fun onSportFavoriteChecked(sportModel: SportModel, isChecked: Boolean) {
+        DataStorage.updateSportModel(sportModel, isChecked)
+        loadSports()
+    }
 }

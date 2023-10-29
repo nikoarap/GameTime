@@ -10,7 +10,9 @@ open class DataStorage {
     companion object {
 
         fun insert(sportModel: SportModel) {
-            RealmUtils.executeTransaction { realm -> realm.insertOrUpdate(sportModel) }
+            RealmUtils.executeTransaction(fun(realm: Realm) {
+                realm.insertOrUpdate(sportModel)
+            })
         }
 
         fun getAll(realm: Realm?): RealmResults<SportModel>? {
@@ -23,6 +25,14 @@ open class DataStorage {
 
         fun getEmpty(realm: Realm?): RealmResults<SportModel>? {
             return realm?.where(SportModel::class.java)?.equalTo("id", EMPTY_STRING)?.findAll()
+        }
+
+        fun updateSportModel(sportModel: SportModel, isFavourite: Boolean) {
+            RealmUtils.executeTransaction(fun(realm: Realm) {
+                sportModel.isFavourite = isFavourite
+                realm.insertOrUpdate(sportModel)
+            })
+
         }
     }
 

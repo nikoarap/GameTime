@@ -17,22 +17,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.nikoarap.gametime.R
+import com.nikoarap.gametime.models.SportModel
 import com.nikoarap.gametime.utils.Constants.Companion.ICON
 import com.nikoarap.gametime.view.themes.dp_24
 import com.nikoarap.gametime.view.themes.primary
 import com.nikoarap.gametime.view.themes.secondary
 import com.nikoarap.gametime.view.themes.surface
+import com.nikoarap.gametime.viewmodels.MainViewModel
 
 @Composable
 fun SwitchButton(
-    isChecked: Boolean
+    viewModel: MainViewModel,
+    sportModel: SportModel
 ) {
-    var isSwitchChecked by remember { mutableStateOf(isChecked) }
+    var isSwitchChecked by remember { mutableStateOf(sportModel.isFavourite) }
     Switch(
         modifier = Modifier.background(Color.White),
         checked = isSwitchChecked,
         onCheckedChange = {
             isSwitchChecked = it
+            viewModel.onSportFavoriteChecked(sportModel, isSwitchChecked)
         },
         thumbContent = {
             Icon(
