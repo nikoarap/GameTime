@@ -3,7 +3,6 @@ package com.nikoarap.gametime.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.nikoarap.gametime.models.SportModel
 import com.nikoarap.gametime.networking.repositories.SportsRepository
 import com.nikoarap.gametime.realm.RealmLiveData
@@ -17,7 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-open class MainViewModel(application: Application): AndroidViewModel(application), SwipeRefreshLayout.OnRefreshListener {
+open class MainViewModel(application: Application): AndroidViewModel(application) {
 
     private var realm: Realm? = null
     private var sportModels: RealmLiveData<SportModel>? = null
@@ -26,10 +25,6 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     private val _sportModels = MutableStateFlow(emptyList<SportModel>())
     val sportModelsStateFlow: StateFlow<List<SportModel>>
         get() = _sportModels.asStateFlow()
-
-    private val _isRefreshing = MutableStateFlow(false)
-    val isRefreshing: StateFlow<Boolean>
-        get() = _isRefreshing.asStateFlow()
 
     fun initViewModel(realm: Realm?) {
         this.realm = realm
@@ -73,9 +68,4 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     fun getSportModels(): RealmLiveData<SportModel>? {
         return sportModels
     }
-
-    override fun onRefresh() {
-        fetchDataFromRepo()
-    }
-
 }

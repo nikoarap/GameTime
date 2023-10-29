@@ -32,11 +32,8 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun TestContent() {
         val sportsList by viewModel.sportModelsStateFlow.collectAsState()
-        val isRefreshing by viewModel.isRefreshing.collectAsState()
         LoadMainComponent(
-            sports = sportsList,
-            refreshing = isRefreshing,
-            onRefresh = { viewModel.onRefresh() }
+            sports = sportsList
         )
     }
 
