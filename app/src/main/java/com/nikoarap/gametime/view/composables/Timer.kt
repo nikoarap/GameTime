@@ -17,13 +17,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.unit.dp
+import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
 import com.nikoarap.gametime.utils.Constants.Companion.EVENT_STARTED
 import com.nikoarap.gametime.utils.Constants.Companion.MILLIS_IN_SECOND
 import com.nikoarap.gametime.utils.Constants.Companion.MINUTES_IN_HOUR
 import com.nikoarap.gametime.utils.Constants.Companion.ONE_SECOND_DELAY
+import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_DAY
 import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_HOUR
 import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_MINUTE
+import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
+import com.nikoarap.gametime.view.themes.dp_1
+import com.nikoarap.gametime.view.themes.dp_4
 import com.nikoarap.gametime.view.themes.primary
 import com.nikoarap.gametime.view.themes.secondary
 import com.nikoarap.gametime.view.themes.surface
@@ -35,28 +39,38 @@ fun CountdownTimer(timeUntilEventStartInMs: Long) {
     var timeLeft by remember { mutableLongStateOf(timeUntilEventStartInMs) }
 
         LaunchedEffect(key1 = timeLeft) {
-            while (timeLeft > 0) {
+            while (timeLeft > VALUE_ZERO) {
                 delay(ONE_SECOND_DELAY)
-                timeLeft -= 1000
+                timeLeft -= MILLIS_IN_SECOND
             }
         }
 
     val seconds = (timeLeft / MILLIS_IN_SECOND).toInt()
-    val hoursLeft = seconds / SECONDS_IN_HOUR
-    val minutesLeft = (seconds % 3600) / MINUTES_IN_HOUR
+    val daysLeft = seconds / SECONDS_IN_DAY
+    val hoursLeft = (seconds % SECONDS_IN_DAY) / SECONDS_IN_HOUR
+    val minutesLeft = (seconds % SECONDS_IN_HOUR) / MINUTES_IN_HOUR
     val secondsLeft = seconds % SECONDS_IN_MINUTE
+
+    val countdownValue = if (timeLeft > VALUE_ZERO) {
+        val daysString = if (daysLeft > VALUE_ZERO) "${daysLeft}d, " else EMPTY_STRING
+        val hoursString = if (hoursLeft > VALUE_ZERO) "${hoursLeft}h, " else EMPTY_STRING
+        val minutesString = if (minutesLeft > VALUE_ZERO) "${minutesLeft}m, " else EMPTY_STRING
+        String.format("$daysString$hoursString$minutesString%02ds", secondsLeft)
+    } else {
+        EVENT_STARTED
+    }
 
     Box(
         modifier = Modifier
-            .border(border = BorderStroke(1.dp, if (timeLeft > 0) primary else Color.Transparent), shape = RectangleShape)
+            .border(border = BorderStroke(dp_1, if (timeLeft > VALUE_ZERO) primary else Color.Transparent), shape = RectangleShape)
             .background(color = surface),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            modifier = Modifier.padding(4.dp),
-            text = if (timeLeft > 0) "$hoursLeft:$minutesLeft:$secondsLeft" else EVENT_STARTED,
+            modifier = Modifier.padding(dp_4),
+            text = countdownValue,
             style = MaterialTheme.typography.bodySmall,
-            color = if (timeLeft > 0) secondary else tertiary,
+            color = if (timeLeft > VALUE_ZERO) secondary else tertiary,
         )
     }
 }

@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.Star
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.models.NavBottomItem
 import com.nikoarap.gametime.models.SportModel
 import com.nikoarap.gametime.networking.repositories.SportsRepository
@@ -104,6 +105,16 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     fun onFavoritesSelected() {
         favoriteSelected.value = true
         selectedItemIndex = VALUE_ONE
+        loadSports()
+    }
+
+    fun onEventFavouriteChecked(eventModel: EventModel, isChecked: Boolean) {
+        DataStorage.updateEventModelWithFavourite(eventModel, isChecked)
+        loadSports()
+    }
+
+    fun onSportFavouriteChecked(sportModel: SportModel, isChecked: Boolean) {
+        DataStorage.updateSportModelWithFavourite(sportModel, isChecked)
         loadSports()
     }
 }

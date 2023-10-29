@@ -52,6 +52,7 @@ class MainComponent(private val viewModel: MainViewModel) {
         selectedItemIndex: Int
     ) {
         Scaffold(
+            modifier = Modifier.background(color = surface),
             topBar = { LoadHeader()},
             bottomBar = { LoadBottomNavBar(navBottomItems, selectedItemIndex)},
             content = { paddingValues ->
@@ -141,13 +142,12 @@ class MainComponent(private val viewModel: MainViewModel) {
         Column(
             modifier = Modifier
                 .padding(paddingValues)
-                .fillMaxWidth()
-                .wrapContentHeight()
+                .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .background(color = surface)
         ) {
             for (sport in sports) {
-                LoadSportSection(sport)
+                LoadSportSection(viewModel, sport)
             }
         }
     }
