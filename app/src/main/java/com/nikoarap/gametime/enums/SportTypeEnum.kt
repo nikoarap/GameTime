@@ -1,5 +1,7 @@
 package com.nikoarap.gametime.enums
 
+import androidx.annotation.DrawableRes
+import com.nikoarap.gametime.R
 import com.nikoarap.gametime.utils.Constants.Companion.BASEBALL
 import com.nikoarap.gametime.utils.Constants.Companion.BASKETBALL
 import com.nikoarap.gametime.utils.Constants.Companion.BEACH_VOLLEYBALL
@@ -9,44 +11,54 @@ import com.nikoarap.gametime.utils.Constants.Companion.HANDBALL
 import com.nikoarap.gametime.utils.Constants.Companion.SOCCER
 import com.nikoarap.gametime.utils.Constants.Companion.TABLE_TENNIS
 import com.nikoarap.gametime.utils.Constants.Companion.TENNIS
+import com.nikoarap.gametime.utils.Constants.Companion.VOLLEYBALL
 
 enum class SportTypeEnum(
-    var sportName: String, var iconResName: String
+    var sportName: String,
+    @DrawableRes var painterRes: Int
 ) {
     TYPE_SOCCER(
         sportName = SOCCER,
-        iconResName = ""
+        painterRes = R.drawable.soccer_icon
     ),
     TYPE_BASKETBALL(
         sportName = BASKETBALL,
-        iconResName = ""
+        painterRes = R.drawable.basketball_icon
     ),
     TYPE_TENNIS(
         sportName = TENNIS,
-        iconResName = ""
+        painterRes = R.drawable.tennis_icon
     ),
     TYPE_TABLE_TENNIS(
         sportName = TABLE_TENNIS,
-        iconResName = ""
+        painterRes = R.drawable.table_tennis_icon
     ),
     TYPE_ESPORTS(
         sportName = ESPORTS,
-        iconResName = ""
+        painterRes = R.drawable.esports_icon
     ),
     TYPE_BASEBALL(
         sportName = BASEBALL,
-        iconResName = ""
+        painterRes = R.drawable.baseball_icon
     ),
     TYPE_HANDBALL(
         sportName = HANDBALL,
-        iconResName = ""
+        painterRes = R.drawable.handball_icon
+    ),
+    TYPE_VOLLEYBALL(
+        sportName = VOLLEYBALL,
+        painterRes = R.drawable.volleyball_icon
     ),
     TYPE_BEACH_VOLLEYBALL(
         sportName = BEACH_VOLLEYBALL,
-        iconResName = ""
+        painterRes = R.drawable.beach_volleyball_icon
     ),
     TYPE_DARTS(
         sportName = DARTS,
-        iconResName = ""
-    ),
+        painterRes = R.drawable.darts_icon
+    )
 }
+
+
+
+

@@ -1,6 +1,7 @@
 package com.nikoarap.gametime.view.composables
 
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -40,6 +41,7 @@ import com.nikoarap.gametime.utils.Constants.Companion.ICON
 import com.nikoarap.gametime.utils.Constants.Companion.MAX_EVENTS_PER_ROW
 import com.nikoarap.gametime.utils.Constants.Companion.NO_EVENTS_PLANNED
 import com.nikoarap.gametime.utils.Constants.Companion.SECTION_COLUMN_WEIGHT
+import com.nikoarap.gametime.utils.ImageUtils
 import com.nikoarap.gametime.view.themes.dp_16
 import com.nikoarap.gametime.view.themes.dp_18
 import com.nikoarap.gametime.view.themes.dp_24
@@ -47,7 +49,6 @@ import com.nikoarap.gametime.view.themes.dp_4
 import com.nikoarap.gametime.view.themes.dp_8
 import com.nikoarap.gametime.view.themes.onSecondary
 import com.nikoarap.gametime.view.themes.surface
-import com.nikoarap.gametime.view.themes.tertiary
 import com.nikoarap.gametime.viewmodels.MainViewModel
 
 @Composable
@@ -69,10 +70,12 @@ fun LoadSportSection(
             },
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Dot(
-                modifier = Modifier.padding(start = dp_16),
-                circleSizeDp = dp_18,
-                backgroundColor = tertiary
+            Image(
+                modifier = Modifier
+                    .padding(start = dp_16)
+                    .size(dp_18),
+                painter = painterResource(ImageUtils.getPainterResForSport(sport.name)),
+                contentDescription = ICON
             )
             Text(
                 text = sport.name,

@@ -70,7 +70,6 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
 
     override fun onConnectivityAvailable() {
         viewModel.fetchDataFromRepo()
-        viewModel.showConnectivityDialog.value = false
         if (connectivityDialog?.isShowing == true) {
             connectivityDialog?.dismiss()
         }
@@ -78,8 +77,6 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
 
     override fun onConnectivityLost() {
         viewModel.showConnectivityDialog.value = true
-//        connectivityDialog = DialogUtils.showConnectivityDialog(this)
-//        connectivityDialog?.show()
     }
 }
 
