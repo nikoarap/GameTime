@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.nikoarap.gametime.models.NavBottomItem
 import com.nikoarap.gametime.models.SportModel
@@ -14,6 +15,8 @@ import com.nikoarap.gametime.realm.DataStorage
 import com.nikoarap.gametime.realm.RealmUtils
 import com.nikoarap.gametime.utils.Constants.Companion.FAVORITES
 import com.nikoarap.gametime.utils.Constants.Companion.HOME
+import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ONE
+import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
 import io.realm.Realm
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,19 +28,20 @@ import kotlinx.coroutines.launch
 open class MainViewModel(application: Application): AndroidViewModel(application) {
 
     private var realm: Realm? = null
-    private var sportModels: RealmLiveData<SportModel>? = null
     private var sportsRepository = SportsRepository()
+    private var sportModels: RealmLiveData<SportModel>? = null
+    var favoriteSelected: MutableLiveData<Boolean> = MutableLiveData()
+    var navBottomItems: List<NavBottomItem> = arrayListOf()
+    var selectedItemIndex = 0
 
     private val _sportModels = MutableStateFlow(emptyList<SportModel>())
     val sportModelsStateFlow: StateFlow<List<SportModel>>
         get() = _sportModels.asStateFlow()
 
-    var navBottomItems: List<NavBottomItem> = arrayListOf()
-
-    var selectedItemIndex = 0
 
     fun initViewModel(realm: Realm?) {
         this.realm = realm
+        favoriteSelected.value = false
         createNavBottomItems()
         sportModels = RealmLiveData(DataStorage.getEmpty(realm))
         val results = realm?.let { DataStorage.getAll(it) }
@@ -66,12 +70,17 @@ open class MainViewModel(application: Application): AndroidViewModel(application
         }
     }
 
-    fun loadSports() {
+    private fun loadSports() {
         if (realm == null) {
             realm = RealmUtils.getRealm()
         }
+
         if (realm?.isInTransaction == false) {
-            DataStorage.getAll(realm)?.let { sportModels?.setResults(it) }
+            if (favoriteSelected.value == true) {
+                DataStorage.getFavoriteSports(realm)?.let { sportModels?.setResults(it) }
+            } else {
+                DataStorage.getAll(realm)?.let { sportModels?.setResults(it) }
+            }
         }
     }
 
@@ -86,11 +95,15 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     }
 
     fun onHomeSelected() {
-        selectedItemIndex = 0
+        favoriteSelected.value = false
+        selectedItemIndex = VALUE_ZERO
+        loadSports()
 
     }
 
     fun onFavoritesSelected() {
-        selectedItemIndex = 1
+        favoriteSelected.value = true
+        selectedItemIndex = VALUE_ONE
+        loadSports()
     }
 }

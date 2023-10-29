@@ -8,10 +8,12 @@ class Constants {
         const val REALM_SCHEMA_VER = 0L
         const val BAD_REQUEST = 400
         const val VALUE_ZERO = 0
+        const val VALUE_ONE = 1
         const val VALUE_ZERO_LONG = 0L
         const val FLOAT_DEGREES_0 = 0f
         const val FLOAT_DEGREES_180 = 180f
         const val ICON = "icon"
+        const val IMAGE = "image"
         const val SECTION_COLUMN_WEIGHT = .8f
         const val VS_VALUE = "VS"
         const val SCORE_REGEX = "-"
@@ -26,6 +28,7 @@ class Constants {
         const val EVENT_STARTED = "EVENT STARTED"
         const val MAX_EVENTS_PER_ROW = 4
         const val EVENT_ITEM_LAYOUT_WEIGHT = 1f
+        const val NO_FAVOURITES_YET = "You haven't added any favorite sports yet. Click on the star located in the sport header to add your favorite sports."
 
         //sport types, used for enums
         const val SOCCER = "SOCCER"

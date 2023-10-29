@@ -17,6 +17,10 @@ open class DataStorage {
             return realm?.where(SportModel::class.java)?.findAll()
         }
 
+        fun getFavoriteSports(realm: Realm?): RealmResults<SportModel>? {
+            return realm?.where(SportModel::class.java)?.equalTo("isFavourite", true)?.findAll()
+        }
+
         fun getEmpty(realm: Realm?): RealmResults<SportModel>? {
             return realm?.where(SportModel::class.java)?.equalTo("id", EMPTY_STRING)?.findAll()
         }
