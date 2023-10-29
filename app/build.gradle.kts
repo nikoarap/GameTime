@@ -76,10 +76,6 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("org.greenrobot:eventbus:3.0.0")
 
-    //swipe refresh libs
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.24.11-rc")
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-
     //flow layout lib
     implementation("com.google.accompanist:accompanist-flowlayout:0.20.0")
 

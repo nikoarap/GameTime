@@ -6,13 +6,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.Star
-import androidx.compose.material.icons.sharp.Star
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,21 +18,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.utils.Constants
+import com.nikoarap.gametime.utils.Constants.Companion.MILLIS_IN_SECOND
 import com.nikoarap.gametime.utils.Constants.Companion.VS_VALUE
-import com.nikoarap.gametime.view.themes.dp_16
+import com.nikoarap.gametime.utils.DateUtils
 import com.nikoarap.gametime.view.themes.dp_24
 import com.nikoarap.gametime.view.themes.dp_4
 import com.nikoarap.gametime.view.themes.dp_8
 import com.nikoarap.gametime.view.themes.onSurface
 import com.nikoarap.gametime.view.themes.secondary
+import com.nikoarap.gametime.view.themes.sp_10
 import com.nikoarap.gametime.view.themes.surface
 import com.nikoarap.gametime.view.themes.tertiary
 
@@ -51,7 +49,8 @@ fun LoadSportEvent(
             .padding(dp_8),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TextWithBorder(text = event.startTime.toString())
+        //set the duration in ms
+        CountdownTimer((event.startTime * MILLIS_IN_SECOND) - System.currentTimeMillis())
         Icon(
             painter = if (isEventFavourite) rememberVectorPainter(Icons.Filled.Star) else painterResource(id = R.drawable.ic_star_hollow),
             modifier = Modifier
@@ -74,7 +73,7 @@ fun LoadSportEvent(
         )
         Text(
             text = VS_VALUE,
-            style = MaterialTheme.typography.labelSmall,
+            fontSize = sp_10,
             color = tertiary,
             modifier = Modifier
         )

@@ -23,9 +23,7 @@ import com.nikoarap.gametime.view.themes.surface
 
 @Composable
 fun LoadMainComponent(
-    sports: List<SportModel>,
-    refreshing: Boolean,
-    onRefresh: () -> Unit
+    sports: List<SportModel>
 ) {
     Column(
         modifier = Modifier
@@ -33,7 +31,7 @@ fun LoadMainComponent(
             .background(color = surface),
     ) {
         LoadHeader()
-        LoadSportSections(sports, refreshing, onRefresh)
+        LoadSportSections(sports)
     }
 }
 
@@ -60,9 +58,7 @@ fun LoadHeader() {
 
 @Composable
 fun LoadSportSections(
-    sports: List<SportModel>,
-    refreshing: Boolean,
-    onRefresh: () -> Unit
+    sports: List<SportModel>
 ) {
     Column(
         modifier = Modifier
