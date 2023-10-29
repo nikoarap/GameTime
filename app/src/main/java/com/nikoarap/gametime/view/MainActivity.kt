@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
-import com.nikoarap.gametime.view.composables.LoadMainComponent
+import com.nikoarap.gametime.view.composables.MainComponent
 import com.nikoarap.gametime.viewmodels.MainViewModel
 import io.realm.Realm
 
@@ -32,7 +32,8 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun TestContent() {
         val sportsList by viewModel.sportModelsStateFlow.collectAsState()
-        LoadMainComponent(
+        val mainComponent = MainComponent(viewModel)
+        mainComponent.LoadMainComponent(
             sports = sportsList,
             navBottomItems = viewModel.navBottomItems,
             viewModel.selectedItemIndex

@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
@@ -29,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.models.SportModel
@@ -38,6 +41,7 @@ import com.nikoarap.gametime.utils.Constants.Companion.FLOAT_DEGREES_0
 import com.nikoarap.gametime.utils.Constants.Companion.FLOAT_DEGREES_180
 import com.nikoarap.gametime.utils.Constants.Companion.ICON
 import com.nikoarap.gametime.utils.Constants.Companion.MAX_EVENTS_PER_ROW
+import com.nikoarap.gametime.utils.Constants.Companion.NO_EVENTS_PLANNED
 import com.nikoarap.gametime.utils.Constants.Companion.SECTION_COLUMN_WEIGHT
 import com.nikoarap.gametime.view.themes.dp_16
 import com.nikoarap.gametime.view.themes.dp_18
@@ -114,12 +118,29 @@ fun LoadSportSection(
     }
 }
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun LoadEventsInSportSection(
     sportEvents: List<EventModel>
 ) {
-    var eventCounter = sportEvents.size
+    if (sportEvents.isNotEmpty()) {
+        LoadEvents(sportEvents)
+    } else {
+        LoadNoResultsView(
+            modifier = Modifier
+                .wrapContentHeight()
+                .fillMaxWidth()
+                .padding(dp_16)
+                .background(color = surface),
+            noResultsText = NO_EVENTS_PLANNED
+        )
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun LoadEvents(
+    sportEvents: List<EventModel>
+) {
     Surface(
         modifier = Modifier
             .wrapContentHeight()
@@ -143,7 +164,6 @@ private fun LoadEventsInSportSection(
                         .weight(EVENT_ITEM_LAYOUT_WEIGHT),
                     sportEvent
                 )
-                eventCounter--
             }
 
         }
