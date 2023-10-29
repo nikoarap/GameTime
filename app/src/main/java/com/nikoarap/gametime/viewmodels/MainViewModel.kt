@@ -31,12 +31,10 @@ open class MainViewModel(application: Application): AndroidViewModel(application
         sportModels = RealmLiveData(DataStorage.getEmpty(realm))
         val results = realm?.let { DataStorage.getAll(it) }
 
-        fetchDataFromRepo()
-
         //if the DB returns 0 results, that means we have to fetch the data from the API
-//        if (results?.isEmpty() == true) {
-//            fetchDataFromRepo()
-//        }
+        if (results?.isEmpty() == true) {
+            fetchDataFromRepo()
+        }
 
         loadSports()
     }
