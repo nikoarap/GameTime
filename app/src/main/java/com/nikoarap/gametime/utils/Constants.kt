@@ -16,9 +16,26 @@ class Constants {
         const val SCORE_REGEX = "-"
         const val SPACER_SCORE_SPACER_REGEX = " - "
         const val TIMER_SDF_FORMAT = "HH:mm:ss"
-        const val SECONDS_IN_HOUR = 3600
+        const val HOURS_IN_DAY = 24
         const val MINUTES_IN_HOUR = 60
+        const val SECONDS_IN_MINUTE = 60
         const val MILLIS_IN_SECOND = 1000
+        const val SECONDS_IN_HOUR = 3600
+        const val COUNTDOWN_TIMER_DELAY = 1000L
+        const val MILLIS_IN_HOUR = 3600000
+        const val MILLIS_IN_MINUTE = 60000
         const val EVENT_STARTED = "EVENT STARTED"
+
+        //sport types, used for enums
+        const val SOCCER = "SOCCER"
+        const val BASKETBALL = "BASKETBALL"
+        const val TENNIS = "TENNIS"
+        const val TABLE_TENNIS = "TABLE TENNIS"
+        const val ESPORTS = "ESPORTS"
+        const val BASEBALL = "BASEBALL"
+        const val HANDBALL = "HANDBALL"
+        const val BEACH_VOLLEYBALL = "BEACH VOLLEYBALL"
+        const val DARTS = "DARTS"
+
     }
 }

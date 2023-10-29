@@ -4,6 +4,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 //dp
+val dp_1 = 1.dp
 val dp_4 = 4.dp
 val dp_8 = 8.dp
 val dp_16 = 16.dp
