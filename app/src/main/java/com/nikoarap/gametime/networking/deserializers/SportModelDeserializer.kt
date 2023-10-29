@@ -15,13 +15,14 @@ import java.lang.reflect.Type
 
 class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
 
+    private val sportModelDTOsList: ArrayList<SportModelDTO> = arrayListOf()
+
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
     ): SportModelListDTO {
         val sportModelListDTO = SportModelListDTO()
-        val sportModelDTOsList: ArrayList<SportModelDTO> = arrayListOf()
         val jsonArrayObject = json?.asJsonArray
 
         if (jsonArrayObject != null) {
@@ -33,7 +34,7 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
                         sportModelDto.id = jsonElement.asJsonObject.get("i")?.asString ?: EMPTY_STRING
                     }
                     else if (jsonElement.asJsonObject.get("i") is JsonArray) {
-                        populateFromJsonObject(jsonElement.asJsonObject, context, sportModelDTOsList)
+                        populateFromJsonObject(jsonElement.asJsonObject, context)
                     }
                 }
 
@@ -42,7 +43,7 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
                         sportModelDto.name = jsonElement.asJsonObject.get("d")?.asString ?: EMPTY_STRING
                     }
                     else if (jsonElement.asJsonObject.get("d") is JsonArray) {
-                       populateFromJsonObject(jsonElement.asJsonObject, context, sportModelDTOsList)
+                       populateFromJsonObject(jsonElement.asJsonObject, context)
                     }
                 }
 
@@ -66,8 +67,7 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
 
     private fun populateFromJsonObject(
         jsonObject: JsonObject,
-        context: JsonDeserializationContext?,
-        sportModelDTOsList: ArrayList<SportModelDTO>
+        context: JsonDeserializationContext?
     ) {
         var i = EMPTY_STRING
         var d = EMPTY_STRING
@@ -75,7 +75,7 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
         for ((key, value) in jsonObject.entrySet()) {
             if (key == "i") {
                 if (value is JsonArray) {
-                    populateFromJsonArray(value, context, sportModelDTOsList)
+                    populateFromJsonArray(value, context)
                 }
                 else {
                     i = value.asString
@@ -83,14 +83,14 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
             }
             if (key == "d") {
                 if (value is JsonArray) {
-                    populateFromJsonArray(value, context, sportModelDTOsList)
+                    populateFromJsonArray(value, context)
                 } else {
                     d = value.asString
                 }
             }
             if (key == "e") {
                 if (value is JsonArray) {
-                    populateFromJsonArray(value, context, sportModelDTOsList)
+                    populateFromJsonArray(value, context)
                 } else {
                     e = context?.deserialize<List<EventModelDTO>>(
                         value,
@@ -104,8 +104,7 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
 
     private fun populateFromJsonArray(
         jsonArray: JsonArray,
-        context: JsonDeserializationContext?,
-        sportModelDTOsList: ArrayList<SportModelDTO>
+        context: JsonDeserializationContext?
     ) {
         for (subElement in jsonArray) {
             sportModelDTOsList.add(
