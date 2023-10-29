@@ -3,7 +3,9 @@ package com.nikoarap.gametime.view.composables
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,18 +29,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
-import com.google.accompanist.flowlayout.FlowRow
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.models.SportModel
 import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
+import com.nikoarap.gametime.utils.Constants.Companion.EVENT_ITEM_LAYOUT_WEIGHT
 import com.nikoarap.gametime.utils.Constants.Companion.FLOAT_DEGREES_0
 import com.nikoarap.gametime.utils.Constants.Companion.FLOAT_DEGREES_180
 import com.nikoarap.gametime.utils.Constants.Companion.ICON
+import com.nikoarap.gametime.utils.Constants.Companion.MAX_EVENTS_PER_ROW
 import com.nikoarap.gametime.utils.Constants.Companion.SECTION_COLUMN_WEIGHT
 import com.nikoarap.gametime.view.themes.dp_16
 import com.nikoarap.gametime.view.themes.dp_18
 import com.nikoarap.gametime.view.themes.dp_24
+import com.nikoarap.gametime.view.themes.dp_4
 import com.nikoarap.gametime.view.themes.dp_8
 import com.nikoarap.gametime.view.themes.onSecondary
 import com.nikoarap.gametime.view.themes.surface
@@ -110,22 +114,38 @@ fun LoadSportSection(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun LoadEventsInSportSection(
+private fun LoadEventsInSportSection(
     sportEvents: List<EventModel>
 ) {
+    var eventCounter = sportEvents.size
     Surface(
         modifier = Modifier
             .wrapContentHeight()
             .background(color = surface)
             .padding(dp_16)
     ) {
-        FlowRow(
-            modifier = Modifier.background(color = surface)
+        //using flow layout here instead of a Lazy Grid, so that the layout computation (composition) becomes smoother and without any nested hierarchies
+        // such as lazy grid inside of a lazy list or vertically scrollable column
+        androidx.compose.foundation.layout.FlowRow(
+            modifier = Modifier.background(color = surface),
+            horizontalArrangement = Arrangement.spacedBy(dp_4),
+            verticalArrangement = Arrangement.spacedBy(dp_4),
+            maxItemsInEachRow = MAX_EVENTS_PER_ROW
         ) {
             for (sportEvent in sportEvents) {
-                LoadSportEvent(sportEvent)
+                LoadSportEvent(
+                    modifier = Modifier
+                        .background(color = surface)
+                        .padding(dp_4)
+                        .wrapContentHeight()
+                        .weight(EVENT_ITEM_LAYOUT_WEIGHT),
+                    sportEvent
+                )
+                eventCounter--
             }
+
         }
     }
 }

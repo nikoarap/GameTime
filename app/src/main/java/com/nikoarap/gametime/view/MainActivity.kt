@@ -33,7 +33,9 @@ class MainActivity : ComponentActivity() {
     fun TestContent() {
         val sportsList by viewModel.sportModelsStateFlow.collectAsState()
         LoadMainComponent(
-            sports = sportsList
+            sports = sportsList,
+            navBottomItems = viewModel.navBottomItems,
+            viewModel.selectedItemIndex
         )
     }
 
