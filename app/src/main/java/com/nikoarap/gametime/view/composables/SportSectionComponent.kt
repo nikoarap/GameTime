@@ -126,6 +126,8 @@ fun LoadEventsInSportSection(
             .background(color = surface)
             .padding(dp_16)
     ) {
+        //using flow layout here instead of a Lazy Grid, so that the layout computation (composition) becomes smoother and without any nested hierarchies
+        // such as lazy grid inside of a lazy list or vertically scrollable column
         androidx.compose.foundation.layout.FlowRow(
             modifier = Modifier.background(color = surface),
             horizontalArrangement = Arrangement.spacedBy(dp_4),
