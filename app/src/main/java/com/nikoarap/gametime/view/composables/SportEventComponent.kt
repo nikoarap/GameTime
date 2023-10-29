@@ -33,6 +33,13 @@ import com.nikoarap.gametime.view.themes.sp_10
 import com.nikoarap.gametime.view.themes.tertiary
 import com.nikoarap.gametime.viewmodels.MainViewModel
 
+/**
+ * A composable function to display a sport event.
+ *
+ * @param modifier      The modifier for this composable.
+ * @param viewModel     The view model for the main view.
+ * @param event         The event model to display.
+ */
 @Composable
 fun LoadSportEvent(
     modifier: Modifier,

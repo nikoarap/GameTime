@@ -16,12 +16,30 @@ import com.nikoarap.gametime.view.composables.MainComponent
 import com.nikoarap.gametime.viewmodels.MainViewModel
 import io.realm.Realm
 
+/**
+ * The main activity for the application. It serves as the entry point and the user interface for
+ * displaying sports events. This activity implements the `ConnectivityCallback` interface to
+ * handle network connectivity changes.
+ *
+ * In this activity, a network change receiver (`NetworkChangeReceiver`) is registered to listen for
+ * network connectivity changes, and a view model (`MainViewModel`) is used to manage and observe
+ * the data related to sports events. The activity initializes the UI using a composable function
+ * (`MainComponent.LoadMainComponent`) and observes the view model for changes to sports data and
+ * connectivity status. It also manages the display of a connectivity dialog when connectivity is lost.
+ *
+ */
 class MainActivity : ComponentActivity(), ConnectivityCallback {
 
     private val networkChangeReceiver = NetworkChangeReceiver(this)
     private var connectivityDialog: AlertDialog? = null
     private val viewModel: MainViewModel by viewModels()
 
+    /**
+     * onCreate Lifecycle fun. Initializes the ViewModel with a Realm instance and sets up
+     * the observables. It also sets the content of the activity, which includes a composable UI using Jetpack Compose.
+     *
+     * @param savedInstanceState The saved instance state.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.initViewModel(Realm.getDefaultInstance())
@@ -38,6 +56,9 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
         }
     }
 
+    /**
+     * Initializes observables to listen for changes in the view model's live data.
+     */
     private fun initObservables() {
         viewModel.getSportModels()?.observe(this) {
             run {
@@ -57,17 +78,29 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
         }
     }
 
+    /**
+     * onStart Lifecycle fun. It registers a broadcast receiver to listen for
+     * connectivity change events.
+     */
     override fun onStart() {
         super.onStart()
         val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         registerReceiver(networkChangeReceiver, filter)
     }
 
+    /**
+     * onStop Lifecycle fun. It unregisters the network change receiver to stop listening
+     * for connectivity change events.
+     */
     override fun onStop() {
         super.onStop()
         unregisterReceiver(networkChangeReceiver)
     }
 
+    /**
+     * Callback method called when network connectivity becomes available. It triggers the fetching of data from the repository
+     * using the ViewModel. If a connectivity dialog is currently showing, it dismisses the dialog.
+     */
     override fun onConnectivityAvailable() {
         viewModel.fetchDataFromRepo()
         if (connectivityDialog?.isShowing == true) {
@@ -75,6 +108,9 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
         }
     }
 
+    /**
+     * Callback method called when network connectivity is lost. It sets a LiveData flag in the ViewModel to show a connectivity dialog.
+     */
     override fun onConnectivityLost() {
         viewModel.showConnectivityDialog.value = true
     }

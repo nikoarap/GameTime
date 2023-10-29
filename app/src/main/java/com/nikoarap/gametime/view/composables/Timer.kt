@@ -34,6 +34,17 @@ import com.nikoarap.gametime.view.themes.surface
 import com.nikoarap.gametime.view.themes.tertiary
 import kotlinx.coroutines.delay
 
+/**
+ * A composable function that displays a countdown timer for an event. This composable takes the
+ * time remaining until an event starts in milliseconds and shows a timer that counts down to
+ * the event's start time.
+ *
+ * The countdown timer calculates the days, hours, minutes, and seconds remaining until the event,
+ * and displays them in a formatted string like "Xd, Xh, Xm, Xs" for days, hours, minutes, and
+ * seconds, respectively. When the event has started, it displays "Event Started."
+ *
+ * @param timeUntilEventStartInMs The time remaining until the event starts in milliseconds.
+ */
 @Composable
 fun CountdownTimer(timeUntilEventStartInMs: Long) {
     var timeLeft by remember { mutableLongStateOf(timeUntilEventStartInMs) }

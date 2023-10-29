@@ -51,6 +51,12 @@ import com.nikoarap.gametime.view.themes.onSecondary
 import com.nikoarap.gametime.view.themes.surface
 import com.nikoarap.gametime.viewmodels.MainViewModel
 
+/**
+ * A composable function to load a sport section.
+ *
+ * @param viewModel      The view model for the main view.
+ * @param sport          The sport model to display in the section.
+ */
 @Composable
 fun LoadSportSection(
     viewModel: MainViewModel,
@@ -120,6 +126,13 @@ fun LoadSportSection(
     }
 }
 
+
+/**
+ * A composable function to load events in a sport section.
+ *
+ * @param viewModel         The view model for the main view.
+ * @param sportEvents       The list of sport events to display.
+ */
 @Composable
 private fun LoadEventsInSportSection(
     viewModel: MainViewModel,
@@ -139,6 +152,13 @@ private fun LoadEventsInSportSection(
     }
 }
 
+
+/**
+ * A composable function to load events in a sport section.
+ *
+ * @param viewModel         The view model for the main view.
+ * @param sportEvents       The list of sport events to display.
+ */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun LoadEvents(

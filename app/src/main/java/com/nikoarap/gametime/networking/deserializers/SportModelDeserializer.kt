@@ -13,6 +13,11 @@ import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
 import com.nikoarap.gametime.utils.JsonUtils
 import java.lang.reflect.Type
 
+/**
+ * A custom JSON deserializer for converting a JSON object to a [SportModelListDTO] object.
+ * This deserializer is used to parse and construct a list of [SportModelDTO] instances and
+ * populate a [SportModelListDTO] object with the parsed data.
+ */
 class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
 
     private val sportModelDTOsList: ArrayList<SportModelDTO> = arrayListOf()
@@ -65,6 +70,12 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
         return sportModelListDTO
     }
 
+    /**
+     * Populates a [SportModelDTO] from a JSON object.
+     *
+     * @param jsonObject    The JSON object to extract data from.
+     * @param context The   JSON deserialization context.
+     */
     private fun populateFromJsonObject(
         jsonObject: JsonObject,
         context: JsonDeserializationContext?
@@ -102,6 +113,12 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
         }
     }
 
+    /**
+     * Populates a [SportModelDTO] from a JSON array.
+     *
+     * @param jsonArray         The JSON array to extract data from.
+     * @param context The       JSON deserialization context.
+     */
     private fun populateFromJsonArray(
         jsonArray: JsonArray,
         context: JsonDeserializationContext?

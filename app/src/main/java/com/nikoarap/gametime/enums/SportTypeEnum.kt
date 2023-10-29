@@ -13,6 +13,12 @@ import com.nikoarap.gametime.utils.Constants.Companion.TABLE_TENNIS
 import com.nikoarap.gametime.utils.Constants.Companion.TENNIS
 import com.nikoarap.gametime.utils.Constants.Companion.VOLLEYBALL
 
+/**
+ * An enum representing different sport types with associated icon resources.
+ *
+ * @property sportName      The name or title of the sport type.
+ * @property painterRes     The resource ID of the icon associated with the sport type.
+ */
 enum class SportTypeEnum(
     var sportName: String,
     @DrawableRes var painterRes: Int

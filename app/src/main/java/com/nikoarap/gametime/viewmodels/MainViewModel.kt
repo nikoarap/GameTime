@@ -26,6 +26,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+/**
+ * The `MainViewModel` class is responsible for managing data and providing it to the UI components. It interacts with the data
+ * repository to fetch and update sports data. It also handles user interactions and maintains the state of the selected tab
+ * (Home or Favorites).
+ *
+ * @property application The application context.
+ */
 open class MainViewModel(application: Application): AndroidViewModel(application) {
 
     private var realm: Realm? = null
@@ -40,7 +47,11 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     val sportModelsStateFlow: StateFlow<List<SportModel>>
         get() = _sportModels.asStateFlow()
 
-
+    /**
+     * Initialize the view model.
+     *
+     * @param realm The Realm instance to use for data operations.
+     */
     fun initViewModel(realm: Realm?) {
         this.realm = realm
         favouriteSelected.value = false
@@ -53,10 +64,12 @@ open class MainViewModel(application: Application): AndroidViewModel(application
         if (results?.isEmpty() == true) {
             fetchDataFromRepo()
         }
-
         loadSports()
     }
 
+    /**
+     * Creates a mock up set of nav bottom items to be used in the bottom nav bar.
+     */
     private fun createNavBottomItems() {
         navBottomItems = listOf(
             NavBottomItem(order = 0, label = HOME, imageVector = Icons.Filled.Home, onSelected = { onHomeSelected() }),
@@ -64,12 +77,20 @@ open class MainViewModel(application: Application): AndroidViewModel(application
         )
     }
 
+    /**
+     * Fetch sports data from the repository. It runs in a background coroutine.
+     */
     fun fetchDataFromRepo() {
         CoroutineScope(Dispatchers.IO).launch {
             sportsRepository.fetchData()
         }
     }
 
+    /**
+     * Load sports data from the database based on user preferences and selected tab.
+     * If the user has selected the "Favorites" tab, it loads favorite sports; otherwise, it loads all sports.
+     * It then updates the LiveData holding the sports data for UI updates.
+     */
     private fun loadSports() {
         if (realm == null) {
             realm = RealmUtils.getRealm()
@@ -84,34 +105,62 @@ open class MainViewModel(application: Application): AndroidViewModel(application
         }
     }
 
+    /**
+     * Emit a list of sport models to update the UI using the StateFlow.
+     *
+     * @param sportModels List of sport models.
+     */
     fun emitSportModels(sportModels : List<SportModel>) {
         viewModelScope.launch {
             _sportModels.emit(sportModels.toMutableList())
         }
     }
 
+    /**
+     * Get the RealmLiveData containing sport models.
+     *
+     * @return RealmLiveData containing sport models.
+     */
     fun getSportModels(): RealmLiveData<SportModel>? {
         return sportModels
     }
 
-    fun onHomeSelected() {
+    /**
+     * Handle user selection of the "Home" tab.
+     */
+    private fun onHomeSelected() {
         favouriteSelected.value = false
         selectedItemIndex = VALUE_ZERO
         loadSports()
 
     }
 
-    fun onFavoritesSelected() {
+    /**
+     * Handle user selection of the "Favorites" tab.
+     */
+    private fun onFavoritesSelected() {
         favouriteSelected.value = true
         selectedItemIndex = VALUE_ONE
         loadSports()
     }
 
+    /**
+     * Handle user interaction to select/unselect an event as a favorite.
+     *
+     * @param eventModel        The event to be marked/unmarked as favorite.
+     * @param isChecked         A flag indicating whether the event should be marked as a favorite.
+     */
     fun onEventFavouriteChecked(eventModel: EventModel, isChecked: Boolean) {
         DataStorage.updateEventModelWithFavourite(eventModel, isChecked)
         loadSports()
     }
 
+    /**
+     * Handle user interaction to select/unselect a sport as a favorite.
+     *
+     * @param sportModel        The sport to be marked/unmarked as favorite.
+     * @param isChecked         A flag indicating whether the sport should be marked as a favorite.
+     */
     fun onSportFavouriteChecked(sportModel: SportModel, isChecked: Boolean) {
         DataStorage.updateSportModelWithFavourite(sportModel, isChecked)
         loadSports()
