@@ -15,8 +15,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.SportModel
 import com.nikoarap.gametime.utils.Constants.Companion.ICON
 import com.nikoarap.gametime.view.themes.dp_24
@@ -36,7 +34,7 @@ fun SwitchButton(
         checked = isSwitchChecked,
         onCheckedChange = {
             isSwitchChecked = it
-            viewModel.onSportFavoriteChecked(sportModel, isSwitchChecked)
+            viewModel.onSportFavouriteChecked(sportModel, isSwitchChecked)
         },
         thumbContent = {
             Icon(

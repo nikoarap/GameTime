@@ -1,5 +1,6 @@
 package com.nikoarap.gametime.realm
 
+import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.models.SportModel
 import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
 import io.realm.Realm
@@ -27,12 +28,18 @@ open class DataStorage {
             return realm?.where(SportModel::class.java)?.equalTo("id", EMPTY_STRING)?.findAll()
         }
 
-        fun updateSportModel(sportModel: SportModel, isFavourite: Boolean) {
+        fun updateSportModelWithFavourite(sportModel: SportModel, isFavourite: Boolean) {
             RealmUtils.executeTransaction(fun(realm: Realm) {
                 sportModel.isFavourite = isFavourite
                 realm.insertOrUpdate(sportModel)
             })
+        }
 
+        fun updateEventModelWithFavourite(eventModel: EventModel, isFavourite: Boolean) {
+            RealmUtils.executeTransaction(fun(realm: Realm) {
+                eventModel.isFavourite = isFavourite
+                realm.insertOrUpdate(eventModel)
+            })
         }
     }
 

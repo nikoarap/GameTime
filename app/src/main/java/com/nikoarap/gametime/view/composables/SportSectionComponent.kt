@@ -8,13 +8,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
@@ -31,7 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.models.SportModel
@@ -110,7 +107,7 @@ fun LoadSportSection(
         }
     }
     if (expandedState) {
-        LoadEventsInSportSection(sport.activeEvents)
+        LoadEventsInSportSection(viewModel, sport.activeEvents)
     } else {
         Divider(
             modifier = Modifier.fillMaxWidth(),
@@ -122,10 +119,11 @@ fun LoadSportSection(
 
 @Composable
 private fun LoadEventsInSportSection(
+    viewModel: MainViewModel,
     sportEvents: List<EventModel>
 ) {
     if (sportEvents.isNotEmpty()) {
-        LoadEvents(sportEvents)
+        LoadEvents(viewModel, sportEvents)
     } else {
         LoadNoResultsView(
             modifier = Modifier
@@ -141,6 +139,7 @@ private fun LoadEventsInSportSection(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun LoadEvents(
+    viewModel: MainViewModel,
     sportEvents: List<EventModel>
 ) {
     Surface(
@@ -164,6 +163,7 @@ private fun LoadEvents(
                         .padding(dp_4)
                         .wrapContentHeight()
                         .weight(EVENT_ITEM_LAYOUT_WEIGHT),
+                    viewModel,
                     sportEvent
                 )
             }

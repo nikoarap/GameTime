@@ -31,10 +31,12 @@ import com.nikoarap.gametime.view.themes.onSurface
 import com.nikoarap.gametime.view.themes.secondary
 import com.nikoarap.gametime.view.themes.sp_10
 import com.nikoarap.gametime.view.themes.tertiary
+import com.nikoarap.gametime.viewmodels.MainViewModel
 
 @Composable
 fun LoadSportEvent(
     modifier: Modifier,
+    viewModel: MainViewModel,
     event: EventModel
 ) {
     var isEventFavourite by remember { mutableStateOf(event.isFavourite) }
@@ -52,7 +54,7 @@ fun LoadSportEvent(
                 .size(dp_24)
                 .clickable {
                     isEventFavourite = !isEventFavourite
-                    //realm logic here
+                    viewModel.onEventFavouriteChecked(event, isEventFavourite)
                 },
 
             contentDescription = Constants.ICON,
