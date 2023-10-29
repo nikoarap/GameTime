@@ -14,7 +14,8 @@ import com.nikoarap.gametime.utils.Constants.Companion.TENNIS
 import com.nikoarap.gametime.utils.Constants.Companion.VOLLEYBALL
 
 enum class SportTypeEnum(
-    var sportName: String,  @DrawableRes painterRes: Int
+    var sportName: String,
+    @DrawableRes var painterRes: Int
 ) {
     TYPE_SOCCER(
         sportName = SOCCER,
@@ -55,5 +56,9 @@ enum class SportTypeEnum(
     TYPE_DARTS(
         sportName = DARTS,
         painterRes = R.drawable.darts_icon
-    ),
+    )
 }
+
+
+
+
