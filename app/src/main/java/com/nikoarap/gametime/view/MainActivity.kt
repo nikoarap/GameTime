@@ -14,6 +14,7 @@ import com.nikoarap.gametime.networking.broadcastReceiver.NetworkChangeReceiver
 import com.nikoarap.gametime.networking.deserializers.EventModelDeserializer
 import com.nikoarap.gametime.networking.deserializers.SportModelDeserializer
 import com.nikoarap.gametime.utils.DialogUtils
+import com.nikoarap.gametime.utils.ToastUtils
 import com.nikoarap.gametime.view.composables.MainComponent
 import com.nikoarap.gametime.viewmodels.MainViewModel
 import io.realm.Realm
@@ -108,11 +109,11 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
             }
         }
         sportModelDeserializer.getErrorLiveData().observe(this) {
-            DialogUtils.showErrorDialog(this)
+            ToastUtils.showErrorToast(this)
             sportModelDeserializer.resetErrorLiveData()
         }
         eventModelDeserializer.getErrorLiveData().observe(this) {
-            DialogUtils.showErrorDialog(this)
+            ToastUtils.showErrorToast(this)
             eventModelDeserializer.resetErrorLiveData()
         }
     }

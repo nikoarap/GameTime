@@ -18,7 +18,6 @@ class Constants {
         const val VS_VALUE = "VS"
         const val SCORE_REGEX = "-"
         const val SPACER_SCORE_SPACER_REGEX = " - "
-        const val TIMER_SDF_FORMAT = "HH:mm:ss"
         const val MINUTES_IN_HOUR = 60
         const val SECONDS_IN_MINUTE = 60
         const val MILLIS_IN_SECOND = 1000
@@ -36,6 +35,7 @@ class Constants {
         const val CONN_DIALOG_OPTION_WIFI = "Wifi"
         const val CONN_DIALOG_OPTION_DATA = "Data"
         const val CONN_DIALOG_OPTION_CANCEL = "Cancel"
+        const val ERROR_TOAST_MESSAGE = "Oops, something went wrong while downloading sport events."
 
         //sport types, used for enums
         const val SOCCER = "SOCCER"

@@ -40,21 +40,8 @@ class DialogUtils {
             builder.setNeutralButton(CONN_DIALOG_OPTION_CANCEL) { dialog, _ ->
                 dialog.dismiss()
             }
-
-            val dialog = builder.create()
-            dialog.show()
-
-            return dialog
+            return builder.create()
         }
-
-        fun showErrorDialog(context: Context) {
-            AlertDialog.Builder(context)
-                .setTitle("Data Error")
-                .setMessage("Oops, something went wrong while downloading sport events.")
-                .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
-                .show()
-        }
-
     }
 
 }

@@ -78,7 +78,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     fun fetchDataFromRepoIfNeeded() {
         val results = realm?.let { DataStorage.getAll(it) }
         if (results?.isEmpty() == true) {
-            CoroutineScope(Dispatchers.IO).launch {
+            viewModelScope.launch {
                 sportsRepository.fetchData()
             }
         }
