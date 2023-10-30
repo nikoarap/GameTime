@@ -63,17 +63,26 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
         }
     }
 
+    /**
+     * Initializes the realm instance properly.
+     */
     private fun initRealm() {
         if (realm == null || realm!!.isClosed) {
             realm = Realm.getDefaultInstance()
         }
     }
 
+    /**
+     * Initializes the deserializers in order to observe for any exceptions caught from them.
+     */
     private fun initDeserializer() {
         sportModelDeserializer = SportModelDeserializer()
         eventModelDeserializer = EventModelDeserializer()
     }
 
+    /**
+     * Initializes the view model with a realm instance.
+     */
     private fun initViewModel() {
         viewModel.initViewModel(realm)
     }
@@ -128,7 +137,7 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
     }
 
     /**
-     * Overrides the [Activity.onDestroy] method to release the Realm instance before the activity is destroyed.
+     * onDestroy Lifecycle func. Releases the Realm instance before the activity is destroyed.
      *
      * When the Android activity is being destroyed, this method is called. It ensures that the Realm instance is properly closed
      * if it exists and is not already closed, preventing resource leaks and ensuring data integrity.

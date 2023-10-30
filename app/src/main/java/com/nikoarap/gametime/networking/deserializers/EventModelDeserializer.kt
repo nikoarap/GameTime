@@ -36,14 +36,6 @@ class EventModelDeserializer: JsonDeserializer<EventModelDTO> {
         }
 
         return eventModelDTO
-
-
-//        return EventModelDTO(
-//            JsonUtils.getAsStringFromJsonObject("i", json?.asJsonObject),
-//            JsonUtils.getAsStringFromJsonObject("si", json?.asJsonObject),
-//            JsonUtils.getAsStringFromJsonObject("d", json?.asJsonObject),
-//            JsonUtils.getAsLongFromJsonObject("tt", json?.asJsonObject)
-//        )
     }
 
     fun getErrorLiveData(): LiveData<Boolean> = caughtException
