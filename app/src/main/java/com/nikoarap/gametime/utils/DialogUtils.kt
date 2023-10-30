@@ -46,6 +46,15 @@ class DialogUtils {
 
             return dialog
         }
+
+        fun showErrorDialog(context: Context) {
+            AlertDialog.Builder(context)
+                .setTitle("Data Error")
+                .setMessage("Oops, something went wrong while downloading sport events.")
+                .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+                .show()
+        }
+
     }
 
 }

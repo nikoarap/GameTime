@@ -1,5 +1,7 @@
 package com.nikoarap.gametime.networking.deserializers
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
@@ -12,16 +14,41 @@ import java.lang.reflect.Type
  * This deserializer is used to parse specific fields from a JSON object and construct an [EventModelDTO] instance.
  */
 class EventModelDeserializer: JsonDeserializer<EventModelDTO> {
+
+    private val caughtException = MutableLiveData<Boolean>()
+
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
     ): EventModelDTO {
-        return EventModelDTO(
-            JsonUtils.getAsStringFromJsonObject("i", json?.asJsonObject),
-            JsonUtils.getAsStringFromJsonObject("si", json?.asJsonObject),
-            JsonUtils.getAsStringFromJsonObject("d", json?.asJsonObject),
-            JsonUtils.getAsLongFromJsonObject("tt", json?.asJsonObject)
-        )
+        var eventModelDTO = EventModelDTO()
+
+        try {
+            eventModelDTO = EventModelDTO(
+                JsonUtils.getAsStringFromJsonObject("i", json?.asJsonObject),
+                JsonUtils.getAsStringFromJsonObject("si", json?.asJsonObject),
+                JsonUtils.getAsStringFromJsonObject("d", json?.asJsonObject),
+                JsonUtils.getAsLongFromJsonObject("tt", json?.asJsonObject)
+            )
+        } catch (e: Exception) {
+            caughtException.postValue(true)
+        }
+
+        return eventModelDTO
+
+
+//        return EventModelDTO(
+//            JsonUtils.getAsStringFromJsonObject("i", json?.asJsonObject),
+//            JsonUtils.getAsStringFromJsonObject("si", json?.asJsonObject),
+//            JsonUtils.getAsStringFromJsonObject("d", json?.asJsonObject),
+//            JsonUtils.getAsLongFromJsonObject("tt", json?.asJsonObject)
+//        )
+    }
+
+    fun getErrorLiveData(): LiveData<Boolean> = caughtException
+
+    fun resetErrorLiveData() {
+        caughtException.value = false
     }
 }

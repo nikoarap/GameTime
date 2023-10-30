@@ -11,6 +11,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.nikoarap.gametime.networking.broadcastReceiver.ConnectivityCallback
 import com.nikoarap.gametime.networking.broadcastReceiver.NetworkChangeReceiver
+import com.nikoarap.gametime.networking.deserializers.EventModelDeserializer
+import com.nikoarap.gametime.networking.deserializers.SportModelDeserializer
 import com.nikoarap.gametime.utils.DialogUtils
 import com.nikoarap.gametime.view.composables.MainComponent
 import com.nikoarap.gametime.viewmodels.MainViewModel
@@ -32,6 +34,8 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
 
     private var realm: Realm? = null
     private val networkChangeReceiver = NetworkChangeReceiver(this)
+    private lateinit var sportModelDeserializer: SportModelDeserializer
+    private lateinit var eventModelDeserializer: EventModelDeserializer
     private var connectivityDialog: AlertDialog? = null
     private val viewModel: MainViewModel by viewModels()
 
@@ -43,12 +47,9 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        if (realm == null || realm!!.isClosed) {
-            realm = Realm.getDefaultInstance()
-        }
-
-        viewModel.initViewModel(realm)
+        initRealm()
+        initDeserializer()
+        initViewModel()
         initObservables()
         setContent {
             val sportsList by viewModel.sportModelsStateFlow.collectAsState()
@@ -60,6 +61,21 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
                 viewModel.favouriteSelected.value
             )
         }
+    }
+
+    private fun initRealm() {
+        if (realm == null || realm!!.isClosed) {
+            realm = Realm.getDefaultInstance()
+        }
+    }
+
+    private fun initDeserializer() {
+        sportModelDeserializer = SportModelDeserializer()
+        eventModelDeserializer = EventModelDeserializer()
+    }
+
+    private fun initViewModel() {
+        viewModel.initViewModel(realm)
     }
 
     /**
@@ -81,6 +97,14 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
                     connectivityDialog?.show()
                 }
             }
+        }
+        sportModelDeserializer.getErrorLiveData().observe(this) {
+            DialogUtils.showErrorDialog(this)
+            sportModelDeserializer.resetErrorLiveData()
+        }
+        eventModelDeserializer.getErrorLiveData().observe(this) {
+            DialogUtils.showErrorDialog(this)
+            eventModelDeserializer.resetErrorLiveData()
         }
     }
 
