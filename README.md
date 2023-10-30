@@ -11,7 +11,6 @@ GameTime is an Android application built in Kotlin and following the MVVM design
 - **Sport events that have started before yesterday, are disregarded and not synced in the app to ensure a better user experience and context**
 - **Connectivity callbacks so the data will automatically start downloading if there is an internet connection available**
 - **In case the user is offline or the internet connection is somehow lost, proper feedback is given**
-- 
 
 ## Libraries / Frameworks / Methodologies used in this project
 
