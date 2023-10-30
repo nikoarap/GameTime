@@ -19,6 +19,7 @@ GameTime is an Android application built in Kotlin and following the MVVM design
 - **MVVM design pattern**
 - **LiveData (for event observation)**
 - **StateFlow (for data emission to the view)**
+- **RealmLiveData (custom object -- LiveData wrapper for Realm Results to ensure smooth data querying and emission)**
 - **OkHttp & Retrofit**
 - **Flow Layout(for the custom grid displaying the sport events)**
 - **JUnit & Mockito for testing**
