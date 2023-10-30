@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
             mainComponent.LoadMainComponent(
                 sports = sportsList,
                 navBottomItems = viewModel.navBottomItems,
-                viewModel.selectedItemIndex,
+                viewModel.selectedItemIndex.value,
                 viewModel.favouriteSelected.value
             )
         }

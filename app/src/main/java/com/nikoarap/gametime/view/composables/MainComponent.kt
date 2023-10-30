@@ -35,6 +35,7 @@ import com.nikoarap.gametime.models.NavBottomItem
 import com.nikoarap.gametime.models.SportModel
 import com.nikoarap.gametime.utils.Constants
 import com.nikoarap.gametime.utils.Constants.Companion.NO_FAVOURITES_YET
+import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
 import com.nikoarap.gametime.view.themes.dp_16
 import com.nikoarap.gametime.view.themes.dp_18
 import com.nikoarap.gametime.view.themes.dp_240
@@ -64,7 +65,7 @@ class MainComponent(private val viewModel: MainViewModel) {
     fun LoadMainComponent(
         sports: List<SportModel>,
         navBottomItems: List<NavBottomItem>,
-        selectedItemIndex: Int,
+        selectedItemIndex: Int?,
         isFavouriteView: Boolean?
     ) {
         Scaffold(
@@ -119,9 +120,9 @@ class MainComponent(private val viewModel: MainViewModel) {
     @Composable
     private fun LoadBottomNavBar(
         items: List<NavBottomItem>,
-        selectedItemIndex: Int,
+        selectedItemIndex: Int?,
     ) {
-        var selectedItem by remember { mutableIntStateOf(selectedItemIndex) }
+        var selectedItem by remember { mutableIntStateOf(selectedItemIndex?: VALUE_ZERO) }
 
         Column(
             modifier = Modifier

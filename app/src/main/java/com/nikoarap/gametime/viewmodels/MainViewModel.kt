@@ -11,16 +11,14 @@ import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.models.NavBottomItem
 import com.nikoarap.gametime.models.SportModel
 import com.nikoarap.gametime.networking.repositories.SportsRepository
-import com.nikoarap.gametime.realm.RealmLiveData
 import com.nikoarap.gametime.realm.DataStorage
+import com.nikoarap.gametime.realm.RealmLiveData
 import com.nikoarap.gametime.realm.RealmUtils
 import com.nikoarap.gametime.utils.Constants.Companion.FAVORITES
 import com.nikoarap.gametime.utils.Constants.Companion.HOME
 import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ONE
 import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
 import io.realm.Realm
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -40,8 +38,8 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     private var sportModels: RealmLiveData<SportModel>? = null
     var favouriteSelected: MutableLiveData<Boolean> = MutableLiveData()
     var showConnectivityDialog: MutableLiveData<Boolean> = MutableLiveData()
+    var selectedItemIndex: MutableLiveData<Int> = MutableLiveData()
     var navBottomItems: List<NavBottomItem> = arrayListOf()
-    var selectedItemIndex = 0
 
     private val _sportModels = MutableStateFlow(emptyList<SportModel>())
     val sportModelsStateFlow: StateFlow<List<SportModel>>
@@ -54,6 +52,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
      */
     fun initViewModel(realm: Realm?) {
         this.realm = realm
+        selectedItemIndex.value = VALUE_ZERO
         favouriteSelected.value = false
         showConnectivityDialog.value = false
         createNavBottomItems()
@@ -128,7 +127,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
      */
     private fun onHomeSelected() {
         favouriteSelected.value = false
-        selectedItemIndex = VALUE_ZERO
+        selectedItemIndex.value = VALUE_ZERO
         loadSports()
 
     }
@@ -138,7 +137,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
      */
     private fun onFavoritesSelected() {
         favouriteSelected.value = true
-        selectedItemIndex = VALUE_ONE
+        selectedItemIndex.value = VALUE_ONE
         loadSports()
     }
 
