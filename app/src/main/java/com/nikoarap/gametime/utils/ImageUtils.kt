@@ -1,5 +1,6 @@
 package com.nikoarap.gametime.utils
 
+import com.nikoarap.gametime.R
 import com.nikoarap.gametime.enums.SportTypeEnum
 
 /**
@@ -17,7 +18,7 @@ class ImageUtils {
          */
         fun getPainterResForSport(sportName: String): Int {
             val sportNameToPainterResMap = SportTypeEnum.values().associateBy { it.sportName }
-            return sportNameToPainterResMap[sportName]?.painterRes ?: 0
+            return sportNameToPainterResMap[sportName]?.painterRes ?: R.drawable.soccer_icon
         }
     }
 
