@@ -71,7 +71,7 @@ fun SwitchButton(
 private fun getSwitchColors(): SwitchColors {
     return SwitchDefaults.colors(
         checkedThumbColor = primary,
-        uncheckedThumbColor = Color.Gray,
+        uncheckedThumbColor = Color.LightGray,
         checkedTrackColor = surface,
         uncheckedTrackColor = Color.Gray
     )
