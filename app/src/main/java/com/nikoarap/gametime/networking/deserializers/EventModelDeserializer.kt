@@ -33,6 +33,7 @@ class EventModelDeserializer: JsonDeserializer<EventModelDTO> {
             )
         } catch (e: Exception) {
             caughtException.postValue(true)
+            return eventModelDTO
         }
 
         return eventModelDTO
