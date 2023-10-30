@@ -138,21 +138,6 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
     }
 
     /**
-     * onDestroy Lifecycle func. Releases the Realm instance before the activity is destroyed.
-     *
-     * When the Android activity is being destroyed, this method is called. It ensures that the Realm instance is properly closed
-     * if it exists and is not already closed, preventing resource leaks and ensuring data integrity.
-     *
-     * @see Realm
-     */
-    override fun onDestroy() {
-        super.onDestroy()
-        if (realm != null && !realm!!.isClosed) {
-            realm!!.close()
-        }
-    }
-
-    /**
      * Callback method called when network connectivity becomes available. It triggers the fetching of data from the repository
      * using the ViewModel. If a connectivity dialog is currently showing, it dismisses the dialog.
      */
