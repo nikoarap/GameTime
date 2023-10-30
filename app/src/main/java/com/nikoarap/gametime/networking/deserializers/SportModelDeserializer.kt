@@ -22,7 +22,7 @@ import java.lang.reflect.Type
  */
 class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
 
-    private val sportModelDTOsList: ArrayList<SportModelDTO> = arrayListOf()
+    val sportModelDTOsList: ArrayList<SportModelDTO> = arrayListOf()
     private val caughtException = MutableLiveData<Boolean>()
 
     override fun deserialize(
@@ -71,7 +71,8 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
                 }
             }
         } catch(e: Exception) {
-            caughtException.postValue(true)
+            caughtException.value = true
+            return sportModelListDTO
         }
 
         sportModelListDTO.sportModelDTOs = sportModelDTOsList
@@ -90,7 +91,7 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
      * @param jsonObject    The JSON object to extract data from.
      * @param context The   JSON deserialization context.
      */
-    private fun populateFromJsonObject(
+    fun populateFromJsonObject(
         jsonObject: JsonObject,
         context: JsonDeserializationContext?
     ) {
@@ -133,7 +134,7 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
      * @param jsonArray         The JSON array to extract data from.
      * @param context The       JSON deserialization context.
      */
-    private fun populateFromJsonArray(
+    fun populateFromJsonArray(
         jsonArray: JsonArray,
         context: JsonDeserializationContext?
     ) {
