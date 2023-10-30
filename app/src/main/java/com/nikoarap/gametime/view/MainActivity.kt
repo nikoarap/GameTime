@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
             mainComponent.LoadMainComponent(
                 sports = sportsList,
                 navBottomItems = viewModel.navBottomItems,
-                viewModel.selectedItemIndex,
+                viewModel.selectedItemIndex.value,
                 viewModel.favouriteSelected.value
             )
         }
@@ -135,21 +135,6 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
     override fun onStop() {
         super.onStop()
         unregisterReceiver(networkChangeReceiver)
-    }
-
-    /**
-     * onDestroy Lifecycle func. Releases the Realm instance before the activity is destroyed.
-     *
-     * When the Android activity is being destroyed, this method is called. It ensures that the Realm instance is properly closed
-     * if it exists and is not already closed, preventing resource leaks and ensuring data integrity.
-     *
-     * @see Realm
-     */
-    override fun onDestroy() {
-        super.onDestroy()
-        if (realm != null && !realm!!.isClosed) {
-            realm!!.close()
-        }
     }
 
     /**
