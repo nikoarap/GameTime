@@ -29,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.NavBottomItem
 import com.nikoarap.gametime.models.SportModel
@@ -36,6 +37,7 @@ import com.nikoarap.gametime.utils.Constants
 import com.nikoarap.gametime.utils.Constants.Companion.NO_FAVOURITES_YET
 import com.nikoarap.gametime.view.themes.dp_16
 import com.nikoarap.gametime.view.themes.dp_18
+import com.nikoarap.gametime.view.themes.dp_240
 import com.nikoarap.gametime.view.themes.dp_68
 import com.nikoarap.gametime.view.themes.primary
 import com.nikoarap.gametime.view.themes.secondary
@@ -77,6 +79,7 @@ class MainComponent(private val viewModel: MainViewModel) {
                         modifier = Modifier
                             .fillMaxSize()
                             .background(color = surface),
+                        imageSizeDp = dp_240,
                         noResultsText = if (isFavouriteView == true) NO_FAVOURITES_YET else Constants.NO_RECORDS_SYNCED_YET
                     )
                 }

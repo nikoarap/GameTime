@@ -58,12 +58,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
         showConnectivityDialog.value = false
         createNavBottomItems()
         sportModels = RealmLiveData(DataStorage.getEmpty(realm))
-        val results = realm?.let { DataStorage.getAll(it) }
-
-        //if the DB returns 0 results, that means we have to fetch the data from the API
-        if (results?.isEmpty() == true) {
-            fetchDataFromRepo()
-        }
+        fetchDataFromRepoIfNeeded()
         loadSports()
     }
 
@@ -80,9 +75,12 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     /**
      * Fetch sports data from the repository. It runs in a background coroutine.
      */
-    fun fetchDataFromRepo() {
-        CoroutineScope(Dispatchers.IO).launch {
-            sportsRepository.fetchData()
+    fun fetchDataFromRepoIfNeeded() {
+        val results = realm?.let { DataStorage.getAll(it) }
+        if (results?.isEmpty() == true) {
+            CoroutineScope(Dispatchers.IO).launch {
+                sportsRepository.fetchData()
+            }
         }
     }
 

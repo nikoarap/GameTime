@@ -42,6 +42,7 @@ import com.nikoarap.gametime.utils.Constants.Companion.MAX_EVENTS_PER_ROW
 import com.nikoarap.gametime.utils.Constants.Companion.NO_EVENTS_PLANNED
 import com.nikoarap.gametime.utils.Constants.Companion.SECTION_COLUMN_WEIGHT
 import com.nikoarap.gametime.utils.ImageUtils
+import com.nikoarap.gametime.view.themes.dp_120
 import com.nikoarap.gametime.view.themes.dp_16
 import com.nikoarap.gametime.view.themes.dp_18
 import com.nikoarap.gametime.view.themes.dp_24
@@ -145,8 +146,8 @@ private fun LoadEventsInSportSection(
             modifier = Modifier
                 .wrapContentHeight()
                 .fillMaxWidth()
-                .padding(dp_16)
                 .background(color = surface),
+            imageSizeDp = dp_120,
             noResultsText = NO_EVENTS_PLANNED
         )
     }
