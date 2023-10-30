@@ -12,6 +12,7 @@ import io.realm.annotations.PrimaryKey
  * @property name               The name or title of the sport category.
  * @property activeEvents       A list of active events associated with this sport category.
  * @property isFavourite        Indicates whether the sport category is marked as a favorite.
+ * @property isExpanded         Indicates whether the sport category expanded or not.
  */
 open class SportModel: RealmObject() {
     @PrimaryKey
@@ -19,6 +20,7 @@ open class SportModel: RealmObject() {
     var name: String = EMPTY_STRING
     var activeEvents: RealmList<EventModel> = RealmList()
     var isFavourite: Boolean = false
+    var isExpanded: Boolean = false
 }
 
 

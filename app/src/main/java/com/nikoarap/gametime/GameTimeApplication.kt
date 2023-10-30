@@ -21,6 +21,7 @@ class GameTimeApplication: Application() {
             .name(REALM_ID)
             .schemaVersion(REALM_SCHEMA_VER)
             .allowWritesOnUiThread(true)
+            .deleteRealmIfMigrationNeeded()
             .build()
 
         realmConfig.let { it?.let { realmConfiguration -> Realm.setDefaultConfiguration(realmConfiguration) } }
