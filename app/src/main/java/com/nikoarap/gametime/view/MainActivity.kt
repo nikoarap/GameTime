@@ -123,7 +123,7 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
      * using the ViewModel. If a connectivity dialog is currently showing, it dismisses the dialog.
      */
     override fun onConnectivityAvailable() {
-        viewModel.fetchDataFromRepo()
+        viewModel.fetchDataFromRepoIfNeeded()
         if (connectivityDialog?.isShowing == true) {
             connectivityDialog?.dismiss()
         }
