@@ -122,7 +122,7 @@ fun LoadSportSection(
         Divider(
             modifier = Modifier.fillMaxWidth(),
             color = surface,
-            thickness = dp_16
+            thickness = dp_8
         )
     }
 }
