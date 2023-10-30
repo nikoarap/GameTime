@@ -67,6 +67,18 @@ open class DataStorage {
         }
 
         /**
+         * Updates a SportModel's expanded status in the Realm database.
+         *
+         * @param sportModel    The SportModel to update.
+         * @param isExpanded    The new expanded status.
+         */
+        fun updateSportModelWithExpanded(sportModel: SportModel, isExpanded: Boolean) {
+            RealmUtils.executeTransaction {
+                sportModel.isExpanded = isExpanded
+            }
+        }
+
+        /**
          * Updates an EventModel's favorite status in the Realm database.
          *
          * @param eventModel    The EventModel to update.

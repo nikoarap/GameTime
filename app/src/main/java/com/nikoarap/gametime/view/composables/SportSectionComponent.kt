@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -63,7 +64,11 @@ fun LoadSportSection(
     viewModel: MainViewModel,
     sport: SportModel
 ) {
-    var expandedState by remember { mutableStateOf(false) }
+    var expandedState by remember { mutableStateOf(sport.isExpanded) }
+    val sportModelSnapshot = rememberUpdatedState(sport)
+    if (expandedState != sportModelSnapshot.value.isExpanded) {
+        expandedState = sportModelSnapshot.value.isExpanded
+    }
     val rotationState by animateFloatAsState(targetValue = if (expandedState) FLOAT_DEGREES_180 else FLOAT_DEGREES_0, label = EMPTY_STRING)
 
     Card(
@@ -74,6 +79,7 @@ fun LoadSportSection(
         Row(
             modifier = Modifier.clickable {
                 expandedState = !expandedState
+                viewModel.onSportExpanded(sport, expandedState)
             },
             verticalAlignment = Alignment.CenterVertically,
         ) {

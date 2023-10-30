@@ -162,4 +162,15 @@ open class MainViewModel(application: Application): AndroidViewModel(application
         DataStorage.updateSportModelWithFavourite(sportModel, isChecked)
         loadSports()
     }
+
+    /**
+     * Handle user interaction to expand a sport section.
+     *
+     * @param sportModel         The sport section to be expanded or not.
+     * @param isExpanded         A flag indicating whether the sport should be expanded or not.
+     */
+    fun onSportExpanded(sportModel: SportModel, isExpanded: Boolean) {
+        DataStorage.updateSportModelWithExpanded(sportModel, isExpanded)
+        loadSports()
+    }
 }
