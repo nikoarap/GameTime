@@ -30,6 +30,7 @@ import io.realm.Realm
  */
 class MainActivity : ComponentActivity(), ConnectivityCallback {
 
+    private var realm: Realm? = null
     private val networkChangeReceiver = NetworkChangeReceiver(this)
     private var connectivityDialog: AlertDialog? = null
     private val viewModel: MainViewModel by viewModels()
@@ -42,7 +43,12 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.initViewModel(Realm.getDefaultInstance())
+
+        if (realm == null || realm!!.isClosed) {
+            realm = Realm.getDefaultInstance()
+        }
+
+        viewModel.initViewModel(realm)
         initObservables()
         setContent {
             val sportsList by viewModel.sportModelsStateFlow.collectAsState()
@@ -95,6 +101,21 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
     override fun onStop() {
         super.onStop()
         unregisterReceiver(networkChangeReceiver)
+    }
+
+    /**
+     * Overrides the [Activity.onDestroy] method to release the Realm instance before the activity is destroyed.
+     *
+     * When the Android activity is being destroyed, this method is called. It ensures that the Realm instance is properly closed
+     * if it exists and is not already closed, preventing resource leaks and ensuring data integrity.
+     *
+     * @see Realm
+     */
+    override fun onDestroy() {
+        super.onDestroy()
+        if (realm != null && !realm!!.isClosed) {
+            realm!!.close()
+        }
     }
 
     /**
