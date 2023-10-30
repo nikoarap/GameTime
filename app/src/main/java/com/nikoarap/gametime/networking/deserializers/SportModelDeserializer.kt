@@ -1,5 +1,7 @@
 package com.nikoarap.gametime.networking.deserializers
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.gson.JsonArray
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
@@ -21,6 +23,7 @@ import java.lang.reflect.Type
 class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
 
     private val sportModelDTOsList: ArrayList<SportModelDTO> = arrayListOf()
+    private val caughtException = MutableLiveData<Boolean>()
 
     override fun deserialize(
         json: JsonElement?,
@@ -28,46 +31,57 @@ class SportModelDeserializer: JsonDeserializer<SportModelListDTO> {
         context: JsonDeserializationContext?
     ): SportModelListDTO {
         val sportModelListDTO = SportModelListDTO()
-        val jsonArrayObject = json?.asJsonArray
 
-        if (jsonArrayObject != null) {
-            for (jsonElement in jsonArrayObject.asJsonArray) {
-                val sportModelDto = SportModelDTO()
+        try {
+            val jsonArrayObject = json?.asJsonArray
 
-                if (jsonElement.asJsonObject.has("i")) {
-                    if (jsonElement.asJsonObject.get("i").isJsonPrimitive && jsonElement.asJsonObject.get("i").asString != null) {
-                        sportModelDto.id = jsonElement.asJsonObject.get("i")?.asString ?: EMPTY_STRING
+            if (jsonArrayObject != null) {
+                for (jsonElement in jsonArrayObject.asJsonArray) {
+                    val sportModelDto = SportModelDTO()
+
+                    if (jsonElement.asJsonObject.has("i")) {
+                        if (jsonElement.asJsonObject.get("i").isJsonPrimitive && jsonElement.asJsonObject.get("i").asString != null) {
+                            sportModelDto.id = jsonElement.asJsonObject.get("i")?.asString ?: EMPTY_STRING
+                        }
+                        else if (jsonElement.asJsonObject.get("i") is JsonArray) {
+                            populateFromJsonObject(jsonElement.asJsonObject, context)
+                        }
                     }
-                    else if (jsonElement.asJsonObject.get("i") is JsonArray) {
-                        populateFromJsonObject(jsonElement.asJsonObject, context)
-                    }
-                }
 
-                if (jsonElement.asJsonObject.has("d")) {
-                    if (jsonElement.asJsonObject.get("d").isJsonPrimitive && jsonElement.asJsonObject.get("d").asString != null) {
-                        sportModelDto.name = jsonElement.asJsonObject.get("d")?.asString ?: EMPTY_STRING
+                    if (jsonElement.asJsonObject.has("d")) {
+                        if (jsonElement.asJsonObject.get("d").isJsonPrimitive && jsonElement.asJsonObject.get("d").asString != null) {
+                            sportModelDto.name = jsonElement.asJsonObject.get("d")?.asString ?: EMPTY_STRING
+                        }
+                        else if (jsonElement.asJsonObject.get("d") is JsonArray) {
+                            populateFromJsonObject(jsonElement.asJsonObject, context)
+                        }
                     }
-                    else if (jsonElement.asJsonObject.get("d") is JsonArray) {
-                       populateFromJsonObject(jsonElement.asJsonObject, context)
+
+                    if (jsonElement.asJsonObject.has("e")) {
+                        sportModelDto.activeEvents = context?.deserialize<List<EventModelDTO>>(
+                            jsonElement.asJsonObject?.get("e"),
+                            object : TypeToken<List<EventModelDTO>>() {}.type
+                        ) ?: emptyList()
                     }
-                }
 
-                if (jsonElement.asJsonObject.has("e")) {
-                    sportModelDto.activeEvents = context?.deserialize<List<EventModelDTO>>(
-                        jsonElement.asJsonObject?.get("e"),
-                        object : TypeToken<List<EventModelDTO>>() {}.type
-                    ) ?: emptyList()
-                }
-
-                //if the id of the dto is empty, do not add it to the list, probably added from the array's json object
-                if (sportModelDto.id.isNotEmpty()) {
-                    sportModelDTOsList.add(sportModelDto)
+                    //if the id of the dto is empty, do not add it to the list, probably added from the array's json object
+                    if (sportModelDto.id.isNotEmpty()) {
+                        sportModelDTOsList.add(sportModelDto)
+                    }
                 }
             }
+        } catch(e: Exception) {
+            caughtException.postValue(true)
         }
 
         sportModelListDTO.sportModelDTOs = sportModelDTOsList
         return sportModelListDTO
+    }
+
+    fun getErrorLiveData(): LiveData<Boolean> = caughtException
+
+    fun resetErrorLiveData() {
+        caughtException.value = false
     }
 
     /**
