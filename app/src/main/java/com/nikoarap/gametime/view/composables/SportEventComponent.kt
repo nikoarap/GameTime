@@ -64,7 +64,7 @@ fun LoadSportEvent(
                     viewModel.onEventFavouriteChecked(event, isEventFavourite)
                 },
 
-            contentDescription = Constants.ICON,
+            contentDescription = Constants.DESCRIPTION_ICON,
             tint = onSurface
         )
         Text(

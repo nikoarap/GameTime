@@ -19,10 +19,10 @@ import com.nikoarap.gametime.view.themes.surface
  * @param onSelected                A lambda function to handle the action when the item is selected.
  */
 data class NavBottomItem(
-    var order: Int = 0,
-    var label: String = EMPTY_STRING,
-    var imageVector: ImageVector = Icons.Filled.Home,
-    var tintColor: Color = surface,
-    var selectedTintColor: Color = secondary,
-    var onSelected: () -> Unit,
+    val order: Int = 0,
+    val label: String = EMPTY_STRING,
+    val imageVector: ImageVector = Icons.Filled.Home,
+    val tintColor: Color = surface,
+    val selectedTintColor: Color = secondary,
+    val onSelected: () -> Unit,
 )

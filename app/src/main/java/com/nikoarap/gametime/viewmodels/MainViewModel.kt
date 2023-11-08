@@ -1,12 +1,14 @@
 package com.nikoarap.gametime.viewmodels
 
 import android.app.Application
+import android.content.Context
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.models.NavBottomItem
 import com.nikoarap.gametime.models.SportModel
@@ -14,8 +16,6 @@ import com.nikoarap.gametime.networking.repositories.SportsRepository
 import com.nikoarap.gametime.realm.DataStorage
 import com.nikoarap.gametime.realm.RealmLiveData
 import com.nikoarap.gametime.realm.RealmUtils
-import com.nikoarap.gametime.utils.Constants.Companion.FAVORITES
-import com.nikoarap.gametime.utils.Constants.Companion.HOME
 import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ONE
 import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
 import io.realm.Realm
@@ -39,7 +39,6 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     var favouriteSelected: MutableLiveData<Boolean> = MutableLiveData()
     var showConnectivityDialog: MutableLiveData<Boolean> = MutableLiveData()
     var selectedItemIndex: MutableLiveData<Int> = MutableLiveData()
-    var navBottomItems: List<NavBottomItem> = arrayListOf()
 
     private val _sportModels = MutableStateFlow(emptyList<SportModel>())
     val sportModelsStateFlow: StateFlow<List<SportModel>>
@@ -48,27 +47,16 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     /**
      * Initialize the view model.
      *
-     * @param realm The Realm instance to use for data operations.
+     * @param realm   The Realm instance to use for data operations.
      */
     fun initViewModel(realm: Realm?) {
         this.realm = realm
         selectedItemIndex.value = VALUE_ZERO
         favouriteSelected.value = false
         showConnectivityDialog.value = false
-        createNavBottomItems()
         sportModels = RealmLiveData(DataStorage.getEmpty(realm))
         fetchDataFromRepoIfNeeded()
         loadSports()
-    }
-
-    /**
-     * Creates a mock up set of nav bottom items to be used in the bottom nav bar.
-     */
-    private fun createNavBottomItems() {
-        navBottomItems = listOf(
-            NavBottomItem(order = 0, label = HOME, imageVector = Icons.Filled.Home, onSelected = { onHomeSelected() }),
-            NavBottomItem(order = 1, label = FAVORITES, imageVector = Icons.Filled.Star, onSelected = { onFavoritesSelected() }),
-        )
     }
 
     /**
@@ -125,7 +113,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     /**
      * Handle user selection of the "Home" tab.
      */
-    private fun onHomeSelected() {
+    fun onHomeSelected() {
         favouriteSelected.value = false
         selectedItemIndex.value = VALUE_ZERO
         loadSports()
@@ -135,7 +123,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     /**
      * Handle user selection of the "Favorites" tab.
      */
-    private fun onFavoritesSelected() {
+    fun onFavoritesSelected() {
         favouriteSelected.value = true
         selectedItemIndex.value = VALUE_ONE
         loadSports()

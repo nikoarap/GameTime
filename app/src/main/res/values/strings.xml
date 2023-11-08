@@ -11,4 +11,6 @@
     <string name="conn_dialog_option_cancel">Cancel</string>
     <string name="error_toast_msg">Oops, something went wrong while downloading sport events.</string>
     <string name="vs">VS</string>
+    <string name="home">Home</string>
+    <string name="favourites">Favourites</string>
 </resources>

@@ -16,7 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.nikoarap.gametime.models.SportModel
-import com.nikoarap.gametime.utils.Constants.Companion.ICON
+import com.nikoarap.gametime.utils.Constants.Companion.DESCRIPTION_ICON
 import com.nikoarap.gametime.view.themes.dp_24
 import com.nikoarap.gametime.view.themes.primary
 import com.nikoarap.gametime.view.themes.secondary
@@ -54,7 +54,7 @@ fun SwitchButton(
             Icon(
                 modifier = Modifier.size(dp_24),
                 imageVector = Icons.Filled.Star,
-                contentDescription = ICON,
+                contentDescription = DESCRIPTION_ICON,
                 tint = secondary
             )
         },

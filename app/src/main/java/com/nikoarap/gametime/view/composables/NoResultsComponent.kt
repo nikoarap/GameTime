@@ -14,9 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.nikoarap.gametime.R
-import com.nikoarap.gametime.utils.Constants.Companion.IMAGE
+import com.nikoarap.gametime.utils.Constants.Companion.DESCRIPTION_IMAGE
 import com.nikoarap.gametime.view.themes.dp_16
 import com.nikoarap.gametime.view.themes.dp_8
 import com.nikoarap.gametime.view.themes.secondary
@@ -45,7 +44,7 @@ fun LoadNoResultsView(
                 .padding(top = dp_8)
                 .background(color = surface)
                 .size(imageSizeDp),
-            contentDescription = IMAGE,
+            contentDescription = DESCRIPTION_IMAGE,
             painter = painterResource(R.drawable.no_results_placeholder),
         )
         Text(

@@ -57,8 +57,6 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
             val mainComponent = MainComponent(viewModel)
             mainComponent.LoadMainComponent(
                 sports = sportsList,
-                navBottomItems = viewModel.navBottomItems,
-                viewModel.selectedItemIndex.value,
                 viewModel.favouriteSelected.value
             )
         }

@@ -12,8 +12,8 @@ class Constants {
         const val VALUE_ZERO_LONG = 0L
         const val FLOAT_DEGREES_0 = 0f
         const val FLOAT_DEGREES_180 = 180f
-        const val ICON = "icon"
-        const val IMAGE = "image"
+        const val DESCRIPTION_ICON = "icon"
+        const val DESCRIPTION_IMAGE = "image"
         const val SECTION_COLUMN_WEIGHT = .8f
         const val SCORE_REGEX = "-"
         const val SPACER_SCORE_SPACER_REGEX = " - "
@@ -37,10 +37,5 @@ class Constants {
         const val VOLLEYBALL = "VOLLEYBALL"
         const val BEACH_VOLLEYBALL = "BEACH VOLLEYBALL"
         const val DARTS = "DARTS"
-
-        //nav bar items, used for enums
-        const val HOME = "Home"
-        const val FAVORITES = "Favorites"
-
     }
 }

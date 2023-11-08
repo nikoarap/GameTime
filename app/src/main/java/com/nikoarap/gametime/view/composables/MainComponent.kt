@@ -13,6 +13,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -54,22 +57,23 @@ class MainComponent(private val viewModel: MainViewModel) {
      * Load the main component of the application.
      *
      * @param sports                The list of sports to display in the main component.
-     * @param navBottomItems        The list of navigation bar items.
-     * @param selectedItemIndex     The index of the selected item in the navigation bar.
      * @param isFavouriteView       Indicates whether the view is in favorites mode.
      */
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun LoadMainComponent(
         sports: List<SportModel>,
-        navBottomItems: List<NavBottomItem>,
-        selectedItemIndex: Int?,
         isFavouriteView: Boolean?
     ) {
+        val navBottomItems = listOf(
+            NavBottomItem(order = 0, label = LocalContext.current.resources.getString(R.string.home), imageVector = Icons.Filled.Home, onSelected = { viewModel.onHomeSelected() }),
+            NavBottomItem(order = 1, label = LocalContext.current.resources.getString(R.string.favourites), imageVector = Icons.Filled.Star, onSelected = { viewModel.onFavoritesSelected() }),
+        )
+
         Scaffold(
             modifier = Modifier.background(color = surface),
             topBar = { LoadHeader()},
-            bottomBar = { LoadBottomNavBar(navBottomItems, selectedItemIndex)},
+            bottomBar = { LoadBottomNavBar(navBottomItems)},
             content = { paddingValues ->
                 if (sports.isNotEmpty()) {
                     LoadSportSections(sports, paddingValues)
@@ -113,14 +117,12 @@ class MainComponent(private val viewModel: MainViewModel) {
      * Loads the bottom navigation bar for the main component.
      *
      * @param items                 The list of navigation bar items.
-     * @param selectedItemIndex     The index of the selected item.
      */
     @Composable
     private fun LoadBottomNavBar(
-        items: List<NavBottomItem>,
-        selectedItemIndex: Int?,
+        items: List<NavBottomItem>
     ) {
-        var selectedItem by remember { mutableIntStateOf(selectedItemIndex?: VALUE_ZERO) }
+        var selectedItem by remember { mutableIntStateOf(VALUE_ZERO) }
 
         Column(
             modifier = Modifier
@@ -147,7 +149,7 @@ class MainComponent(private val viewModel: MainViewModel) {
                                 Icon(
                                     modifier = Modifier.size(dp_18),
                                     imageVector = item.imageVector,
-                                    contentDescription = Constants.ICON,
+                                    contentDescription = Constants.DESCRIPTION_ICON,
                                     tint = if (selectedItem == index) item.selectedTintColor else item.tintColor
                                 )
                             },

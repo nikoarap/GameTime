@@ -39,7 +39,7 @@ import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
 import com.nikoarap.gametime.utils.Constants.Companion.EVENT_ITEM_LAYOUT_WEIGHT
 import com.nikoarap.gametime.utils.Constants.Companion.FLOAT_DEGREES_0
 import com.nikoarap.gametime.utils.Constants.Companion.FLOAT_DEGREES_180
-import com.nikoarap.gametime.utils.Constants.Companion.ICON
+import com.nikoarap.gametime.utils.Constants.Companion.DESCRIPTION_ICON
 import com.nikoarap.gametime.utils.Constants.Companion.MAX_EVENTS_PER_ROW
 import com.nikoarap.gametime.utils.Constants.Companion.SECTION_COLUMN_WEIGHT
 import com.nikoarap.gametime.utils.ImageUtils
@@ -88,7 +88,7 @@ fun LoadSportSection(
                     .padding(start = dp_16)
                     .size(dp_18),
                 painter = painterResource(ImageUtils.getPainterResForSport(sport.name)),
-                contentDescription = ICON
+                contentDescription = DESCRIPTION_ICON
             )
             Text(
                 text = sport.name,
@@ -114,7 +114,7 @@ fun LoadSportSection(
                             .size(dp_24)
                             .rotate(rotationState),
                         painter = painterResource(R.drawable.ic_caret_down),
-                        contentDescription = ICON,
+                        contentDescription = DESCRIPTION_ICON,
                         tint = onSecondary
                     )
                     Spacer(Modifier.width(dp_8))
