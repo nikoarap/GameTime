@@ -38,7 +38,6 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     private var sportModels: RealmLiveData<SportModel>? = null
     var favouriteSelected: MutableLiveData<Boolean> = MutableLiveData()
     var showConnectivityDialog: MutableLiveData<Boolean> = MutableLiveData()
-    var selectedItemIndex: MutableLiveData<Int> = MutableLiveData()
 
     private val _sportModels = MutableStateFlow(emptyList<SportModel>())
     val sportModelsStateFlow: StateFlow<List<SportModel>>
@@ -51,7 +50,6 @@ open class MainViewModel(application: Application): AndroidViewModel(application
      */
     fun initViewModel(realm: Realm?) {
         this.realm = realm
-        selectedItemIndex.value = VALUE_ZERO
         favouriteSelected.value = false
         showConnectivityDialog.value = false
         sportModels = RealmLiveData(DataStorage.getEmpty(realm))
@@ -115,7 +113,6 @@ open class MainViewModel(application: Application): AndroidViewModel(application
      */
     fun onHomeSelected() {
         favouriteSelected.value = false
-        selectedItemIndex.value = VALUE_ZERO
         loadSports()
 
     }
@@ -125,7 +122,6 @@ open class MainViewModel(application: Application): AndroidViewModel(application
      */
     fun onFavoritesSelected() {
         favouriteSelected.value = true
-        selectedItemIndex.value = VALUE_ONE
         loadSports()
     }
 
