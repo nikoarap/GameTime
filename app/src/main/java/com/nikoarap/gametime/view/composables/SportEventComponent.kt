@@ -17,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -24,7 +25,6 @@ import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.EventModel
 import com.nikoarap.gametime.utils.Constants
 import com.nikoarap.gametime.utils.Constants.Companion.MILLIS_IN_SECOND
-import com.nikoarap.gametime.utils.Constants.Companion.VS_VALUE
 import com.nikoarap.gametime.view.themes.dp_24
 import com.nikoarap.gametime.view.themes.dp_4
 import com.nikoarap.gametime.view.themes.onSurface
@@ -76,7 +76,7 @@ fun LoadSportEvent(
             modifier = Modifier
         )
         Text(
-            text = VS_VALUE,
+            text = LocalContext.current.resources.getString(R.string.vs),
             fontSize = sp_10,
             color = tertiary,
             modifier = Modifier

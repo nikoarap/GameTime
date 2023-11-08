@@ -33,7 +33,6 @@ import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.NavBottomItem
 import com.nikoarap.gametime.models.SportModel
 import com.nikoarap.gametime.utils.Constants
-import com.nikoarap.gametime.utils.Constants.Companion.NO_FAVOURITES_YET
 import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
 import com.nikoarap.gametime.view.themes.dp_16
 import com.nikoarap.gametime.view.themes.dp_18
@@ -80,7 +79,7 @@ class MainComponent(private val viewModel: MainViewModel) {
                             .fillMaxSize()
                             .background(color = surface),
                         imageSizeDp = dp_180,
-                        noResultsText = if (isFavouriteView == true) NO_FAVOURITES_YET else Constants.NO_RECORDS_SYNCED_YET
+                        noResultsText = if (isFavouriteView == true) LocalContext.current.resources.getString(R.string.no_favourites_yet) else LocalContext.current.resources.getString(R.string.no_records_synced_yet)
                     )
                 }
             }

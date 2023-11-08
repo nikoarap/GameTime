@@ -15,7 +15,6 @@ class Constants {
         const val ICON = "icon"
         const val IMAGE = "image"
         const val SECTION_COLUMN_WEIGHT = .8f
-        const val VS_VALUE = "VS"
         const val SCORE_REGEX = "-"
         const val SPACER_SCORE_SPACER_REGEX = " - "
         const val MINUTES_IN_HOUR = 60
@@ -24,18 +23,8 @@ class Constants {
         const val SECONDS_IN_HOUR = 3600
         const val ONE_SECOND_DELAY = 1000L
         const val SECONDS_IN_DAY = 86400
-        const val EVENT_STARTED = "EVENT STARTED"
         const val MAX_EVENTS_PER_ROW = 2
         const val EVENT_ITEM_LAYOUT_WEIGHT = 1f
-        const val NO_FAVOURITES_YET = "You haven't added any favorite sports yet. Click on the star located in the sport header to add your favorite sports."
-        const val NO_RECORDS_SYNCED_YET = "There are no sport event synced in the app. Please enable your internet connection so you can stay up-to-date!"
-        const val NO_EVENTS_PLANNED = "There are no sport events for this category yet"
-        const val CONN_DIALOG_TITLE = "No Internet Connection Available"
-        const val CONN_DIALOG_MESSAGE = "This application requires an internet connection to work properly. Please either enable your Wi-Fi or your Cellular Data, from the options below."
-        const val CONN_DIALOG_OPTION_WIFI = "Wifi"
-        const val CONN_DIALOG_OPTION_DATA = "Data"
-        const val CONN_DIALOG_OPTION_CANCEL = "Cancel"
-        const val ERROR_TOAST_MESSAGE = "Oops, something went wrong while downloading sport events."
 
         //sport types, used for enums
         const val SOCCER = "SOCCER"

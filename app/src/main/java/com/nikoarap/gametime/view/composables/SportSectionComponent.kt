@@ -30,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.models.EventModel
@@ -40,7 +41,6 @@ import com.nikoarap.gametime.utils.Constants.Companion.FLOAT_DEGREES_0
 import com.nikoarap.gametime.utils.Constants.Companion.FLOAT_DEGREES_180
 import com.nikoarap.gametime.utils.Constants.Companion.ICON
 import com.nikoarap.gametime.utils.Constants.Companion.MAX_EVENTS_PER_ROW
-import com.nikoarap.gametime.utils.Constants.Companion.NO_EVENTS_PLANNED
 import com.nikoarap.gametime.utils.Constants.Companion.SECTION_COLUMN_WEIGHT
 import com.nikoarap.gametime.utils.ImageUtils
 import com.nikoarap.gametime.view.themes.dp_120
@@ -154,7 +154,7 @@ private fun LoadEventsInSportSection(
                 .fillMaxWidth()
                 .background(color = surface),
             imageSizeDp = dp_120,
-            noResultsText = NO_EVENTS_PLANNED
+            noResultsText = LocalContext.current.resources.getString(R.string.no_events_planned)
         )
     }
 }
