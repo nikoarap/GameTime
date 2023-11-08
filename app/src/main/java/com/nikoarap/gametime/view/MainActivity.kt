@@ -17,6 +17,7 @@ import com.nikoarap.gametime.utils.DialogUtils
 import com.nikoarap.gametime.utils.ToastUtils
 import com.nikoarap.gametime.view.composables.MainComponent
 import com.nikoarap.gametime.viewmodels.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import io.realm.Realm
 
 /**
@@ -31,6 +32,7 @@ import io.realm.Realm
  * connectivity status. It also manages the display of a connectivity dialog when connectivity is lost.
  *
  */
+@AndroidEntryPoint
 class MainActivity : ComponentActivity(), ConnectivityCallback {
 
     private var realm: Realm? = null
