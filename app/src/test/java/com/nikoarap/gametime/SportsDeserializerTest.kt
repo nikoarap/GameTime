@@ -6,7 +6,7 @@ import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import com.nikoarap.gametime.networking.deserializers.SportModelDeserializer
+import com.nikoarap.gametime.data.networking.deserializers.SportModelDeserializer
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertNotNull
