@@ -1,7 +1,7 @@
 package com.nikoarap.gametime.utils
 
 import com.nikoarap.gametime.R
-import com.nikoarap.gametime.enums.SportTypeEnum
+import com.nikoarap.gametime.utils.enums.SportTypeEnum
 
 /**
  * A utility class for images.

@@ -1,7 +1,6 @@
 package com.nikoarap.gametime.utils
 
-import com.nikoarap.gametime.networking.DTOs.SportModelDTO
-import com.nikoarap.gametime.networking.DTOs.SportModelListDTO
+import com.nikoarap.gametime.data.networking.dto.SportModelDto
 
 /**
  * A utility class for list manipulation.
@@ -16,15 +15,15 @@ class ListUtils {
          * @param sportModelList        The list of SportModelDTO objects to be merged.
          * @return                      A new SportModelListDTO containing the merged SportModelDTO objects.
          */
-        fun mergeSportModels(sportModelList: SportModelListDTO): SportModelListDTO {
+        fun mergeSportModels(sportModelList: SportModelListDto): SportModelListDto {
             val mergedSportModelList = sportModelList.sportModelDTOs.groupBy { it.id }
                 .map { (_, models) ->
                     val id = models.first().id
                     val name = models.first().name
                     val activeEvents = models.flatMap { it.activeEvents }
-                    SportModelDTO(id, name, activeEvents)
+                    SportModelDto(id, name, activeEvents)
                 }
-            return SportModelListDTO(mergedSportModelList)
+            return SportModelListDto(mergedSportModelList)
         }
     }
 

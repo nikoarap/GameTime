@@ -4,11 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.provider.Settings
-import com.nikoarap.gametime.utils.Constants.Companion.CONN_DIALOG_MESSAGE
-import com.nikoarap.gametime.utils.Constants.Companion.CONN_DIALOG_OPTION_CANCEL
-import com.nikoarap.gametime.utils.Constants.Companion.CONN_DIALOG_OPTION_DATA
-import com.nikoarap.gametime.utils.Constants.Companion.CONN_DIALOG_OPTION_WIFI
-import com.nikoarap.gametime.utils.Constants.Companion.CONN_DIALOG_TITLE
+import com.nikoarap.gametime.R
 
 /**
  * A utility class for creating and displaying dialogs.
@@ -25,19 +21,19 @@ class DialogUtils {
          */
         fun showConnectivityDialog(context: Context): AlertDialog {
             val builder = AlertDialog.Builder(context)
-            builder.setTitle(CONN_DIALOG_TITLE)
-            builder.setMessage(CONN_DIALOG_MESSAGE)
+            builder.setTitle(context.resources.getString(R.string.conn_dialog_title))
+            builder.setMessage(context.resources.getString(R.string.conn_dialog_msg))
             builder.setCancelable(false)
 
-            builder.setPositiveButton(CONN_DIALOG_OPTION_WIFI) { _, _ ->
+            builder.setPositiveButton(context.resources.getString(R.string.conn_dialog_option_wifi)) { _, _ ->
                 // Open Wi-Fi settings
                 context.startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
             }
-            builder.setNegativeButton(CONN_DIALOG_OPTION_DATA) { _, _ ->
+            builder.setNegativeButton(context.resources.getString(R.string.conn_dialog_option_data)) { _, _ ->
                 // Open cellular data settings
                 context.startActivity(Intent(Settings.ACTION_DATA_ROAMING_SETTINGS))
             }
-            builder.setNeutralButton(CONN_DIALOG_OPTION_CANCEL) { dialog, _ ->
+            builder.setNeutralButton(context.resources.getString(R.string.conn_dialog_option_cancel)) { dialog, _ ->
                 dialog.dismiss()
             }
             return builder.create()

@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">GameTime</string>
+    <string name="event_started">EVENT STARTED</string>
+    <string name="no_favourites_yet">You haven\'t added any favorite sports yet. Click on the star located in the sport header to add your favorite sports.</string>
+    <string name="no_records_synced_yet">There are no sport event synced in the app. Please enable your internet connection so you can stay up-to-date!</string>
+    <string name="no_events_planned">There are no sport events for this category yet</string>
+    <string name="conn_dialog_title">No Internet Connection Available</string>
+    <string name="conn_dialog_msg">This application requires an internet connection to work properly. Please either enable your Wi-Fi or your Cellular Data, from the options below.</string>
+    <string name="conn_dialog_option_wifi">Wifi</string>
+    <string name="conn_dialog_option_data">Data</string>
+    <string name="conn_dialog_option_cancel">Cancel</string>
+    <string name="error_toast_msg">Oops, something went wrong while downloading sport events.</string>
+    <string name="vs">VS</string>
+    <string name="home">Home</string>
+    <string name="favourites">Favourites</string>
 </resources>
