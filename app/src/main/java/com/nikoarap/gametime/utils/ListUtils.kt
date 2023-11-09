@@ -15,15 +15,15 @@ class ListUtils {
          * @param sportModelList        The list of SportModelDTO objects to be merged.
          * @return                      A new SportModelListDTO containing the merged SportModelDTO objects.
          */
-        fun mergeSportModels(sportModelList: SportModelListDto): SportModelListDto {
-            val mergedSportModelList = sportModelList.sportModelDTOs.groupBy { it.id }
+        fun mergeSportModels(sportModelList: List<SportModelDto>):  List<SportModelDto> {
+            val mergedSportModelList = sportModelList.groupBy { it.id }
                 .map { (_, models) ->
                     val id = models.first().id
                     val name = models.first().name
                     val activeEvents = models.flatMap { it.activeEvents }
                     SportModelDto(id, name, activeEvents)
                 }
-            return SportModelListDto(mergedSportModelList)
+            return mergedSportModelList
         }
     }
 

@@ -56,7 +56,7 @@ open class MainViewModel(application: Application): AndroidViewModel(application
         val results = realm?.let { DataStorage.getAll(it) }
         if (results?.isEmpty() == true) {
             viewModelScope.launch {
-                sportsRepository.fetchData()
+//                sportsRepository.fetchData()
             }
         }
     }

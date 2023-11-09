@@ -1,8 +1,8 @@
 package com.nikoarap.gametime.utils
 
 import com.google.gson.JsonObject
-import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
-import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO_LONG
+import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
+import com.nikoarap.gametime.utils.Constants.VALUE_ZERO_LONG
 
 /**
  * A utility class for JSON manipulation.

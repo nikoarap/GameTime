@@ -2,16 +2,16 @@ package com.nikoarap.gametime.utils.enums
 
 import androidx.annotation.DrawableRes
 import com.nikoarap.gametime.R
-import com.nikoarap.gametime.utils.Constants.Companion.BASEBALL
-import com.nikoarap.gametime.utils.Constants.Companion.BASKETBALL
-import com.nikoarap.gametime.utils.Constants.Companion.BEACH_VOLLEYBALL
-import com.nikoarap.gametime.utils.Constants.Companion.DARTS
-import com.nikoarap.gametime.utils.Constants.Companion.ESPORTS
-import com.nikoarap.gametime.utils.Constants.Companion.HANDBALL
-import com.nikoarap.gametime.utils.Constants.Companion.SOCCER
-import com.nikoarap.gametime.utils.Constants.Companion.TABLE_TENNIS
-import com.nikoarap.gametime.utils.Constants.Companion.TENNIS
-import com.nikoarap.gametime.utils.Constants.Companion.VOLLEYBALL
+import com.nikoarap.gametime.utils.Constants.BASEBALL
+import com.nikoarap.gametime.utils.Constants.BASKETBALL
+import com.nikoarap.gametime.utils.Constants.BEACH_VOLLEYBALL
+import com.nikoarap.gametime.utils.Constants.DARTS
+import com.nikoarap.gametime.utils.Constants.ESPORTS
+import com.nikoarap.gametime.utils.Constants.HANDBALL
+import com.nikoarap.gametime.utils.Constants.SOCCER
+import com.nikoarap.gametime.utils.Constants.TABLE_TENNIS
+import com.nikoarap.gametime.utils.Constants.TENNIS
+import com.nikoarap.gametime.utils.Constants.VOLLEYBALL
 
 /**
  * An enum representing different sport types with associated icon resources.

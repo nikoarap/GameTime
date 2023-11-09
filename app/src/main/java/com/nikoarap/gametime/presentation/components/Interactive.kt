@@ -16,11 +16,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.nikoarap.gametime.domain.model.SportModel
-import com.nikoarap.gametime.utils.Constants.Companion.DESCRIPTION_ICON
 import com.nikoarap.gametime.presentation.ui.dp_24
 import com.nikoarap.gametime.presentation.ui.primary
 import com.nikoarap.gametime.presentation.ui.secondary
 import com.nikoarap.gametime.presentation.ui.surface
+import com.nikoarap.gametime.utils.Constants.DESCRIPTION_ICON
 import com.nikoarap.gametime.viewmodels.MainViewModel
 
 /**

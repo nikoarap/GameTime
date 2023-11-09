@@ -15,11 +15,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import com.nikoarap.gametime.R
-import com.nikoarap.gametime.utils.Constants.Companion.DESCRIPTION_IMAGE
 import com.nikoarap.gametime.presentation.ui.dp_16
 import com.nikoarap.gametime.presentation.ui.dp_8
 import com.nikoarap.gametime.presentation.ui.secondary
 import com.nikoarap.gametime.presentation.ui.surface
+import com.nikoarap.gametime.utils.Constants.DESCRIPTION_IMAGE
 
 /**
  * A composable function to display a "No Results" view.

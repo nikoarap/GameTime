@@ -19,20 +19,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import com.nikoarap.gametime.R
-import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
-import com.nikoarap.gametime.utils.Constants.Companion.MILLIS_IN_SECOND
-import com.nikoarap.gametime.utils.Constants.Companion.MINUTES_IN_HOUR
-import com.nikoarap.gametime.utils.Constants.Companion.ONE_SECOND_DELAY
-import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_DAY
-import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_HOUR
-import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_MINUTE
-import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
 import com.nikoarap.gametime.presentation.ui.dp_1
 import com.nikoarap.gametime.presentation.ui.dp_4
 import com.nikoarap.gametime.presentation.ui.primary
 import com.nikoarap.gametime.presentation.ui.secondary
 import com.nikoarap.gametime.presentation.ui.surface
 import com.nikoarap.gametime.presentation.ui.tertiary
+import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
+import com.nikoarap.gametime.utils.Constants.MILLIS_IN_SECOND
+import com.nikoarap.gametime.utils.Constants.MINUTES_IN_HOUR
+import com.nikoarap.gametime.utils.Constants.ONE_SECOND_DELAY
+import com.nikoarap.gametime.utils.Constants.SECONDS_IN_DAY
+import com.nikoarap.gametime.utils.Constants.SECONDS_IN_HOUR
+import com.nikoarap.gametime.utils.Constants.SECONDS_IN_MINUTE
+import com.nikoarap.gametime.utils.Constants.VALUE_ZERO
 import kotlinx.coroutines.delay
 
 /**

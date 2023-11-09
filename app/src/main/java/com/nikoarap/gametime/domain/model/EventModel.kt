@@ -1,7 +1,7 @@
 package com.nikoarap.gametime.domain.model
 
-import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
-import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO_LONG
+import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
+import com.nikoarap.gametime.utils.Constants.VALUE_ZERO_LONG
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 

@@ -35,13 +35,6 @@ import androidx.compose.ui.res.painterResource
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.domain.model.EventModel
 import com.nikoarap.gametime.domain.model.SportModel
-import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
-import com.nikoarap.gametime.utils.Constants.Companion.EVENT_ITEM_LAYOUT_WEIGHT
-import com.nikoarap.gametime.utils.Constants.Companion.FLOAT_DEGREES_0
-import com.nikoarap.gametime.utils.Constants.Companion.FLOAT_DEGREES_180
-import com.nikoarap.gametime.utils.Constants.Companion.DESCRIPTION_ICON
-import com.nikoarap.gametime.utils.Constants.Companion.MAX_EVENTS_PER_ROW
-import com.nikoarap.gametime.utils.Constants.Companion.SECTION_COLUMN_WEIGHT
 import com.nikoarap.gametime.utils.ImageUtils
 import com.nikoarap.gametime.presentation.ui.dp_120
 import com.nikoarap.gametime.presentation.ui.dp_16
@@ -51,6 +44,13 @@ import com.nikoarap.gametime.presentation.ui.dp_4
 import com.nikoarap.gametime.presentation.ui.dp_8
 import com.nikoarap.gametime.presentation.ui.onSecondary
 import com.nikoarap.gametime.presentation.ui.surface
+import com.nikoarap.gametime.utils.Constants.DESCRIPTION_ICON
+import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
+import com.nikoarap.gametime.utils.Constants.EVENT_ITEM_LAYOUT_WEIGHT
+import com.nikoarap.gametime.utils.Constants.FLOAT_DEGREES_0
+import com.nikoarap.gametime.utils.Constants.FLOAT_DEGREES_180
+import com.nikoarap.gametime.utils.Constants.MAX_EVENTS_PER_ROW
+import com.nikoarap.gametime.utils.Constants.SECTION_COLUMN_WEIGHT
 import com.nikoarap.gametime.viewmodels.MainViewModel
 
 /**

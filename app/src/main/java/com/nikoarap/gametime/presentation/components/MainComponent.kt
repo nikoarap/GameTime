@@ -35,8 +35,6 @@ import androidx.compose.ui.platform.LocalContext
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.domain.model.NavBottomItem
 import com.nikoarap.gametime.domain.model.SportModel
-import com.nikoarap.gametime.utils.Constants
-import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
 import com.nikoarap.gametime.presentation.ui.dp_16
 import com.nikoarap.gametime.presentation.ui.dp_18
 import com.nikoarap.gametime.presentation.ui.dp_180
@@ -44,6 +42,8 @@ import com.nikoarap.gametime.presentation.ui.dp_68
 import com.nikoarap.gametime.presentation.ui.primary
 import com.nikoarap.gametime.presentation.ui.secondary
 import com.nikoarap.gametime.presentation.ui.surface
+import com.nikoarap.gametime.utils.Constants.DESCRIPTION_ICON
+import com.nikoarap.gametime.utils.Constants.VALUE_ZERO
 import com.nikoarap.gametime.viewmodels.MainViewModel
 
 /**
@@ -149,7 +149,7 @@ class MainComponent(private val viewModel: MainViewModel) {
                                 Icon(
                                     modifier = Modifier.size(dp_18),
                                     imageVector = item.imageVector,
-                                    contentDescription = Constants.DESCRIPTION_ICON,
+                                    contentDescription = DESCRIPTION_ICON,
                                     tint = if (selectedItem == index) item.selectedTintColor else item.tintColor
                                 )
                             },

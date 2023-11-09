@@ -23,14 +23,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.domain.model.EventModel
-import com.nikoarap.gametime.utils.Constants
-import com.nikoarap.gametime.utils.Constants.Companion.MILLIS_IN_SECOND
 import com.nikoarap.gametime.presentation.ui.dp_24
 import com.nikoarap.gametime.presentation.ui.dp_4
 import com.nikoarap.gametime.presentation.ui.onSurface
 import com.nikoarap.gametime.presentation.ui.secondary
 import com.nikoarap.gametime.presentation.ui.sp_10
 import com.nikoarap.gametime.presentation.ui.tertiary
+import com.nikoarap.gametime.utils.Constants.DESCRIPTION_ICON
+import com.nikoarap.gametime.utils.Constants.MILLIS_IN_SECOND
 import com.nikoarap.gametime.viewmodels.MainViewModel
 
 /**
@@ -64,7 +64,7 @@ fun LoadSportEvent(
                     viewModel.onEventFavouriteChecked(event, isEventFavourite)
                 },
 
-            contentDescription = Constants.DESCRIPTION_ICON,
+            contentDescription = DESCRIPTION_ICON,
             tint = onSurface
         )
         Text(
