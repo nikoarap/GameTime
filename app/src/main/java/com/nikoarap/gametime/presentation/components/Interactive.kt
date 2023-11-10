@@ -15,13 +15,12 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
+import com.nikoarap.gametime.R
 import com.nikoarap.gametime.domain.model.SportModel
-import com.nikoarap.gametime.presentation.ui.dp_24
-import com.nikoarap.gametime.presentation.ui.primary
-import com.nikoarap.gametime.presentation.ui.secondary
-import com.nikoarap.gametime.presentation.ui.surface
 import com.nikoarap.gametime.utils.Constants.DESCRIPTION_ICON
-import com.nikoarap.gametime.viewmodels.MainViewModel
+import com.nikoarap.gametime.presentation.viewmodel.MainViewModel
 
 /**
  * A composable function that displays a switch button for making a sport favorite.
@@ -52,10 +51,10 @@ fun SwitchButton(
         },
         thumbContent = {
             Icon(
-                modifier = Modifier.size(dp_24),
+                modifier = Modifier.size(dimensionResource(id = R.dimen.dp_24)),
                 imageVector = Icons.Filled.Star,
                 contentDescription = DESCRIPTION_ICON,
-                tint = secondary
+                tint = colorResource(id = R.color.secondary)
             )
         },
         colors = getSwitchColors()
@@ -70,9 +69,9 @@ fun SwitchButton(
 @Composable
 private fun getSwitchColors(): SwitchColors {
     return SwitchDefaults.colors(
-        checkedThumbColor = primary,
+        checkedThumbColor = colorResource(id = R.color.primary),
         uncheckedThumbColor = Color.LightGray,
-        checkedTrackColor = surface,
+        checkedTrackColor = colorResource(id = R.color.surface),
         uncheckedTrackColor = Color.Gray
     )
 }

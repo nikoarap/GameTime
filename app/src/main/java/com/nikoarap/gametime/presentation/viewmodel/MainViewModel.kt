@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.viewmodels
+package com.nikoarap.gametime.presentation.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

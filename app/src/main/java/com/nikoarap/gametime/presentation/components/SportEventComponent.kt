@@ -18,20 +18,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.domain.model.EventModel
-import com.nikoarap.gametime.presentation.ui.dp_24
-import com.nikoarap.gametime.presentation.ui.dp_4
-import com.nikoarap.gametime.presentation.ui.onSurface
-import com.nikoarap.gametime.presentation.ui.secondary
-import com.nikoarap.gametime.presentation.ui.sp_10
-import com.nikoarap.gametime.presentation.ui.tertiary
 import com.nikoarap.gametime.utils.Constants.DESCRIPTION_ICON
 import com.nikoarap.gametime.utils.Constants.MILLIS_IN_SECOND
-import com.nikoarap.gametime.viewmodels.MainViewModel
+import com.nikoarap.gametime.presentation.viewmodel.MainViewModel
 
 /**
  * A composable function to display a sport event.
@@ -57,35 +53,35 @@ fun LoadSportEvent(
         Icon(
             painter = if (isEventFavourite) rememberVectorPainter(Icons.Filled.Star) else painterResource(id = R.drawable.ic_star_hollow),
             modifier = Modifier
-                .padding(dp_4)
-                .size(dp_24)
+                .padding(dimensionResource(id = R.dimen.dp_4))
+                .size(dimensionResource(id = R.dimen.dp_24))
                 .clickable {
                     isEventFavourite = !isEventFavourite
                     viewModel.onEventFavouriteChecked(event, isEventFavourite)
                 },
 
             contentDescription = DESCRIPTION_ICON,
-            tint = onSurface
+            tint = colorResource(id = R.color.onSurface)
         )
         Text(
             text = event.competitorLeft,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.labelMedium,
-            color = secondary,
+            color = colorResource(id = R.color.secondary),
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier
         )
         Text(
             text = LocalContext.current.resources.getString(R.string.vs),
-            fontSize = sp_10,
-            color = tertiary,
+            style = MaterialTheme.typography.labelSmall,
+            color = colorResource(id = R.color.tertiary),
             modifier = Modifier
         )
         Text(
             text = event.competitorRight,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.labelMedium,
-            color = secondary,
+            color = colorResource(id = R.color.secondary),
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier
         )

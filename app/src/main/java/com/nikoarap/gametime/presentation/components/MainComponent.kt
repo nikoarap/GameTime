@@ -32,19 +32,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.domain.model.NavBottomItem
 import com.nikoarap.gametime.domain.model.SportModel
-import com.nikoarap.gametime.presentation.ui.dp_16
-import com.nikoarap.gametime.presentation.ui.dp_18
-import com.nikoarap.gametime.presentation.ui.dp_180
-import com.nikoarap.gametime.presentation.ui.dp_68
-import com.nikoarap.gametime.presentation.ui.primary
-import com.nikoarap.gametime.presentation.ui.secondary
-import com.nikoarap.gametime.presentation.ui.surface
 import com.nikoarap.gametime.utils.Constants.DESCRIPTION_ICON
 import com.nikoarap.gametime.utils.Constants.VALUE_ZERO
-import com.nikoarap.gametime.viewmodels.MainViewModel
+import com.nikoarap.gametime.presentation.viewmodel.MainViewModel
 
 /**
  * A class representing the main UI component of the application.
@@ -71,7 +66,7 @@ class MainComponent(private val viewModel: MainViewModel) {
         )
 
         Scaffold(
-            modifier = Modifier.background(color = surface),
+            modifier = Modifier.background(color = colorResource(id = R.color.surface)),
             topBar = { LoadHeader()},
             bottomBar = { LoadBottomNavBar(navBottomItems)},
             content = { paddingValues ->
@@ -81,8 +76,8 @@ class MainComponent(private val viewModel: MainViewModel) {
                     LoadNoResultsView(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(color = surface),
-                        imageSizeDp = dp_180,
+                            .background(color = colorResource(id = R.color.surface)),
+                        imageSizeDp = dimensionResource(id = R.dimen.dp_180),
                         noResultsText = if (isFavouriteView == true) LocalContext.current.resources.getString(R.string.no_favourites_yet) else LocalContext.current.resources.getString(R.string.no_records_synced_yet)
                     )
                 }
@@ -99,17 +94,17 @@ class MainComponent(private val viewModel: MainViewModel) {
             title = {
                 Text(
                     text = LocalContext.current.getString(R.string.app_name),
-                    color = secondary,
+                    color = colorResource(id = R.color.secondary),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = dp_16),
+                        .padding(horizontal = dimensionResource(id = R.dimen.dp_16)),
                     style =  MaterialTheme.typography.titleMedium
                 )
             },
             modifier = Modifier
                 .wrapContentHeight()
                 .fillMaxWidth(),
-            backgroundColor = primary
+            backgroundColor = colorResource(id = R.color.primary)
         )
     }
 
@@ -127,10 +122,10 @@ class MainComponent(private val viewModel: MainViewModel) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(dp_68)
+                .height(dimensionResource(id = R.dimen.dp_68))
         ) {
             NavigationBar(
-                containerColor = primary,
+                containerColor = colorResource(id = R.color.primary),
                 content = {
                     items.forEachIndexed { index, item ->
                         NavigationBarItem(
@@ -147,13 +142,13 @@ class MainComponent(private val viewModel: MainViewModel) {
                             },
                             icon = {
                                 Icon(
-                                    modifier = Modifier.size(dp_18),
+                                    modifier = Modifier.size(dimensionResource(id = R.dimen.dp_18)),
                                     imageVector = item.imageVector,
                                     contentDescription = DESCRIPTION_ICON,
                                     tint = if (selectedItem == index) item.selectedTintColor else item.tintColor
                                 )
                             },
-                            colors = customNavigationBarItemColors(primary, item.selectedTintColor, item.tintColor)
+                            colors = customNavigationBarItemColors(colorResource(id = R.color.primary), item.selectedTintColor, item.tintColor)
                         )
                     }
                 }
@@ -177,7 +172,7 @@ class MainComponent(private val viewModel: MainViewModel) {
                 .padding(paddingValues)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .background(color = surface)
+                .background(color = colorResource(id = R.color.surface))
         ) {
             for (sport in sports) {
                 LoadSportSection(viewModel, sport)

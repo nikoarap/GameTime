@@ -2,8 +2,6 @@ package com.nikoarap.gametime.domain.model
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.nikoarap.gametime.presentation.ui.secondary
-import com.nikoarap.gametime.presentation.ui.surface
 
 /**
  * A data class representing an item for a navigation bar.
@@ -19,7 +17,7 @@ data class NavBottomItem(
     val order: Int,
     val label: String,
     val imageVector: ImageVector,
-    val tintColor: Color = surface,
-    val selectedTintColor: Color = secondary,
+    val tintColor: Color = Color(0xFF343434),
+    val selectedTintColor: Color = Color(0xFFFFFFFF),
     val onSelected: () -> Unit,
 )

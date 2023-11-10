@@ -12,9 +12,8 @@ import androidx.compose.runtime.getValue
 import com.nikoarap.gametime.data.networking.broadcastReceiver.ConnectivityCallback
 import com.nikoarap.gametime.data.networking.broadcastReceiver.NetworkChangeReceiver
 import com.nikoarap.gametime.utils.DialogUtils
-import com.nikoarap.gametime.utils.ToastUtils
 import com.nikoarap.gametime.presentation.components.MainComponent
-import com.nikoarap.gametime.viewmodels.MainViewModel
+import com.nikoarap.gametime.presentation.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import io.realm.Realm
 
