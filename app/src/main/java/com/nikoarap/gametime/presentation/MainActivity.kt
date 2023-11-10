@@ -11,12 +11,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.nikoarap.gametime.data.networking.broadcastReceiver.ConnectivityCallback
 import com.nikoarap.gametime.data.networking.broadcastReceiver.NetworkChangeReceiver
-import com.nikoarap.gametime.data.networking.deserializers.EventModelDeserializer
-import com.nikoarap.gametime.data.networking.deserializers.SportModelDeserializer
 import com.nikoarap.gametime.utils.DialogUtils
-import com.nikoarap.gametime.utils.ToastUtils
 import com.nikoarap.gametime.presentation.components.MainComponent
-import com.nikoarap.gametime.viewmodels.MainViewModel
+import com.nikoarap.gametime.presentation.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import io.realm.Realm
 
@@ -37,8 +34,6 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
 
     private var realm: Realm? = null
     private val networkChangeReceiver = NetworkChangeReceiver(this)
-    private lateinit var sportModelDeserializer: SportModelDeserializer
-    private lateinit var eventModelDeserializer: EventModelDeserializer
     private var connectivityDialog: AlertDialog? = null
     private val viewModel: MainViewModel by viewModels()
 
@@ -51,7 +46,6 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initRealm()
-        initDeserializer()
         initViewModel()
         initObservables()
         setContent {
@@ -71,14 +65,6 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
         if (realm == null || realm!!.isClosed) {
             realm = Realm.getDefaultInstance()
         }
-    }
-
-    /**
-     * Initializes the deserializers in order to observe for any exceptions caught from them.
-     */
-    private fun initDeserializer() {
-        sportModelDeserializer = SportModelDeserializer()
-        eventModelDeserializer = EventModelDeserializer()
     }
 
     /**
@@ -107,14 +93,6 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
                     connectivityDialog?.show()
                 }
             }
-        }
-        sportModelDeserializer.getErrorLiveData().observe(this) {
-            ToastUtils.showErrorToast(this)
-            sportModelDeserializer.resetErrorLiveData()
-        }
-        eventModelDeserializer.getErrorLiveData().observe(this) {
-            ToastUtils.showErrorToast(this)
-            eventModelDeserializer.resetErrorLiveData()
         }
     }
 

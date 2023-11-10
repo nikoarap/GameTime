@@ -1,7 +1,7 @@
 package com.nikoarap.gametime.utils
 
-import com.nikoarap.gametime.utils.Constants.Companion.MILLIS_IN_SECOND
-import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_DAY
+import com.nikoarap.gametime.utils.Constants.MILLIS_IN_SECOND
+import com.nikoarap.gametime.utils.Constants.SECONDS_IN_DAY
 
 /**
  * A utility class for date-related operations.

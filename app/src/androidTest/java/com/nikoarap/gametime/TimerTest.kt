@@ -2,7 +2,6 @@ package com.nikoarap.gametime
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import com.nikoarap.gametime.utils.Constants.Companion.EVENT_STARTED
 import com.nikoarap.gametime.presentation.components.CountdownTimer
 import org.junit.Rule
 import org.junit.Test
@@ -38,7 +37,7 @@ class TimerTest {
         testRule.setContent {
             CountdownTimer(timeUntilEventStartInMs)
         }
-        val expectedText = EVENT_STARTED
+        val expectedText = "EVENT_STARTED"
         testRule.onNodeWithText(expectedText).assertExists()
     }
 

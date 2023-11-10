@@ -18,21 +18,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import com.nikoarap.gametime.R
-import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
-import com.nikoarap.gametime.utils.Constants.Companion.MILLIS_IN_SECOND
-import com.nikoarap.gametime.utils.Constants.Companion.MINUTES_IN_HOUR
-import com.nikoarap.gametime.utils.Constants.Companion.ONE_SECOND_DELAY
-import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_DAY
-import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_HOUR
-import com.nikoarap.gametime.utils.Constants.Companion.SECONDS_IN_MINUTE
-import com.nikoarap.gametime.utils.Constants.Companion.VALUE_ZERO
-import com.nikoarap.gametime.presentation.ui.dp_1
-import com.nikoarap.gametime.presentation.ui.dp_4
-import com.nikoarap.gametime.presentation.ui.primary
-import com.nikoarap.gametime.presentation.ui.secondary
-import com.nikoarap.gametime.presentation.ui.surface
-import com.nikoarap.gametime.presentation.ui.tertiary
+import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
+import com.nikoarap.gametime.utils.Constants.MILLIS_IN_SECOND
+import com.nikoarap.gametime.utils.Constants.MINUTES_IN_HOUR
+import com.nikoarap.gametime.utils.Constants.ONE_SECOND_DELAY
+import com.nikoarap.gametime.utils.Constants.SECONDS_IN_DAY
+import com.nikoarap.gametime.utils.Constants.SECONDS_IN_HOUR
+import com.nikoarap.gametime.utils.Constants.SECONDS_IN_MINUTE
+import com.nikoarap.gametime.utils.Constants.VALUE_ZERO
 import kotlinx.coroutines.delay
 
 /**
@@ -74,15 +70,15 @@ fun CountdownTimer(timeUntilEventStartInMs: Long) {
 
     Box(
         modifier = Modifier
-            .border(border = BorderStroke(dp_1, if (timeLeft > VALUE_ZERO) primary else Color.Transparent), shape = RectangleShape)
-            .background(color = surface),
+            .border(border = BorderStroke(dimensionResource(id = R.dimen.dp_1), if (timeLeft > VALUE_ZERO) colorResource(id = R.color.primary) else Color.Transparent), shape = RectangleShape)
+            .background(color = colorResource(id = R.color.surface)),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            modifier = Modifier.padding(dp_4),
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.dp_4)),
             text = countdownValue,
             style = MaterialTheme.typography.bodySmall,
-            color = if (timeLeft > VALUE_ZERO) secondary else tertiary,
+            color = if (timeLeft > VALUE_ZERO) colorResource(id = R.color.secondary) else colorResource(id = R.color.tertiary),
         )
     }
 }

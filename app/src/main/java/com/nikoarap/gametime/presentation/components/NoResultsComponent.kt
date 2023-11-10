@@ -11,15 +11,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import com.nikoarap.gametime.R
-import com.nikoarap.gametime.utils.Constants.Companion.DESCRIPTION_IMAGE
-import com.nikoarap.gametime.presentation.ui.dp_16
-import com.nikoarap.gametime.presentation.ui.dp_8
-import com.nikoarap.gametime.presentation.ui.secondary
-import com.nikoarap.gametime.presentation.ui.surface
+import com.nikoarap.gametime.utils.Constants.DESCRIPTION_IMAGE
 
 /**
  * A composable function to display a "No Results" view.
@@ -41,16 +39,16 @@ fun LoadNoResultsView(
     ) {
         Image(
             modifier = Modifier
-                .padding(top = dp_8)
-                .background(color = surface)
+                .padding(top = dimensionResource(id = R.dimen.dp_8))
+                .background(color = colorResource(id = R.color.surface))
                 .size(imageSizeDp),
             contentDescription = DESCRIPTION_IMAGE,
             painter = painterResource(R.drawable.no_results_placeholder),
         )
         Text(
-            modifier = Modifier.padding(horizontal = dp_16, vertical = dp_8),
+            modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.dp_16), vertical = dimensionResource(id = R.dimen.dp_8)),
             text = noResultsText,
-            color = secondary,
+            color = colorResource(id = R.color.secondary),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.labelMedium
         )

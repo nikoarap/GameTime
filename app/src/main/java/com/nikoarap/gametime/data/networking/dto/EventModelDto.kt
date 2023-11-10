@@ -2,7 +2,9 @@ package com.nikoarap.gametime.data.networking.dto
 
 import com.google.gson.annotations.SerializedName
 import com.nikoarap.gametime.domain.model.EventModel
-import com.nikoarap.gametime.utils.Constants
+import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
+import com.nikoarap.gametime.utils.Constants.SCORE_REGEX
+import com.nikoarap.gametime.utils.Constants.SPACER_SCORE_SPACER_REGEX
 
 /**
  * A data class representing an event model in DTO (Data Transfer Object) form.
@@ -16,7 +18,7 @@ import com.nikoarap.gametime.utils.Constants
  * @property name           The name of the event.
  * @property startTime      The timestamp when the event is scheduled to start.
  */
-data class emdto (
+data class EventModelDto (
     @SerializedName("i")
     val id: String,
     @SerializedName("si")
@@ -27,7 +29,7 @@ data class emdto (
     val startTime: Long
 )
 
-fun emdto.toEventModel(): EventModel {
+fun EventModelDto.toEventModel(): EventModel {
     val competitors: Pair<String, String> = unpackCompetitors(name)
     val eventModel = EventModel()
     eventModel.id = id
@@ -39,16 +41,16 @@ fun emdto.toEventModel(): EventModel {
 }
 
 private fun unpackCompetitors(name: String): Pair<String, String> {
-    if (name.contains(Constants.SPACER_SCORE_SPACER_REGEX)) {
-        val parts = name.split(Constants.SPACER_SCORE_SPACER_REGEX)
+    if (name.contains(SPACER_SCORE_SPACER_REGEX)) {
+        val parts = name.split(SPACER_SCORE_SPACER_REGEX)
         if (parts.size == 2) {
             return Pair(parts[0], parts[1])
         }
-    } else if (name.contains(Constants.SCORE_REGEX)) {
-        val parts = name.split(Constants.SCORE_REGEX)
+    } else if (name.contains(SCORE_REGEX)) {
+        val parts = name.split(SCORE_REGEX)
         if (parts.size == 2) {
             return Pair(parts[0], parts[1])
         }
     }
-    return Pair(Constants.EMPTY_STRING, Constants.EMPTY_STRING)
+    return Pair(EMPTY_STRING, EMPTY_STRING)
 }

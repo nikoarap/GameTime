@@ -2,7 +2,7 @@ package com.nikoarap.gametime.data.storage
 
 import com.nikoarap.gametime.domain.model.EventModel
 import com.nikoarap.gametime.domain.model.SportModel
-import com.nikoarap.gametime.utils.Constants.Companion.EMPTY_STRING
+import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
 import io.realm.Realm
 import io.realm.RealmResults
 
