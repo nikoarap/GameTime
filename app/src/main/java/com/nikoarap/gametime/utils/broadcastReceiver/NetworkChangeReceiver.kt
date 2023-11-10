@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.data.networking.broadcastReceiver
+package com.nikoarap.gametime.utils.broadcastReceiver
 
 import android.content.BroadcastReceiver
 import android.content.Context

@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.data.networking.broadcastReceiver
+package com.nikoarap.gametime.utils.broadcastReceiver
 
 /**
  * A callback interface for handling connectivity changes.

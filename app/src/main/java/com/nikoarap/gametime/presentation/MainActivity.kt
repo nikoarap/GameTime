@@ -9,8 +9,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.nikoarap.gametime.data.networking.broadcastReceiver.ConnectivityCallback
-import com.nikoarap.gametime.data.networking.broadcastReceiver.NetworkChangeReceiver
+import com.nikoarap.gametime.utils.broadcastReceiver.ConnectivityCallback
+import com.nikoarap.gametime.utils.broadcastReceiver.NetworkChangeReceiver
 import com.nikoarap.gametime.utils.DialogUtils
 import com.nikoarap.gametime.presentation.components.MainComponent
 import com.nikoarap.gametime.presentation.viewmodel.MainViewModel
