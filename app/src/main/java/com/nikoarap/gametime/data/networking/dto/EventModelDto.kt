@@ -1,7 +1,7 @@
 package com.nikoarap.gametime.data.networking.dto
 
 import com.google.gson.annotations.SerializedName
-import com.nikoarap.gametime.domain.model.EventModel
+import com.nikoarap.gametime.domain.models.EventModel
 import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
 import com.nikoarap.gametime.utils.Constants.SCORE_REGEX
 import com.nikoarap.gametime.utils.Constants.SPACER_SCORE_SPACER_REGEX

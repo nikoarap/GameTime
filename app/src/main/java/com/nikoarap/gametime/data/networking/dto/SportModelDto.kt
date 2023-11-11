@@ -1,8 +1,8 @@
 package com.nikoarap.gametime.data.networking.dto
 
 import com.google.gson.annotations.SerializedName
-import com.nikoarap.gametime.domain.model.EventModel
-import com.nikoarap.gametime.domain.model.SportModel
+import com.nikoarap.gametime.domain.models.EventModel
+import com.nikoarap.gametime.domain.models.SportModel
 import com.nikoarap.gametime.utils.DateUtils
 import io.realm.RealmList
 

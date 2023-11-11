@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.data.storage
+package com.nikoarap.gametime.utils
 
 import android.util.Log
 import io.realm.Realm

@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.presentation.components
+package com.nikoarap.gametime.presentation.screenAllEvents.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
@@ -35,9 +35,9 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import com.nikoarap.gametime.R
-import com.nikoarap.gametime.domain.model.EventModel
-import com.nikoarap.gametime.domain.model.SportModel
-import com.nikoarap.gametime.utils.ImageUtils
+import com.nikoarap.gametime.domain.models.EventModel
+import com.nikoarap.gametime.domain.models.SportModel
+import com.nikoarap.gametime.presentation.common.LoadNoResultsView
 import com.nikoarap.gametime.utils.Constants.DESCRIPTION_ICON
 import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
 import com.nikoarap.gametime.utils.Constants.EVENT_ITEM_LAYOUT_WEIGHT
@@ -45,24 +45,18 @@ import com.nikoarap.gametime.utils.Constants.FLOAT_DEGREES_0
 import com.nikoarap.gametime.utils.Constants.FLOAT_DEGREES_180
 import com.nikoarap.gametime.utils.Constants.MAX_EVENTS_PER_ROW
 import com.nikoarap.gametime.utils.Constants.SECTION_COLUMN_WEIGHT
-import com.nikoarap.gametime.presentation.viewmodel.MainViewModel
+import com.nikoarap.gametime.utils.ImageUtils
 
 /**
  * A composable function to load a sport section.
  *
- * @param viewModel      The view model for the main view.
  * @param sport          The sport model to display in the section.
  */
 @Composable
 fun LoadSportSection(
-    viewModel: MainViewModel,
     sport: SportModel
 ) {
-    var expandedState by remember { mutableStateOf(sport.isExpanded) }
-    val sportModelSnapshot = rememberUpdatedState(sport)
-    if (expandedState != sportModelSnapshot.value.isExpanded) {
-        expandedState = sportModelSnapshot.value.isExpanded
-    }
+    var expandedState by remember { mutableStateOf(false) }
     val rotationState by animateFloatAsState(targetValue = if (expandedState) FLOAT_DEGREES_180 else FLOAT_DEGREES_0, label = EMPTY_STRING)
 
     Card(
@@ -73,7 +67,6 @@ fun LoadSportSection(
         Row(
             modifier = Modifier.clickable {
                 expandedState = !expandedState
-                viewModel.onSportExpanded(sport, expandedState)
             },
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -101,8 +94,6 @@ fun LoadSportSection(
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    SwitchButton(viewModel, sport)
-                    Spacer(Modifier.width(dimensionResource(id = R.dimen.dp_16)))
                     Icon(
                         modifier = Modifier
                             .size(dimensionResource(id = R.dimen.dp_24))
@@ -117,7 +108,7 @@ fun LoadSportSection(
         }
     }
     if (expandedState) {
-        LoadEventsInSportSection(viewModel, sport.activeEvents)
+        LoadEventsInSportSection(sport.activeEvents)
     } else {
         Divider(
             modifier = Modifier.fillMaxWidth(),
@@ -134,13 +125,41 @@ fun LoadSportSection(
  * @param viewModel         The view model for the main view.
  * @param sportEvents       The list of sport events to display.
  */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun LoadEventsInSportSection(
-    viewModel: MainViewModel,
     sportEvents: List<EventModel>
 ) {
     if (sportEvents.isNotEmpty()) {
-        LoadEvents(viewModel, sportEvents)
+        Surface(
+            modifier = Modifier
+                .wrapContentHeight()
+                .background(color = colorResource(id = R.color.surface))
+                .padding(dimensionResource(id = R.dimen.dp_16))
+        ) {
+            //using flow layout here instead of a Lazy Grid, so that the layout computation (composition) becomes smoother and without any nested hierarchies
+            // such as lazy grid inside of a lazy list or vertically scrollable column
+            androidx.compose.foundation.layout.FlowRow(
+                modifier = Modifier.background(color = colorResource(id = R.color.surface)),
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.dp_4)),
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.dp_4)),
+                maxItemsInEachRow = MAX_EVENTS_PER_ROW
+            ) {
+                for (sportEvent in sportEvents) {
+                    val isEventFavourite by remember { mutableStateOf(sportEvent.isFavourite) }
+                    LoadSportEvent(
+                        modifier = Modifier
+                            .background(color = colorResource(id = R.color.surface))
+                            .padding(dimensionResource(id = R.dimen.dp_4))
+                            .wrapContentHeight()
+                            .weight(EVENT_ITEM_LAYOUT_WEIGHT),
+                        sportEvent,
+                        isEventFavourite
+                    )
+                }
+
+            }
+        }
     } else {
         LoadNoResultsView(
             modifier = Modifier
@@ -150,48 +169,5 @@ private fun LoadEventsInSportSection(
             imageSizeDp = dimensionResource(id = R.dimen.dp_120),
             noResultsText = LocalContext.current.resources.getString(R.string.no_events_planned)
         )
-    }
-}
-
-
-/**
- * A composable function to load events in a sport section.
- *
- * @param viewModel         The view model for the main view.
- * @param sportEvents       The list of sport events to display.
- */
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-private fun LoadEvents(
-    viewModel: MainViewModel,
-    sportEvents: List<EventModel>
-) {
-    Surface(
-        modifier = Modifier
-            .wrapContentHeight()
-            .background(color = colorResource(id = R.color.surface))
-            .padding(dimensionResource(id = R.dimen.dp_16))
-    ) {
-        //using flow layout here instead of a Lazy Grid, so that the layout computation (composition) becomes smoother and without any nested hierarchies
-        // such as lazy grid inside of a lazy list or vertically scrollable column
-        androidx.compose.foundation.layout.FlowRow(
-            modifier = Modifier.background(color = colorResource(id = R.color.surface)),
-            horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.dp_4)),
-            verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.dp_4)),
-            maxItemsInEachRow = MAX_EVENTS_PER_ROW
-        ) {
-            for (sportEvent in sportEvents) {
-                LoadSportEvent(
-                    modifier = Modifier
-                        .background(color = colorResource(id = R.color.surface))
-                        .padding(dimensionResource(id = R.dimen.dp_4))
-                        .wrapContentHeight()
-                        .weight(EVENT_ITEM_LAYOUT_WEIGHT),
-                    viewModel,
-                    sportEvent
-                )
-            }
-
-        }
     }
 }

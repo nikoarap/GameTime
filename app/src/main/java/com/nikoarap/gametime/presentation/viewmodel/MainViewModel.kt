@@ -4,12 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.nikoarap.gametime.domain.model.EventModel
-import com.nikoarap.gametime.domain.model.SportModel
+import com.nikoarap.gametime.domain.models.EventModel
+import com.nikoarap.gametime.domain.models.SportModel
 import com.nikoarap.gametime.data.networking.repositories.SportsRepository
 import com.nikoarap.gametime.data.storage.DataStorage
 import com.nikoarap.gametime.utils.RealmLiveData
-import com.nikoarap.gametime.data.storage.RealmUtils
+import com.nikoarap.gametime.utils.RealmUtils
 import io.realm.Realm
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -101,23 +101,6 @@ open class MainViewModel(application: Application): AndroidViewModel(application
     }
 
     /**
-     * Handle user selection of the "Home" tab.
-     */
-    fun onHomeSelected() {
-        favouriteSelected.value = false
-        loadSports()
-
-    }
-
-    /**
-     * Handle user selection of the "Favorites" tab.
-     */
-    fun onFavoritesSelected() {
-        favouriteSelected.value = true
-        loadSports()
-    }
-
-    /**
      * Handle user interaction to select/unselect an event as a favorite.
      *
      * @param eventModel        The event to be marked/unmarked as favorite.
@@ -125,28 +108,6 @@ open class MainViewModel(application: Application): AndroidViewModel(application
      */
     fun onEventFavouriteChecked(eventModel: EventModel, isChecked: Boolean) {
         DataStorage.updateEventModelWithFavourite(eventModel, isChecked)
-        loadSports()
-    }
-
-    /**
-     * Handle user interaction to select/unselect a sport as a favorite.
-     *
-     * @param sportModel        The sport to be marked/unmarked as favorite.
-     * @param isChecked         A flag indicating whether the sport should be marked as a favorite.
-     */
-    fun onSportFavouriteChecked(sportModel: SportModel, isChecked: Boolean) {
-        DataStorage.updateSportModelWithFavourite(sportModel, isChecked)
-        loadSports()
-    }
-
-    /**
-     * Handle user interaction to expand a sport section.
-     *
-     * @param sportModel         The sport section to be expanded or not.
-     * @param isExpanded         A flag indicating whether the sport should be expanded or not.
-     */
-    fun onSportExpanded(sportModel: SportModel, isExpanded: Boolean) {
-        DataStorage.updateSportModelWithExpanded(sportModel, isExpanded)
         loadSports()
     }
 }

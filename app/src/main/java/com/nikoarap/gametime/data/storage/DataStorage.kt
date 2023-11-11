@@ -1,8 +1,9 @@
 package com.nikoarap.gametime.data.storage
 
-import com.nikoarap.gametime.domain.model.EventModel
-import com.nikoarap.gametime.domain.model.SportModel
+import com.nikoarap.gametime.domain.models.EventModel
+import com.nikoarap.gametime.domain.models.SportModel
 import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
+import com.nikoarap.gametime.utils.RealmUtils
 import io.realm.Realm
 import io.realm.RealmResults
 
@@ -52,30 +53,6 @@ open class DataStorage {
          */
         fun getEmpty(realm: Realm?): RealmResults<SportModel>? {
             return realm?.where(SportModel::class.java)?.equalTo("id", EMPTY_STRING)?.findAll()
-        }
-
-        /**
-         * Updates a SportModel's favorite status in the Realm database.
-         *
-         * @param sportModel    The SportModel to update.
-         * @param isFavourite   The new favorite status.
-         */
-        fun updateSportModelWithFavourite(sportModel: SportModel, isFavourite: Boolean) {
-            RealmUtils.executeTransaction {
-                sportModel.isFavourite = isFavourite
-            }
-        }
-
-        /**
-         * Updates a SportModel's expanded status in the Realm database.
-         *
-         * @param sportModel    The SportModel to update.
-         * @param isExpanded    The new expanded status.
-         */
-        fun updateSportModelWithExpanded(sportModel: SportModel, isExpanded: Boolean) {
-            RealmUtils.executeTransaction {
-                sportModel.isExpanded = isExpanded
-            }
         }
 
         /**

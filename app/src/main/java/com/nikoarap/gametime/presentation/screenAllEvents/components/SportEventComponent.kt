@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.presentation.components
+package com.nikoarap.gametime.presentation.screenAllEvents.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -24,7 +24,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import com.nikoarap.gametime.R
-import com.nikoarap.gametime.domain.model.EventModel
+import com.nikoarap.gametime.domain.models.EventModel
+import com.nikoarap.gametime.presentation.common.CountdownTimer
 import com.nikoarap.gametime.utils.Constants.DESCRIPTION_ICON
 import com.nikoarap.gametime.utils.Constants.MILLIS_IN_SECOND
 import com.nikoarap.gametime.presentation.viewmodel.MainViewModel
@@ -32,18 +33,17 @@ import com.nikoarap.gametime.presentation.viewmodel.MainViewModel
 /**
  * A composable function to display a sport event.
  *
- * @param modifier      The modifier for this composable.
- * @param viewModel     The view model for the main view.
- * @param event         The event model to display.
+ * @param modifier          The modifier for this composable.
+ * @param viewModel         The view model for the main view.
+ * @param event             The event model to display.
+ * @param isEventFavourite  determines if the event has been favourited by the user or not.
  */
 @Composable
 fun LoadSportEvent(
     modifier: Modifier,
-    viewModel: MainViewModel,
-    event: EventModel
+    event: EventModel,
+    isEventFavourite: Boolean,
 ) {
-    var isEventFavourite by remember { mutableStateOf(event.isFavourite) }
-
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -56,8 +56,7 @@ fun LoadSportEvent(
                 .padding(dimensionResource(id = R.dimen.dp_4))
                 .size(dimensionResource(id = R.dimen.dp_24))
                 .clickable {
-                    isEventFavourite = !isEventFavourite
-                    viewModel.onEventFavouriteChecked(event, isEventFavourite)
+//                    viewModel.onEventFavouriteChecked(event, isEventFavourite)
                 },
 
             contentDescription = DESCRIPTION_ICON,

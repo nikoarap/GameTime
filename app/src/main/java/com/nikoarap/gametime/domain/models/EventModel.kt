@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.domain.model
+package com.nikoarap.gametime.domain.models
 
 import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
 import com.nikoarap.gametime.utils.Constants.VALUE_ZERO_LONG
