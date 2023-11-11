@@ -22,7 +22,6 @@ class GameTimeApplication: Application() {
         realmConfig = RealmConfiguration.Builder()
             .name(REALM_ID)
             .schemaVersion(REALM_SCHEMA_VER)
-            .allowWritesOnUiThread(true)
             .deleteRealmIfMigrationNeeded()
             .build()
 
