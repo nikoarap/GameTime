@@ -3,9 +3,6 @@ package com.nikoarap.gametime.utils
 import android.util.Log
 import io.realm.Realm
 
-/**
- * A utility class for managing Realm instances and executing transactions.
- */
 open class RealmUtils {
 
     companion object {

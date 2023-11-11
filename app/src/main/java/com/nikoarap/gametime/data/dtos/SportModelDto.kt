@@ -3,7 +3,8 @@ package com.nikoarap.gametime.data.dtos
 import com.google.gson.annotations.SerializedName
 import com.nikoarap.gametime.domain.models.EventModel
 import com.nikoarap.gametime.domain.models.SportModel
-import com.nikoarap.gametime.utils.DateUtils
+import com.nikoarap.gametime.utils.Constants.MILLIS_IN_SECOND
+import com.nikoarap.gametime.utils.Constants.SECONDS_IN_DAY
 import io.realm.RealmList
 
 /**
@@ -32,7 +33,7 @@ fun SportModelDto.toSportModel(): SportModel {
 
     //disregard events that have started more than a day ago
     for (activeEvent in activeEvents) {
-        if (DateUtils.isDurationLessThanDay(activeEvent.startTime)) {
+        if (activeEvent.startTime.isDurationLessThanDay()) {
             activeEventsList.add(
                 EventModelDto(
                     activeEvent.id, activeEvent.sportId, activeEvent.name, activeEvent.startTime
@@ -45,4 +46,9 @@ fun SportModelDto.toSportModel(): SportModel {
     sportModel.name = name
     sportModel.activeEvents = activeEventsList
     return sportModel
+}
+
+fun Long.isDurationLessThanDay(): Boolean {
+    val duration = (System.currentTimeMillis() / MILLIS_IN_SECOND) - this
+    return duration <= SECONDS_IN_DAY
 }

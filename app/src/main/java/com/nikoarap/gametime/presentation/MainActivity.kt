@@ -6,13 +6,13 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.nikoarap.gametime.utils.DialogUtils
+import com.nikoarap.gametime.utils.DialogUtils.Companion.createConnectivityDialog
 import com.nikoarap.gametime.utils.broadcastReceiver.ConnectivityCallback
 import com.nikoarap.gametime.utils.broadcastReceiver.NetworkChangeReceiver
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity(), ConnectivityCallback {
+class MainActivity: ComponentActivity(), ConnectivityCallback {
 
     private val networkChangeReceiver = NetworkChangeReceiver(this)
     private var connectivityDialog: AlertDialog? = null
@@ -42,10 +42,8 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
     }
 
     override fun onConnectivityLost() {
-        if (connectivityDialog?.isShowing == false) {
-            connectivityDialog = DialogUtils.showConnectivityDialog(this)
-            connectivityDialog?.show()
-        }
+        connectivityDialog = this.createConnectivityDialog()
+        connectivityDialog?.show()
     }
 }
 

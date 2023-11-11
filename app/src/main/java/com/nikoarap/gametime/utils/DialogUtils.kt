@@ -6,38 +6,33 @@ import android.content.Intent
 import android.provider.Settings
 import com.nikoarap.gametime.R
 
-/**
- * A utility class for creating and displaying dialogs.
- */
 class DialogUtils {
 
     companion object {
 
         /**
-         * Shows a connectivity dialog with options to enable Wi-Fi, cellular data, or cancel.
-         *
-         * @param context       The context in which to display the dialog.
-         * @return              The created AlertDialog.
+         * Creates a dialog prompting the user to check their connectivity settings.
+         * The dialog provides options to open Wi-Fi settings, cellular data settings, or cancel the operation.
+         * @return An [AlertDialog] instance representing the connectivity dialog.
          */
-        fun showConnectivityDialog(context: Context): AlertDialog {
-            val builder = AlertDialog.Builder(context)
-            builder.setTitle(context.resources.getString(R.string.conn_dialog_title))
-            builder.setMessage(context.resources.getString(R.string.conn_dialog_msg))
+        fun Context.createConnectivityDialog(): AlertDialog {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(getString(R.string.conn_dialog_title))
+            builder.setMessage(getString(R.string.conn_dialog_msg))
             builder.setCancelable(false)
 
-            builder.setPositiveButton(context.resources.getString(R.string.conn_dialog_option_wifi)) { _, _ ->
+            builder.setPositiveButton(getString(R.string.conn_dialog_option_wifi)) { _, _ ->
                 // Open Wi-Fi settings
-                context.startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
+                startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
             }
-            builder.setNegativeButton(context.resources.getString(R.string.conn_dialog_option_data)) { _, _ ->
+            builder.setNegativeButton(getString(R.string.conn_dialog_option_data)) { _, _ ->
                 // Open cellular data settings
-                context.startActivity(Intent(Settings.ACTION_DATA_ROAMING_SETTINGS))
+                startActivity(Intent(Settings.ACTION_DATA_ROAMING_SETTINGS))
             }
-            builder.setNeutralButton(context.resources.getString(R.string.conn_dialog_option_cancel)) { dialog, _ ->
+            builder.setNeutralButton(getString(R.string.conn_dialog_option_cancel)) { dialog, _ ->
                 dialog.dismiss()
             }
             return builder.create()
         }
     }
-
 }
