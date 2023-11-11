@@ -25,7 +25,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,7 +44,7 @@ import com.nikoarap.gametime.utils.Constants.FLOAT_DEGREES_0
 import com.nikoarap.gametime.utils.Constants.FLOAT_DEGREES_180
 import com.nikoarap.gametime.utils.Constants.MAX_EVENTS_PER_ROW
 import com.nikoarap.gametime.utils.Constants.SECTION_COLUMN_WEIGHT
-import com.nikoarap.gametime.utils.ImageUtils
+import com.nikoarap.gametime.utils.enums.SportTypeEnum
 
 /**
  * A composable function to load a sport section.
@@ -74,7 +73,7 @@ fun LoadSportSection(
                 modifier = Modifier
                     .padding(start = dimensionResource(id = R.dimen.dp_16))
                     .size(dimensionResource(id = R.dimen.dp_18)),
-                painter = painterResource(ImageUtils.getPainterResForSport(sport.name)),
+                painter = painterResource(sport.name.getPainterResForSport()),
                 contentDescription = DESCRIPTION_ICON
             )
             Text(
@@ -170,4 +169,9 @@ private fun LoadEventsInSportSection(
             noResultsText = LocalContext.current.resources.getString(R.string.no_events_planned)
         )
     }
+}
+
+fun String.getPainterResForSport(): Int {
+    val sportNameToPainterResMap = SportTypeEnum.values().associateBy { it.sportName }
+    return sportNameToPainterResMap[this]?.painterRes ?: R.drawable.trophy_icon
 }
