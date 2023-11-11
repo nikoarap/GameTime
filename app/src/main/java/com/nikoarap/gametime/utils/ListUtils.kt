@@ -1,6 +1,6 @@
 package com.nikoarap.gametime.utils
 
-import com.nikoarap.gametime.data.networking.dto.SportModelDto
+import com.nikoarap.gametime.data.dtos.SportModelDto
 
 /**
  * A utility class for list manipulation.

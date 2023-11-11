@@ -1,7 +1,7 @@
-package com.nikoarap.gametime.data.networking.repositories
+package com.nikoarap.gametime.data.repositories
 
-import com.nikoarap.gametime.data.networking.apiServices.SportsApi
-import com.nikoarap.gametime.data.networking.dto.SportModelDto
+import com.nikoarap.gametime.data.api.SportsApi
+import com.nikoarap.gametime.data.dtos.SportModelDto
 import com.nikoarap.gametime.domain.repository.SportsRepository
 import javax.inject.Inject
 

@@ -1,6 +1,6 @@
-package com.nikoarap.gametime.data.networking.apiServices
+package com.nikoarap.gametime.data.api
 
-import com.nikoarap.gametime.data.networking.dto.SportModelDto
+import com.nikoarap.gametime.data.dtos.SportModelDto
 import com.nikoarap.gametime.utils.Constants.API_ENDPOINT
 import retrofit2.http.GET
 
