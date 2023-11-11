@@ -9,10 +9,11 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.nikoarap.gametime.presentation.navigation.NavigationComponent
+import com.nikoarap.gametime.presentation.screenAllEvents.components.AllEventsScreen
 import com.nikoarap.gametime.utils.broadcastReceiver.ConnectivityCallback
 import com.nikoarap.gametime.utils.broadcastReceiver.NetworkChangeReceiver
 import com.nikoarap.gametime.utils.DialogUtils
-import com.nikoarap.gametime.presentation.components.MainComponent
 import com.nikoarap.gametime.presentation.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import io.realm.Realm
@@ -49,12 +50,7 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
         initViewModel()
         initObservables()
         setContent {
-            val sportsList by viewModel.sportModelsStateFlow.collectAsState()
-            val mainComponent = MainComponent(viewModel)
-            mainComponent.LoadMainComponent(
-                sports = sportsList,
-                viewModel.favouriteSelected.value
-            )
+            NavigationComponent()
         }
     }
 

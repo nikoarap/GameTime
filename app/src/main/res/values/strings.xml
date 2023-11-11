@@ -2,7 +2,7 @@
     <string name="app_name">GameTime</string>
     <string name="event_started">EVENT STARTED</string>
     <string name="no_favourites_yet">You haven\'t added any favorite sports yet. Click on the star located in the sport header to add your favorite sports.</string>
-    <string name="no_records_synced_yet">There are no sport event synced in the app. Please enable your internet connection so you can stay up-to-date!</string>
+    <string name="no_records_synced_yet">No sport events were synced in the app. Please enable your internet connection so you can stay up-to-date!</string>
     <string name="no_events_planned">There are no sport events for this category yet</string>
     <string name="conn_dialog_title">No Internet Connection Available</string>
     <string name="conn_dialog_msg">This application requires an internet connection to work properly. Please either enable your Wi-Fi or your Cellular Data, from the options below.</string>

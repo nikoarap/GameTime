@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.presentation.components
+package com.nikoarap.gametime.presentation.common
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background

@@ -1,15 +1,6 @@
 package com.nikoarap.gametime.data.networking.repositories
 
-import android.util.Log
-import com.nikoarap.gametime.data.networking.apiServices.RetrofitClient
-import com.nikoarap.gametime.data.networking.dto.SportModelDto
-import com.nikoarap.gametime.data.storage.DataStorage
-import com.nikoarap.gametime.utils.Constants.BAD_REQUEST
-import com.nikoarap.gametime.utils.ListUtils
 import okhttp3.ResponseBody
-import okhttp3.ResponseBody.Companion.toResponseBody
-import retrofit2.HttpException
-import retrofit2.Response
 
 /**
  * Repository class responsible for fetching sports data and storing it locally.
