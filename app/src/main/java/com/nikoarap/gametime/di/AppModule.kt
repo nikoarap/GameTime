@@ -1,7 +1,7 @@
 package com.nikoarap.gametime.di
 
-import com.nikoarap.gametime.data.networking.apiServices.SportsApi
-import com.nikoarap.gametime.data.networking.repositories.SportsRepositoryImpl
+import com.nikoarap.gametime.data.api.SportsApi
+import com.nikoarap.gametime.data.repositories.SportsRepositoryImpl
 import com.nikoarap.gametime.domain.repository.SportsRepository
 import com.nikoarap.gametime.utils.Constants.API_ENDPOINT
 import dagger.Module

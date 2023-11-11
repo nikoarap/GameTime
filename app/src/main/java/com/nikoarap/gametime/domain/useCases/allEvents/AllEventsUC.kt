@@ -1,6 +1,6 @@
 package com.nikoarap.gametime.domain.useCases.allEvents
 
-import com.nikoarap.gametime.data.networking.dto.toSportModel
+import com.nikoarap.gametime.data.dtos.toSportModel
 import com.nikoarap.gametime.domain.models.SportModel
 import com.nikoarap.gametime.domain.repository.SportsRepository
 import com.nikoarap.gametime.utils.ResourceManager

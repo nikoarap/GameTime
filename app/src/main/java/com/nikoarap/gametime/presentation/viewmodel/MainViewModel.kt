@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.nikoarap.gametime.domain.models.EventModel
 import com.nikoarap.gametime.domain.models.SportModel
-import com.nikoarap.gametime.data.networking.repositories.SportsRepository
+import com.nikoarap.gametime.data.repositories.SportsRepository
 import com.nikoarap.gametime.data.storage.DataStorage
 import com.nikoarap.gametime.utils.RealmLiveData
 import com.nikoarap.gametime.utils.RealmUtils

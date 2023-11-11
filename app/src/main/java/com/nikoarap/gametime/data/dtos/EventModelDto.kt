@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.data.networking.dto
+package com.nikoarap.gametime.data.dtos
 
 import com.google.gson.annotations.SerializedName
 import com.nikoarap.gametime.domain.models.EventModel

@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.data.networking.repositories
+package com.nikoarap.gametime.data.repositories
 
 import okhttp3.ResponseBody
 
