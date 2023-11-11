@@ -17,9 +17,9 @@ class AllEventsUC @Inject constructor(
     //by overriding the invoke here, we can call this use case as if it was a function
     operator fun invoke(): Flow<ResourceManager<List<SportModel>>> = flow {
         try {
-            emit(ResourceManager.Loading<List<SportModel>>())
+            emit(ResourceManager.Loading())
             val sportDtoList = repository.getSports().map { it.toSportModel() }
-            emit(ResourceManager.Success<List<SportModel>>(sportDtoList))
+            emit(ResourceManager.Success(sportDtoList))
         } catch(e: HttpException) {
             emit(ResourceManager.Error(e.localizedMessage ?: "An unexpected error occurred"))
         } catch (e: IOException) {
