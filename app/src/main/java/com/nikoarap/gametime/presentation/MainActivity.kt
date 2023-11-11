@@ -7,10 +7,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import com.nikoarap.gametime.presentation.navigation.NavigationComponent
-import com.nikoarap.gametime.presentation.screenAllEvents.components.AllEventsScreen
 import com.nikoarap.gametime.utils.broadcastReceiver.ConnectivityCallback
 import com.nikoarap.gametime.utils.broadcastReceiver.NetworkChangeReceiver
 import com.nikoarap.gametime.utils.DialogUtils
@@ -50,7 +46,7 @@ class MainActivity : ComponentActivity(), ConnectivityCallback {
         initViewModel()
         initObservables()
         setContent {
-            NavigationComponent()
+            MainComponent()
         }
     }
 
