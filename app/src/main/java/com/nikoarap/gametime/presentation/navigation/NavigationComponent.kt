@@ -2,6 +2,7 @@ package com.nikoarap.gametime.presentation.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -38,35 +39,39 @@ import com.nikoarap.gametime.presentation.screenFavouriteEvents.components.Favou
 import com.nikoarap.gametime.utils.Constants
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavigationComponent(
-
+private fun ScreenRouter(
+    paddingValues: PaddingValues
 ) {
-    val navController = rememberNavController()
-
     NavHost(
-        navController = navController,
+        navController = rememberNavController(),
         startDestination = Router.AllEventsRouter.route
     ) {
         composable(
             route = Router.AllEventsRouter.route
         ) {
-            AllEventsScreen()
+            AllEventsScreen(paddingValues)
         }
         composable(
             route = Router.FavouriteEventsRouter.route
         ) {
-            FavouriteEventsScreen()
+            FavouriteEventsScreen(paddingValues)
         }
     }
+}
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun NavigationComponent(
+
+) {
     Scaffold(
         modifier = Modifier.background(color = colorResource(id = R.color.surface)),
         topBar = { LoadHeader() },
-        bottomBar = { LoadBottomNavBar(navController) },
-        content = { paddingValues -> (paddingValues) }
-    )
+        bottomBar = { LoadBottomNavBar(rememberNavController()) }
+    ) {
+        ScreenRouter(it)
+    }
 }
 
 /**

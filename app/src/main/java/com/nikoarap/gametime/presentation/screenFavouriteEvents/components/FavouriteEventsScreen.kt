@@ -3,7 +3,9 @@ package com.nikoarap.gametime.presentation.screenFavouriteEvents.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
@@ -21,6 +23,7 @@ import com.nikoarap.gametime.presentation.screenAllEvents.viewmodel.SportListVie
 
 @Composable
 fun FavouriteEventsScreen(
+    paddingValues: PaddingValues,
     viewModel: SportListViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.value
@@ -29,6 +32,7 @@ fun FavouriteEventsScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(paddingValues)
                 .verticalScroll(rememberScrollState())
                 .background(color = colorResource(id = R.color.surface))
         ) {
