@@ -27,7 +27,6 @@ import com.nikoarap.gametime.presentation.screenAllEvents.viewmodel.SportListVie
  */
 @Composable
 fun AllEventsScreen(
-    paddingValues: PaddingValues,
     viewModel: SportListViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.value
@@ -36,7 +35,6 @@ fun AllEventsScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
                 .verticalScroll(rememberScrollState())
                 .background(color = colorResource(id = R.color.surface))
         ) {

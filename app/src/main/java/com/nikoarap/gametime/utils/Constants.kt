@@ -25,6 +25,10 @@ object Constants {
     const val MAX_EVENTS_PER_ROW = 2
     const val EVENT_ITEM_LAYOUT_WEIGHT = 1f
 
+    //route strings
+    const val ROUTE_HOME = "home_screen"
+    const val ROUTE_FAVOURITES = "favourites_screen"
+
     //sport types, used for enums
     const val SOCCER = "SOCCER"
     const val BASKETBALL = "BASKETBALL"
