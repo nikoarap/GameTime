@@ -1,7 +1,7 @@
 package com.nikoarap.gametime.feature_sports.data.remote.dtos
 
 import com.google.gson.annotations.SerializedName
-import com.nikoarap.gametime.feature_sports.domain.models.EventModel
+import com.nikoarap.gametime.feature_sports.domain.models.Event
 import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
 import com.nikoarap.gametime.utils.Constants.SCORE_REGEX
 import com.nikoarap.gametime.utils.Constants.SPACER_SCORE_SPACER_REGEX
@@ -29,9 +29,9 @@ data class EventModelDto (
     val startTime: Long
 )
 
-fun EventModelDto.toEventModel(): EventModel {
+fun EventModelDto.toEventModel(): Event {
     val competitors: Pair<String, String> = unpackCompetitors(name)
-    val eventModel = EventModel()
+    val eventModel = Event()
     eventModel.id = id
     eventModel.sportId = sportId
     eventModel.competitorLeft = competitors.first

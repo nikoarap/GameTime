@@ -34,8 +34,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import com.nikoarap.gametime.R
-import com.nikoarap.gametime.feature_sports.domain.models.EventModel
-import com.nikoarap.gametime.feature_sports.domain.models.SportModel
+import com.nikoarap.gametime.feature_sports.domain.models.Event
+import com.nikoarap.gametime.feature_sports.domain.models.Sport
 import com.nikoarap.gametime.feature_sports.presentation.common.LoadNoResultsView
 import com.nikoarap.gametime.utils.Constants.DESCRIPTION_ICON
 import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
@@ -53,7 +53,7 @@ import com.nikoarap.gametime.utils.enums.SportTypeEnum
  */
 @Composable
 fun LoadSportSection(
-    sport: SportModel
+    sport: Sport
 ) {
     var expandedState by remember { mutableStateOf(false) }
     val rotationState by animateFloatAsState(targetValue = if (expandedState) FLOAT_DEGREES_180 else FLOAT_DEGREES_0, label = EMPTY_STRING)
@@ -127,7 +127,7 @@ fun LoadSportSection(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun LoadEventsInSportSection(
-    sportEvents: List<EventModel>
+    sportEvents: List<Event>
 ) {
     if (sportEvents.isNotEmpty()) {
         Surface(

@@ -16,7 +16,7 @@ import io.realm.annotations.PrimaryKey
  * @property startTime          The start time of the event in milliseconds since the epoch.
  * @property isFavourite        Indicates whether the event is marked as a favorite.
  */
-open class EventModel: RealmObject() {
+open class Event: RealmObject() {
     @PrimaryKey
     var id: String = EMPTY_STRING
     var sportId: String = EMPTY_STRING

@@ -14,11 +14,11 @@ import io.realm.annotations.PrimaryKey
  * @property activeEvents       A list of active events associated with this sport category.
  * @property isFavourite        Indicates whether the sport category is marked as a favorite.
  */
-open class SportModel: RealmObject() {
+open class Sport: RealmObject() {
     @PrimaryKey
     var id: String = EMPTY_STRING
     var name: String = EMPTY_STRING
-    var activeEvents: RealmList<EventModel> = RealmList()
+    var activeEvents: RealmList<Event> = RealmList()
     var isFavourite: Boolean = false
 }
 

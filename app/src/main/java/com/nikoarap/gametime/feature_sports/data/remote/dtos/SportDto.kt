@@ -1,8 +1,8 @@
 package com.nikoarap.gametime.feature_sports.data.remote.dtos
 
 import com.google.gson.annotations.SerializedName
-import com.nikoarap.gametime.feature_sports.domain.models.EventModel
-import com.nikoarap.gametime.feature_sports.domain.models.SportModel
+import com.nikoarap.gametime.feature_sports.domain.models.Event
+import com.nikoarap.gametime.feature_sports.domain.models.Sport
 import com.nikoarap.gametime.utils.Constants.MILLIS_IN_SECOND
 import com.nikoarap.gametime.utils.Constants.SECONDS_IN_DAY
 import io.realm.RealmList
@@ -27,9 +27,9 @@ data class SportModelDto (
     val activeEvents: List<EventModelDto>
 )
 
-fun SportModelDto.toSportModel(): SportModel {
-    val activeEventsList: RealmList<EventModel> = RealmList()
-    val sportModel = SportModel()
+fun SportModelDto.toSportModel(): Sport {
+    val activeEventsList: RealmList<Event> = RealmList()
+    val sportModel = Sport()
 
     //disregard events that have started more than a day ago
     for (activeEvent in activeEvents) {

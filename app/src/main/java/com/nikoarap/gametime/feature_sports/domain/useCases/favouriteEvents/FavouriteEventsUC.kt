@@ -1,6 +1,6 @@
 package com.nikoarap.gametime.feature_sports.domain.useCases.favouriteEvents
 
-import com.nikoarap.gametime.feature_sports.domain.models.SportModel
+import com.nikoarap.gametime.feature_sports.domain.models.Sport
 import com.nikoarap.gametime.feature_sports.domain.repository.SportsRepository
 import com.nikoarap.gametime.utils.DownloadResult
 import kotlinx.coroutines.flow.Flow
@@ -14,7 +14,7 @@ class FavouriteEventsUC @Inject constructor(
 ) {
 
     //by overriding the invoke here, we can call this use case as if it was a function
-    operator fun invoke(): Flow<DownloadResult<List<SportModel>>> = flow {
+    operator fun invoke(): Flow<DownloadResult<List<Sport>>> = flow {
         try {
             emit(DownloadResult.Loading())
             val sportDtoList = repository.downloadSports().map { it.toSportModel() }

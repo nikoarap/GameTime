@@ -20,7 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import com.nikoarap.gametime.R
-import com.nikoarap.gametime.feature_sports.domain.models.EventModel
+import com.nikoarap.gametime.feature_sports.domain.models.Event
 import com.nikoarap.gametime.feature_sports.presentation.common.CountdownTimer
 import com.nikoarap.gametime.utils.Constants.DESCRIPTION_ICON
 import com.nikoarap.gametime.utils.Constants.MILLIS_IN_SECOND
@@ -36,7 +36,7 @@ import com.nikoarap.gametime.utils.Constants.MILLIS_IN_SECOND
 @Composable
 fun LoadSportEvent(
     modifier: Modifier,
-    event: EventModel,
+    event: Event,
     isEventFavourite: Boolean,
 ) {
     Column(
