@@ -14,5 +14,5 @@ interface SportsApi {
      * @return A response containing a list of Sport dtos.
      */
     @GET(API_ENDPOINT)
-    suspend fun getSportModels(): List<SportDto>
+    suspend fun getSportDtos(): List<SportDto>
 }

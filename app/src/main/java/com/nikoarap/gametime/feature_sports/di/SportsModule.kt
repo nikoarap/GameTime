@@ -1,5 +1,11 @@
 package com.nikoarap.gametime.feature_sports.di
 
+import android.app.Application
+import androidx.room.Room
+import com.google.gson.Gson
+import com.nikoarap.gametime.feature_sports.data.cache.db.Converters
+import com.nikoarap.gametime.feature_sports.data.cache.db.GsonParser
+import com.nikoarap.gametime.feature_sports.data.cache.db.SportsDatabase
 import com.nikoarap.gametime.feature_sports.data.remote.api.SportsApi
 import com.nikoarap.gametime.feature_sports.data.repository.SportsRepositoryImpl
 import com.nikoarap.gametime.feature_sports.domain.repository.SportsRepository
@@ -30,9 +36,19 @@ object SportsModule {
 
     @Provides
     @Singleton
-    fun provideSportsRepository(api: SportsApi): SportsRepository {
-        return SportsRepositoryImpl(api)
+    fun provideSportsDatabase(app: Application): SportsDatabase {
+        return Room.databaseBuilder(
+            app, SportsDatabase::class.java, "sports_db"
+        ).addTypeConverter(Converters(GsonParser(Gson())))
+            .build()
     }
 
-
+    @Provides
+    @Singleton
+    fun provideSportsRepository(
+        api: SportsApi,
+        db: SportsDatabase
+    ): SportsRepository {
+        return SportsRepositoryImpl(api, db.dao)
+    }
 }

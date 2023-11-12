@@ -1,4 +1,16 @@
 package com.nikoarap.gametime.feature_sports.data.cache.db
 
-abstract class SportsDatabase {
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.nikoarap.gametime.feature_sports.data.cache.entity.SportEntity
+
+@Database(
+    entities = [SportEntity::class],
+    version = 1
+)
+
+@TypeConverters(Converters::class)
+abstract class SportsDatabase: RoomDatabase() {
+    abstract val dao: SportsDao
 }

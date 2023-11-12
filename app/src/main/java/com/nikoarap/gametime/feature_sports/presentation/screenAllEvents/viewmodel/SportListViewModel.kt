@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nikoarap.gametime.feature_sports.domain.useCases.allEvents.AllEventsUC
 import com.nikoarap.gametime.feature_sports.presentation.screenAllEvents.state.SportListState
-import com.nikoarap.gametime.utils.DownloadResult
+import com.nikoarap.gametime.utils.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -27,13 +27,13 @@ class SportListViewModel @Inject constructor(
     private fun getSports() {
         getSportsUseCase().onEach { result ->
             when(result) {
-                is DownloadResult.Success -> {
+                is DataState.Success -> {
                     _state.value = SportListState(sports = result.data ?: emptyList())
                 }
-                is DownloadResult.Error -> {
+                is DataState.Error -> {
                     _state.value = SportListState(error = result.errorMessage ?: "Error while fetching sports data.")
                 }
-                is DownloadResult.Loading -> {
+                is DataState.Loading -> {
                     _state.value = SportListState(isLoading = true)
                 }
             }

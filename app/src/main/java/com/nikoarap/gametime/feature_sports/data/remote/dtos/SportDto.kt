@@ -1,11 +1,7 @@
 package com.nikoarap.gametime.feature_sports.data.remote.dtos
 
 import com.google.gson.annotations.SerializedName
-import com.nikoarap.gametime.feature_sports.domain.models.Event
-import com.nikoarap.gametime.feature_sports.domain.models.Sport
-import com.nikoarap.gametime.utils.Constants.MILLIS_IN_SECOND
-import com.nikoarap.gametime.utils.Constants.SECONDS_IN_DAY
-import io.realm.RealmList
+import com.nikoarap.gametime.feature_sports.data.cache.entity.SportEntity
 
 /**
  * A data class representing a sports model in DTO (Data Transfer Object) form.
@@ -26,31 +22,13 @@ data class SportDto (
     @SerializedName("e")
     val activeEvents: List<EventDto>
 ) {
-    fun toSpo
-}
-
-fun SportDto.toSportModel(): Sport {
-    val activeEventsList: RealmList<Event> = RealmList()
-    val sportModel = Sport()
-
-    //disregard events that have started more than a day ago
-    for (activeEvent in activeEvents) {
-        if (activeEvent.startTime.isDurationLessThanDay()) {
-            activeEventsList.add(
-                EventDto(
-                    activeEvent.id, activeEvent.sportId, activeEvent.name, activeEvent.startTime
-                ).toEventModel()
-            )
-        }
+    fun toSportEntity(): SportEntity {
+        return SportEntity(
+            id = id,
+            name = name,
+            activeEvents = activeEvents.map { it.toEvent() }
+        )
     }
-
-    sportModel.id = id
-    sportModel.name = name
-    sportModel.activeEvents = activeEventsList
-    return sportModel
 }
 
-fun Long.isDurationLessThanDay(): Boolean {
-    val duration = (System.currentTimeMillis() / MILLIS_IN_SECOND) - this
-    return duration <= SECONDS_IN_DAY
-}
+

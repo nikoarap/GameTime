@@ -27,30 +27,31 @@ data class EventDto (
     val name: String ,
     @SerializedName("tt")
     val startTime: Long
-)
-
-fun EventDto.toEventModel(): Event {
-    val competitors: Pair<String, String> = unpackCompetitors(name)
-    val eventModel = Event()
-    eventModel.id = id
-    eventModel.sportId = sportId
-    eventModel.competitorLeft = competitors.first
-    eventModel.competitorRight = competitors.second
-    eventModel.startTime = startTime
-    return eventModel
-}
-
-private fun unpackCompetitors(name: String): Pair<String, String> {
-    if (name.contains(SPACER_SCORE_SPACER_REGEX)) {
-        val parts = name.split(SPACER_SCORE_SPACER_REGEX)
-        if (parts.size == 2) {
-            return Pair(parts[0], parts[1])
-        }
-    } else if (name.contains(SCORE_REGEX)) {
-        val parts = name.split(SCORE_REGEX)
-        if (parts.size == 2) {
-            return Pair(parts[0], parts[1])
-        }
+) {
+    fun toEvent(): Event {
+        val competitors: Pair<String, String> = unpackCompetitors(name)
+        return Event(
+            id = id,
+            sportId = sportId,
+            competitorLeft = competitors.first,
+            competitorRight = competitors.second,
+            startTime = startTime
+        )
     }
-    return Pair(EMPTY_STRING, EMPTY_STRING)
+
+    private fun unpackCompetitors(name: String): Pair<String, String> {
+        if (name.contains(SPACER_SCORE_SPACER_REGEX)) {
+            val parts = name.split(SPACER_SCORE_SPACER_REGEX)
+            if (parts.size == 2) {
+                return Pair(parts[0], parts[1])
+            }
+        } else if (name.contains(SCORE_REGEX)) {
+            val parts = name.split(SCORE_REGEX)
+            if (parts.size == 2) {
+                return Pair(parts[0], parts[1])
+            }
+        }
+        return Pair(EMPTY_STRING, EMPTY_STRING)
+    }
 }
+
