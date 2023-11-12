@@ -18,16 +18,18 @@ import io.realm.RealmList
  * @property name               The name of the sports model.
  * @property activeEvents       A list of associated events for the sports model.
  */
-data class SportModelDto (
+data class SportDto (
     @SerializedName("i")
     val id: String,
     @SerializedName("d")
     val name: String,
     @SerializedName("e")
-    val activeEvents: List<EventModelDto>
-)
+    val activeEvents: List<EventDto>
+) {
+    fun toSpo
+}
 
-fun SportModelDto.toSportModel(): Sport {
+fun SportDto.toSportModel(): Sport {
     val activeEventsList: RealmList<Event> = RealmList()
     val sportModel = Sport()
 
@@ -35,7 +37,7 @@ fun SportModelDto.toSportModel(): Sport {
     for (activeEvent in activeEvents) {
         if (activeEvent.startTime.isDurationLessThanDay()) {
             activeEventsList.add(
-                EventModelDto(
+                EventDto(
                     activeEvent.id, activeEvent.sportId, activeEvent.name, activeEvent.startTime
                 ).toEventModel()
             )

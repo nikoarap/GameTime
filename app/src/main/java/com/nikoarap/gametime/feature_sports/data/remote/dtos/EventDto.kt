@@ -18,7 +18,7 @@ import com.nikoarap.gametime.utils.Constants.SPACER_SCORE_SPACER_REGEX
  * @property name           The name of the event.
  * @property startTime      The timestamp when the event is scheduled to start.
  */
-data class EventModelDto (
+data class EventDto (
     @SerializedName("i")
     val id: String,
     @SerializedName("si")
@@ -29,7 +29,7 @@ data class EventModelDto (
     val startTime: Long
 )
 
-fun EventModelDto.toEventModel(): Event {
+fun EventDto.toEventModel(): Event {
     val competitors: Pair<String, String> = unpackCompetitors(name)
     val eventModel = Event()
     eventModel.id = id
