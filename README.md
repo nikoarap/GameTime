@@ -12,19 +12,16 @@ GameTime is an Android application built in Kotlin and following the MVVM design
 - **Connectivity callbacks so the data will automatically start downloading if there is an internet connection available**
 - **In case the user is offline or the internet connection is somehow lost, proper feedback is given**
 
-## Libraries / Frameworks / Methodologies used in this project
-
-- **Jetpack Compose**
-- **Realm Database Structure**
-- **Material / Material 3**
-- **Kotlin Coroutines (for fetching data & the countdown timer)**
-- **MVVM design pattern**
-- **LiveData (for event observation)**
-- **StateFlow (for data emission to the view)**
-- **RealmLiveData (custom object -- LiveData wrapper for Realm Results to ensure smooth data querying and emission)**
+## What is used in this project:
+- **Clean architecture (Repository & Use Cases) with MVVM**
+- **Dagger-Hilt Dependency Injection**
+- **Data Persistence with Room**
 - **OkHttp & Retrofit**
-- **Flow Layout(for the custom grid displaying the sport events)**
-- **Broadcast Receiver for Connectivity Callbacks (old implementation, but used for Android 5 backwards compatibility)**
+- **Flow / StateFlow**
+- **Jetpack Compose**
+- **Material / Material 3**
+- **Flow Layout**
+- **Broadcast Receiver for Connectivity Callbacks**
 - **JUnit & Mockito for testing**
 - **Custom theming, typography and styles are used when needed**
 
