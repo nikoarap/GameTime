@@ -17,9 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.utils.Constants.EMPTY_STRING
 import com.nikoarap.gametime.utils.Constants.MILLIS_IN_SECOND
@@ -65,7 +65,7 @@ fun CountdownTimer(timeUntilEventStartInMs: Long) {
         val minutesString = if (minutesLeft > VALUE_ZERO) "${minutesLeft}m, " else EMPTY_STRING
         String.format("$daysString$hoursString$minutesString%02ds", secondsLeft)
     } else {
-        LocalContext.current.resources.getString(R.string.event_started)
+        stringResource(R.string.event_started)
     }
 
     Box(

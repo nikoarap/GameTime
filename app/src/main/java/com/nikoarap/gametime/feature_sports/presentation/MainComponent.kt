@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -108,7 +107,7 @@ private fun Header() {
     TopAppBar(
         title = {
             Text(
-                text = LocalContext.current.getString(R.string.app_name),
+                text = stringResource(R.string.app_name),
                 color = colorResource(id = R.color.secondary),
                 modifier = Modifier
                     .fillMaxWidth()

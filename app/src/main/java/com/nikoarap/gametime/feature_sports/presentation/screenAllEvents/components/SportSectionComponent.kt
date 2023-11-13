@@ -29,10 +29,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.feature_sports.domain.models.Event
 import com.nikoarap.gametime.feature_sports.domain.models.Sport
@@ -166,7 +166,7 @@ private fun LoadEventsInSportSection(
                 .fillMaxWidth()
                 .background(color = colorResource(id = R.color.surface)),
             imageSizeDp = dimensionResource(id = R.dimen.dp_120),
-            noResultsText = LocalContext.current.resources.getString(R.string.no_events_planned)
+            noResultsText = stringResource(R.string.no_events_planned)
         )
     }
 }

@@ -10,9 +10,9 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nikoarap.gametime.R
 import com.nikoarap.gametime.feature_sports.presentation.common.LoadNoResultsView
@@ -47,7 +47,7 @@ fun AllEventsScreen(
                     .fillMaxSize()
                     .background(color = colorResource(id = R.color.surface)),
                 imageSizeDp = dimensionResource(id = R.dimen.dp_180),
-                noResultsText = LocalContext.current.resources.getString(R.string.no_records_synced_yet)
+                noResultsText = stringResource(R.string.no_records_synced_yet)
             )
         }
 
