@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.feature_sports.data.cache.db
+package com.nikoarap.gametime.utils
 
 import com.google.gson.Gson
 import java.lang.reflect.Type

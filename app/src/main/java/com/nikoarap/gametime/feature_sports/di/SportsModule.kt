@@ -3,8 +3,8 @@ package com.nikoarap.gametime.feature_sports.di
 import android.app.Application
 import androidx.room.Room
 import com.google.gson.Gson
-import com.nikoarap.gametime.feature_sports.data.cache.db.Converters
-import com.nikoarap.gametime.feature_sports.data.cache.db.GsonParser
+import com.nikoarap.gametime.utils.Converters
+import com.nikoarap.gametime.utils.GsonParser
 import com.nikoarap.gametime.feature_sports.data.cache.db.SportsDatabase
 import com.nikoarap.gametime.feature_sports.data.remote.api.SportsApi
 import com.nikoarap.gametime.feature_sports.data.repository.SportsRepositoryImpl

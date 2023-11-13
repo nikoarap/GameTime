@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.nikoarap.gametime.feature_sports.data.cache.entity.SportEntity
+import com.nikoarap.gametime.utils.Converters
 
 @Database(
     entities = [SportEntity::class],

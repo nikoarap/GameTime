@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.feature_sports.data.cache.db
+package com.nikoarap.gametime.utils
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
