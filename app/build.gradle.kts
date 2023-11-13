@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
-    id("realm-android")
 }
 
 android {
@@ -68,8 +67,10 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 
-    //realm lib
-    implementation("io.realm:realm-android-library:10.17.0")
+    // Room libs
+    implementation("androidx.room:room-runtime:2.6.0")
+    kapt("androidx.room:room-compiler:2.6.0")
+    implementation("androidx.room:room-ktx:2.6.0")
 
     //Retrofit/OkHttp/Coroutines libs:
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
