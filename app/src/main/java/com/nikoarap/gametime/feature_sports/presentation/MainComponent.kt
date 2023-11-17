@@ -81,7 +81,7 @@ private fun BottomNavBar(
                             navController.navigate(screen.route)
                         },
                         label = {
-                            Text(text = stringResource(screen.labelResId),)
+                            Text(text = stringResource(screen.labelResId))
                         },
                         icon = {
                             Icon(
