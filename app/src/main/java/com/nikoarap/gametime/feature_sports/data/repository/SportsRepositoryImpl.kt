@@ -22,16 +22,20 @@ class SportsRepositoryImpl @Inject constructor(
         val sports = dao.getSportEntities().map { it.toSport() }
         emit(DataState.Loading(data = sports))
 
-        try {
-            val sportDtos = api.getSportDtos()
-            dao.insertSportEntities(sportDtos.map { it.toSportEntity() })
-        } catch(e: HttpException) {
-            emit(DataState.Error(errorMessage = "Oops, something went wrong!", data = sports))
-        } catch(e: IOException) {
-            emit(DataState.Error(errorMessage = "Couldn't reach server, check your internet connection.", data = sports))
-        }
+        if (sports.isEmpty()) {
+            try {
+                val sportDtos = api.getSportDtos()
+                dao.insertSportEntities(sportDtos.map { it.toSportEntity() })
+            } catch(e: HttpException) {
+                emit(DataState.Error(errorMessage = e.message, data = sports))
+            } catch(e: IOException) {
+                emit(DataState.Error(errorMessage = e.message, data = sports))
+            }
 
-        val newSports = dao.getSportEntities().map { it.toSport() }
-        emit(DataState.Success(newSports))
+            val newSports = dao.getSportEntities().map { it.toSport() }
+            emit(DataState.Success(newSports))
+        } else {
+            emit(DataState.Success(sports))
+        }
     }
 }
