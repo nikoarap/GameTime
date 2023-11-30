@@ -2,7 +2,7 @@ package com.nikoarap.gametime
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import com.nikoarap.gametime.presentation.common.CountdownTimer
+import com.nikoarap.gametime.feature_sports.presentation.common.CountdownTimer
 import org.junit.Rule
 import org.junit.Test
 

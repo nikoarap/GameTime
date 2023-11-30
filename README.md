@@ -1,6 +1,8 @@
 # GameTime - Keep track of your favourite sport events
 
-GameTime is an Android application built in Kotlin and following the MVVM design pattern, that helps you keep track of your favourite sport events in real-time. 
+GameTime is an Android application that helps you keep track of your favourite sport events in real-time.
+App is built in Kotlin, following Clean Architecture Principles and leveraging the Repository & Use Cases patterns along with the MVVM design pattern.
+A mock API is used for fetching & displaying virtual sports data.
 
 ## Features
 - **Countdown timer displaying the remaining days, hours, minutes and seconds for a sport event, in real-time**
@@ -15,13 +17,13 @@ GameTime is an Android application built in Kotlin and following the MVVM design
 ## What is used in this project:
 - **Clean architecture (Repository & Use Cases) with MVVM**
 - **Dagger-Hilt Dependency Injection**
+- **TDD approach with Unit & UI Test Cases**
+- **StateFlow**
+- **Jetpack Compose**
+- **Coroutines & Compose Effect Handlers**
 - **Data Persistence with Room**
 - **OkHttp & Retrofit**
-- **Flow / StateFlow**
-- **Jetpack Compose**
 - **Material / Material 3**
-- **Flow Layout**
 - **Broadcast Receiver for Connectivity Callbacks**
-- **JUnit & Mockito for testing**
 - **Custom theming, typography and styles are used when needed**
 
