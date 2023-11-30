@@ -79,7 +79,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
-    implementation("com.squareup.okhttp3:mockwebserver:4.9.0")
 
     //flow layout lib
     implementation("com.google.accompanist:accompanist-flowlayout:0.20.0")

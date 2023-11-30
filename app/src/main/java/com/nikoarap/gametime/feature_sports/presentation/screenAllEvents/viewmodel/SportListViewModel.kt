@@ -2,7 +2,7 @@ package com.nikoarap.gametime.feature_sports.presentation.screenAllEvents.viewmo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nikoarap.gametime.feature_sports.domain.useCases.allEvents.AllEventsUC
+import com.nikoarap.gametime.feature_sports.domain.useCases.GetAllSports
 import com.nikoarap.gametime.feature_sports.presentation.screenAllEvents.state.SportListState
 import com.nikoarap.gametime.utils.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SportListViewModel @Inject constructor(
-    private val getSportsUseCase: AllEventsUC
+    private val getAllSportsUseCase: GetAllSports
 ): ViewModel() {
 
     private val _state = MutableStateFlow(SportListState())
@@ -25,7 +25,7 @@ class SportListViewModel @Inject constructor(
     }
 
     private fun getSports() {
-        getSportsUseCase().onEach { result ->
+        getAllSportsUseCase().onEach { result ->
             when(result) {
                 is DataState.Success -> {
                     _state.value = SportListState(sports = result.data ?: emptyList())

@@ -14,7 +14,7 @@ import com.nikoarap.gametime.feature_sports.data.cache.entity.SportEntity
  * @property name               The name of the sports model.
  * @property activeEvents       A list of associated events for the sports model.
  */
-data class SportDto (
+data class SportDto(
     @SerializedName("i")
     val id: String,
     @SerializedName("d")
