@@ -8,6 +8,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -23,7 +24,7 @@ import com.nikoarap.gametime.feature_sports.presentation.screenAllEvents.viewmod
 fun FavouriteEventsScreen(
     viewModel: SportListViewModel = hiltViewModel(),
 ) {
-    val state = viewModel.state.value
+    val state = viewModel.state.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -32,12 +33,12 @@ fun FavouriteEventsScreen(
                 .verticalScroll(rememberScrollState())
                 .background(color = colorResource(id = R.color.surface))
         ) {
-            for (sport in state.sports) {
+            for (sport in state.value.sports) {
                 LoadSportSection(sport)
             }
         }
 
-        if(state.error.isNotBlank()) {
+        if(state.value.error.isNotBlank()) {
             LoadNoResultsView(
                 modifier = Modifier
                     .fillMaxSize()
@@ -47,7 +48,7 @@ fun FavouriteEventsScreen(
             )
         }
 
-        if(state.isLoading) {
+        if(state.value.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
     }
