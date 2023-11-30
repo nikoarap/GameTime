@@ -1,4 +1,4 @@
-package com.nikoarap.gametime.feature_sports.di
+package com.nikoarap.gametime.di
 
 import android.app.Application
 import androidx.room.Room
@@ -22,7 +22,7 @@ import javax.inject.Singleton
 //SingletonComponent makes all the dependencies inside this module live as long as the application does
 //and makes sure that we have only a single instance throughout the lifetime of the application
 @InstallIn(SingletonComponent::class)
-object SportsModule {
+object AppModule {
 
     @Provides
     @Singleton
