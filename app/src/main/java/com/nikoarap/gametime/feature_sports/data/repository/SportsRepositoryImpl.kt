@@ -1,6 +1,7 @@
 package com.nikoarap.gametime.feature_sports.data.repository
 
 import com.nikoarap.gametime.feature_sports.data.cache.db.SportsDao
+import com.nikoarap.gametime.feature_sports.data.cache.entity.SportEntity
 import com.nikoarap.gametime.feature_sports.data.remote.api.SportsApi
 import com.nikoarap.gametime.feature_sports.domain.models.Sport
 import com.nikoarap.gametime.feature_sports.domain.repository.SportsRepository
