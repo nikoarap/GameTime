@@ -37,7 +37,7 @@ class TimerTest {
         testRule.setContent {
             CountdownTimer(timeUntilEventStartInMs)
         }
-        val expectedText = "EVENT_STARTED"
+        val expectedText = "EVENT STARTED"
         testRule.onNodeWithText(expectedText).assertExists()
     }
 
